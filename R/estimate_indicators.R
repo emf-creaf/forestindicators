@@ -1,6 +1,6 @@
 #' Estimate forest indicators
 #'
-#' Estimates available forest indicators for a given set of forest stands
+#' Estimates forest indicators for a given set of forest stands during a given set of dates of evaluation.
 #'
 #' @param indicators A character vector containing the indicators to be estimated.
 #' @param stand_static_input A data frame (or \code{\link{sf}} object) containing static stand variables. Minimum required column are \code{id_stand} (character).
@@ -12,7 +12,16 @@
 #' @param additional_params Optional named list where each element is in turn a list of additional parameters required for internal indicator functions.
 #' @param verbose A logical flag to provide information on progress
 #'
-#' @returns
+#' @returns A data frame with the following columns:
+#'   \itemize{
+#'     \item{\code{id_stand} - Stand identifier.}
+#'     \item{\code{date} - Date of indicator assessment.}
+#'     \item{\code{...} - Additional columns with names equal to strings given in \code{indicators}.}
+#'   }
+#'
+#' @details
+#' Additional details...
+#'
 #' @export
 #'
 estimate_indicators <- function(indicators,

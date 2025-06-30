@@ -1,13 +1,10 @@
 Package: forestindicators
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Estimates forest indicators such as forest ecosystem services
 Version: 0.1.0
 Authors@R: c(
-    person(
-      "Jane", "Doe",
-      email = "jane@example.com",
-      role = c("aut", "cre")
-    )
+	person('Miquel', 'De Cáceres', role=c('aut','cre', 'cph'), email='miquelcaceres@gmail.com', comment = c(ORCID = "0000-0001-7132-2080")),
+  person('Núria', 'Aquilué', role=c('aut'), comment = c(ORCID = "0000-0001-7911-3144"))
   )
 Description: More about what it does (maybe more than one line).
     Continuation lines should be indented.
