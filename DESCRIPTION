@@ -15,6 +15,7 @@ License: GPL (>= 2)
 Depends: R (>= 4.1.0)
 Imports:
     cli,
+    sf,
     dplyr,
     tibble
 Suggests: 

@@ -28,6 +28,7 @@
 
 ## usethis namespace: start
 #' @import cli
+#' @import sf
 #' @importFrom dplyr bind_rows
 #' @importFrom tibble tibble as_tibble
 ## usethis namespace: end

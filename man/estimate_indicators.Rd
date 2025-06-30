@@ -19,7 +19,7 @@ estimate_indicators(
 \arguments{
 \item{indicators}{A character vector containing the indicators to be estimated.}
 
-\item{stand_static_input}{A data frame (or \code{\link{sf}} object) containing static stand variables. Minimum required column are \code{id_stand} (character).}
+\item{stand_static_input}{A data frame (or \code{\link[sf]{sf}} object) containing static stand variables. Minimum required column are \code{id_stand} (character).}
 
 \item{stand_dynamic_input}{Optional data frame containing dynamic stand variables. Minimum required columns are \code{id_stand} (character) and \code{date} (\code{\link{Date}}).}
 

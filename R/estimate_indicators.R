@@ -3,7 +3,7 @@
 #' Estimates forest indicators for a given set of forest stands during a given set of dates of evaluation.
 #'
 #' @param indicators A character vector containing the indicators to be estimated.
-#' @param stand_static_input A data frame (or \code{\link{sf}} object) containing static stand variables. Minimum required column are \code{id_stand} (character).
+#' @param stand_static_input A data frame (or \code{\link[sf]{sf}} object) containing static stand variables. Minimum required column are \code{id_stand} (character).
 #' @param stand_dynamic_input Optional data frame containing dynamic stand variables. Minimum required columns are \code{id_stand} (character) and \code{date} (\code{\link{Date}}).
 #' @param plant_static_input Optional data frame containing static plant variables. Minimum required columns are \code{id_stand} (character) and \code{plant_entity} (character).
 #' @param plant_dynamic_input Optional data frame containing dynamic plant variables. Minimum required columns are \code{id_stand} (character), \code{plant_entity} (character) and \code{date} (\code{\link{Date}}).
