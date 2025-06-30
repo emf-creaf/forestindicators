@@ -7,11 +7,11 @@
 estimate_indicators(
   indicators,
   stand_static_input,
-  stand_dynamic_input = NA,
-  plant_static_input = NA,
-  plant_dynamic_input = NA,
-  timber_volume_function = NA,
-  plant_biomass_function = NA,
+  stand_dynamic_input = NULL,
+  plant_static_input = NULL,
+  plant_dynamic_input = NULL,
+  timber_volume_function = NULL,
+  plant_biomass_function = NULL,
   additional_params = list(),
   verbose = TRUE
 )

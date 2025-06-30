@@ -1,18 +1,22 @@
 Package: forestindicators
 Type: Package
-Title: Estimates forest indicators such as forest ecosystem services
+Title: Estimation of multiple indicators of forest ecosystem services
 Version: 0.1.0
 Authors@R: c(
-	person('Miquel', 'De Cáceres', role=c('aut','cre', 'cph'), email='miquelcaceres@gmail.com', comment = c(ORCID = "0000-0001-7132-2080")),
-  person('Núria', 'Aquilué', role=c('aut'), comment = c(ORCID = "0000-0001-7911-3144"))
+	  person('Miquel', 'De Cáceres', role=c('aut','cre', 'cph'), email='miquelcaceres@gmail.com', comment = c(ORCID = "0000-0001-7132-2080")),
+    person('Núria', 'Aquilué', role=c('aut'), comment = c(ORCID = "0000-0001-7911-3144")),
+    person('Víctor', 'Granda', role='ctb', comment = c(ORCID = "0000-0002-0469-1991")),
+    person('José', 'Salgado', role='ctb'),
+    person('Giuseppe', 'Capizzi', role='ctb')
   )
-Description: More about what it does (maybe more than one line).
-    Continuation lines should be indented.
+Description: Facilitates the estimation multiple indicators of forest ecosystem services.
+    Indicators are defined in internal functions and tables.
 License: GPL (>= 2)
 Depends: R (>= 4.1.0)
 Imports:
     cli,
-    dplyr
+    dplyr,
+    tibble
 Suggests: 
     testthat (>= 3.0.0),
     knitr,

@@ -26,17 +26,30 @@
 #'
 estimate_indicators <- function(indicators,
                                 stand_static_input,
-                                stand_dynamic_input = NA,
-                                plant_static_input = NA,
-                                plant_dynamic_input = NA,
-                                timber_volume_function = NA,
-                                plant_biomass_function = NA,
+                                stand_dynamic_input = NULL,
+                                plant_static_input = NULL,
+                                plant_dynamic_input = NULL,
+                                timber_volume_function = NULL,
+                                plant_biomass_function = NULL,
                                 additional_params = list(),
                                 verbose = TRUE) {
   # Check indicator string against available indicators
-  indicators <- match.arg(indicators, available_indicators(), several.ok = TRUE)
+  indicators <- match.arg(indicators, indicator_definition$indicator, several.ok = TRUE)
   if(verbose) cli::cli_progress_step("Checking overall inputs")
   # Check inputs (general structure)
+  if(!inherits(stand_static_input, "data.frame")) cli::cli_abort("'stand_static_input' should be a data frame")
+  if(!is.null(stand_dynamic_input)) {
+    if(!inherits(stand_dynamic_input, "data.frame")) cli::cli_abort("'stand_dynamic_input' should be a data frame")
+  }
+  if(!is.null(plant_static_input)) {
+    if(!inherits(plant_static_input, "data.frame")) cli::cli_abort("'plant_static_input' should be a data frame")
+  }
+  if(!is.null(plant_dynamic_input)) {
+    if(!inherits(plant_dynamic_input, "data.frame")) cli::cli_abort("'plant_dynamic_input' should be a data frame")
+  }
+  if(!is.null(additional_params)) {
+    if(!inherits(additional_params, "list")) cli::cli_abort("'additional_params' should be a named list")
+  }
 
   # For each indicator
   indicator_table <- vector("list", length(indicators))

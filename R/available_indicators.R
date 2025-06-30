@@ -6,5 +6,5 @@
 #' @export
 #'
 available_indicators<-function() {
-  return(c("soil_erosion_1", "soil_erosion_2"))
+  return(indicator_definition$indicator)
 }
