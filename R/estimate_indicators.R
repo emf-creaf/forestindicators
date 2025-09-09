@@ -80,7 +80,7 @@ estimate_indicators <- function(indicators,
 
     if(verbose) cli::cli_progress_step(paste0("Checking inputs for '", indicator,"'."))
     .check_var_type<-function(varname, vector, input) {
-      if(!(varname %in% variable_definition$variable)) cli::cli_abort(paste0("Variable '",varname,"' not found in variable definition!"))
+      if(!(varname %in% variable_definition$variable)) cli::cli_abort(paste0("Variable '",varname,"' of ", input, " not found in variable definition!"))
       type <- variable_definition$type[variable_definition$variable == varname]
       if(type =="numeric") if(!is.numeric(vector)) cli::cli_abort(paste0("Variable '",varname,"' in ", input, " should be numeric"))
       if(type =="character") if(!is.character(vector)) cli::cli_abort(paste0("Variable '",varname,"' in ", input, " should be character"))
