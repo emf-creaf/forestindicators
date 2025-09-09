@@ -86,25 +86,33 @@ estimate_indicators <- function(indicators,
       if(type =="character") if(!is.character(vector)) cli::cli_abort(paste0("Variable '",varname,"' in ", input, " should be character"))
       if(type =="logical") if(!is.logical(vector)) cli::cli_abort(paste0("Variable '",varname,"' in ", input, " should be logical"))
     }
-    stand_static_variables <- strsplit(indicator_definition$stand_static_variables[i], ",")[[1]]
-    for(var in stand_static_variables) {
-      if(!(var %in% names(stand_static_input))) cli::cli_abort(paste0("Variable '", var,"' not found in stand_static_input"))
-      .check_var_type(var, stand_static_input[[var]], "stand_static_input")
+    if(!is.na(indicator_definition$stand_static_variables[i])) {
+      stand_static_variables <- strsplit(indicator_definition$stand_static_variables[i], ", ")[[1]]
+      for(var in stand_static_variables) {
+        if(!(var %in% names(stand_static_input))) cli::cli_abort(paste0("Variable '", var,"' not found in stand_static_input"))
+        .check_var_type(var, stand_static_input[[var]], "stand_static_input")
+      }
     }
-    stand_dynamic_variables <- strsplit(indicator_definition$stand_dynamic_variables[i], ",")[[1]]
-    for(var in stand_dynamic_variables) {
-      if(!(var %in% names(stand_dynamic_input))) cli::cli_abort(paste0("Variable '", var,"' not found in stand_dynamic_input"))
-      .check_var_type(var, stand_dynamic_input[[var]], "stand_dynamic_input")
+    if(!is.na(indicator_definition$stand_dynamic_variables[i])) {
+      stand_dynamic_variables <- strsplit(indicator_definition$stand_dynamic_variables[i], ", ")[[1]]
+      for(var in stand_dynamic_variables) {
+        if(!(var %in% names(stand_dynamic_input))) cli::cli_abort(paste0("Variable '", var,"' not found in stand_dynamic_input"))
+        .check_var_type(var, stand_dynamic_input[[var]], "stand_dynamic_input")
+      }
     }
-    plant_static_variables <- strsplit(indicator_definition$plant_static_variables[i], ",")[[1]]
-    for(var in plant_static_variables) {
-      if(!(var %in% names(plant_static_input))) cli::cli_abort(paste0("Variable '", var,"' not found in plant_static_input"))
-      .check_var_type(var, plant_static_input[[var]], "plant_static_input")
+    if(!is.na(indicator_definition$plant_static_variables[i])) {
+      plant_static_variables <- strsplit(indicator_definition$plant_static_variables[i], ", ")[[1]]
+      for(var in plant_static_variables) {
+        if(!(var %in% names(plant_static_input))) cli::cli_abort(paste0("Variable '", var,"' not found in plant_static_input"))
+        .check_var_type(var, plant_static_input[[var]], "plant_static_input")
+      }
     }
-    plant_dynamic_variables <- strsplit(indicator_definition$plant_dynamic_variables[i], ",")[[1]]
-    for(var in plant_dynamic_variables) {
-      if(!(var %in% names(plant_dynamic_input))) cli::cli_abort(paste0("Variable '", var,"' not found in plant_dynamic_input"))
-      .check_var_type(var, plant_dynamic_input[[var]], "plant_dynamic_input")
+    if(!is.na(indicator_definition$plant_dynamic_variables[i])) {
+      plant_dynamic_variables <- strsplit(indicator_definition$plant_dynamic_variables[i], ", ")[[1]]
+      for(var in plant_dynamic_variables) {
+        if(!(var %in% names(plant_dynamic_input))) cli::cli_abort(paste0("Variable '", var,"' not found in plant_dynamic_input"))
+        .check_var_type(var, plant_dynamic_input[[var]], "plant_dynamic_input")
+      }
     }
 
     if(verbose) cli::cli_progress_step(paste0("Processing '", indicator,"'."))

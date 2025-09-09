@@ -7,5 +7,8 @@ test_that("Obvious errors are dealt",{
 
 test_that("soil erosion calculation",{
   expect_error(estimate_indicators("soil_erosion_01", data.frame(id_stand = "stand 1"), verbose = FALSE))
-  expect_s3_class(estimate_indicators("soil_erosion_01", data.frame(id_stand = "stand 1", slope = 25), verbose = FALSE), "data.frame")
+  expect_s3_class(estimate_indicators("soil_erosion_01",
+                                      stand_static_input = example_stand_static_input,
+                                      stand_dynamic_input = example_stand_dynamic_input,
+                                      verbose = FALSE), "data.frame")
 })
