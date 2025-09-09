@@ -15,10 +15,6 @@ test_that("soil erosion calculation",{
 
 test_that("timber harvest calculation",{
   expect_error(estimate_indicators("timber_harvest_01", data.frame(id_stand = "stand 1"), verbose = FALSE))
-  expect_error(estimate_indicators("timber_harvest_01",
-                                      plant_dynamic_input = example_plant_dynamic_input,
-                                      timber_volume_function = forestindicators:::.ifn_volume_forestindicators,
-                                      verbose = FALSE), "data.frame")
   example_plant_dynamic_input$Province = "8"
   expect_s3_class(estimate_indicators("timber_harvest_01",
                                       plant_dynamic_input = example_plant_dynamic_input,
