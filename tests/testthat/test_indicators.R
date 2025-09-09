@@ -12,3 +12,18 @@ test_that("soil erosion calculation",{
                                       stand_dynamic_input = example_stand_dynamic_input,
                                       verbose = FALSE), "data.frame")
 })
+
+test_that("recreational value calculation",{
+  expect_s3_class(estimate_indicators("recreational_value_01",
+                                      stand_static_input = example_stand_static_input,
+                                      plant_static_input = example_plant_static_input,
+                                      plant_dynamic_input = example_plant_dynamic_input,
+                                      verbose = FALSE), "data.frame")
+})
+
+test_that("several indicators can be calculated",{
+  expect_s3_class(estimate_indicators(c("soil_erosion_01", "recreational_value_01"),
+                                     stand_static_input = example_stand_static_input,
+                                     stand_dynamic_input = example_stand_dynamic_input, plant_dynamic_input = example_plant_dynamic_input, plant_static_input = example_plant_static_input,
+                                     verbose = FALSE, additional_params = list(soil_erosion_01 = list(k=1))), "data.frame")
+})

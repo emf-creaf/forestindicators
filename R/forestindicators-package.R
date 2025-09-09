@@ -29,7 +29,7 @@
 ## usethis namespace: start
 #' @import cli
 #' @import sf
-#' @importFrom dplyr bind_rows
+#' @importFrom dplyr bind_rows left_join select summarise group_by mutate
 #' @importFrom tibble tibble as_tibble
 ## usethis namespace: end
 NULL

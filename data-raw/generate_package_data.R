@@ -1,8 +1,5 @@
 indicator_definition <-as.data.frame(readxl::read_xlsx("data-raw/forestindicators_input.xlsx",
-                                                       sheet="indicators"), stringsAsFactors=FALSE) |>
-  dplyr::mutate(stand_dynamic_input = as.logical(stand_dynamic_input),
-                plant_static_input = as.logical(plant_static_input),
-                plant_dynamic_input = as.logical(plant_dynamic_input))
+                                                       sheet="indicators"), stringsAsFactors=FALSE)
 
 variable_definition <-as.data.frame(readxl::read_xlsx("data-raw/forestindicators_input.xlsx",
                                                       sheet="variables"), stringsAsFactors=FALSE)

@@ -70,10 +70,9 @@ estimate_indicators <- function(indicators,
 
 
   # For each indicator
-  indicator_table <- vector("list", length(indicators))
   for(i in 1:length(indicators)) {
     indicator  <- indicators[i]
-    row <- which(indicator_definition$definition == indicator)
+    row <- which(indicator_definition$indicator == indicator)
     indicator_function_name <- paste0(".", indicator)
     if(!exists(indicator_function_name)) cli::cli_abort(paste0("Function '", indicator_function_name," not found!"))
     indicator_function <- get(indicator_function_name)
@@ -86,29 +85,37 @@ estimate_indicators <- function(indicators,
       if(type =="character") if(!is.character(vector)) cli::cli_abort(paste0("Variable '",varname,"' in ", input, " should be character"))
       if(type =="logical") if(!is.logical(vector)) cli::cli_abort(paste0("Variable '",varname,"' in ", input, " should be logical"))
     }
-    if(!is.na(indicator_definition$stand_static_variables[i])) {
-      stand_static_variables <- strsplit(indicator_definition$stand_static_variables[i], ", ")[[1]]
+    stand_static_variable_string <- indicator_definition$stand_static_variables[row]
+    if(!is.na(stand_static_variable_string)) {
+      if(is.null(stand_static_input)) cli::cli_abort(paste0("Stand static input is needed to estimate ", indicator))
+      stand_static_variables <- strsplit(stand_static_variable_string, ", ")[[1]]
       for(var in stand_static_variables) {
         if(!(var %in% names(stand_static_input))) cli::cli_abort(paste0("Variable '", var,"' not found in stand_static_input"))
         .check_var_type(var, stand_static_input[[var]], "stand_static_input")
       }
     }
-    if(!is.na(indicator_definition$stand_dynamic_variables[i])) {
-      stand_dynamic_variables <- strsplit(indicator_definition$stand_dynamic_variables[i], ", ")[[1]]
+    stand_dynamic_variable_string <- indicator_definition$stand_dynamic_variables[row]
+    if(!is.na(stand_dynamic_variable_string)) {
+      if(is.null(stand_dynamic_input)) cli::cli_abort(paste0("Stand dynamic input is needed to estimate ", indicator))
+      stand_dynamic_variables <- strsplit(stand_dynamic_variable_string, ", ")[[1]]
       for(var in stand_dynamic_variables) {
         if(!(var %in% names(stand_dynamic_input))) cli::cli_abort(paste0("Variable '", var,"' not found in stand_dynamic_input"))
         .check_var_type(var, stand_dynamic_input[[var]], "stand_dynamic_input")
       }
     }
-    if(!is.na(indicator_definition$plant_static_variables[i])) {
-      plant_static_variables <- strsplit(indicator_definition$plant_static_variables[i], ", ")[[1]]
+    plant_static_variable_string <- indicator_definition$plant_static_variables[row]
+    if(!is.na(plant_static_variable_string)) {
+      if(is.null(plant_static_input)) cli::cli_abort(paste0("Plant static input is needed to estimate ", indicator))
+      plant_static_variables <- strsplit(plant_static_variable_string, ", ")[[1]]
       for(var in plant_static_variables) {
         if(!(var %in% names(plant_static_input))) cli::cli_abort(paste0("Variable '", var,"' not found in plant_static_input"))
         .check_var_type(var, plant_static_input[[var]], "plant_static_input")
       }
     }
-    if(!is.na(indicator_definition$plant_dynamic_variables[i])) {
-      plant_dynamic_variables <- strsplit(indicator_definition$plant_dynamic_variables[i], ", ")[[1]]
+    plant_dynamic_variable_string <- indicator_definition$plant_dynamic_variables[row]
+    if(!is.na(plant_dynamic_variable_string)) {
+      if(is.null(plant_dynamic_input)) cli::cli_abort(paste0("Plant dynamic input is needed to estimate ", indicator))
+      plant_dynamic_variables <- strsplit(plant_dynamic_variable_string, ", ")[[1]]
       for(var in plant_dynamic_variables) {
         if(!(var %in% names(plant_dynamic_input))) cli::cli_abort(paste0("Variable '", var,"' not found in plant_dynamic_input"))
         .check_var_type(var, plant_dynamic_input[[var]], "plant_dynamic_input")
@@ -124,10 +131,15 @@ estimate_indicators <- function(indicators,
                     plant_biomass_function = plant_biomass_function)
 
     if(indicator %in% names(additional_params)) argList = c(argList, additional_params[[indicator]])
-    indicator_table[[i]] <- do.call(indicator_function, args=argList)
+    indicator_table <- do.call(indicator_function, args=argList) |>
+      tibble::as_tibble()
+    if(i==1) {
+      result <- indicator_table
+    } else {
+      result <- result |>
+        dplyr::full_join(indicator_table, by=c("id_stand", "date"))
+    }
   }
-  if(verbose) cli::cli_progress_step("Assembling results")
-  result <- dplyr::bind_cols(indicator_table)
   if(verbose) cli::cli_progress_done()
   return(result)
 }
