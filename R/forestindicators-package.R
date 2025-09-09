@@ -35,4 +35,6 @@
 NULL
 
 # global variable exporting
-utils::globalVariables(c(".data","indicator_definition", "variable_definition"))
+utils::globalVariables(c(".data","indicator_definition", "variable_definition",
+                         "example_stand_static_input", "example_stand_dynamic_input",
+                         "example_plant_static_input", "example_plant_dynamic_input"))

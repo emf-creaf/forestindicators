@@ -25,7 +25,7 @@
 #' @export
 #'
 estimate_indicators <- function(indicators,
-                                stand_static_input,
+                                stand_static_input = NULL,
                                 stand_dynamic_input = NULL,
                                 plant_static_input = NULL,
                                 plant_dynamic_input = NULL,
@@ -37,9 +37,11 @@ estimate_indicators <- function(indicators,
   indicators <- match.arg(indicators, indicator_definition$indicator, several.ok = TRUE)
   if(verbose) cli::cli_progress_step("Checking overall inputs")
   # Check inputs (general structure)
-  if(!inherits(stand_static_input, "data.frame")) cli::cli_abort("'stand_static_input' should be a data frame")
-  if(!("id_stand" %in% names(stand_static_input))) cli::cli_abort("'stand_static_input' should contain a character column called 'id_stand'")
-  if(!is.character(stand_static_input$id_stand)) cli::cli_abort("'id_stand' of 'stand_static_input' should contain character values")
+  if(!is.null(stand_static_input)) {
+    if(!inherits(stand_static_input, "data.frame")) cli::cli_abort("'stand_static_input' should be a data frame")
+    if(!("id_stand" %in% names(stand_static_input))) cli::cli_abort("'stand_static_input' should contain a character column called 'id_stand'")
+    if(!is.character(stand_static_input$id_stand)) cli::cli_abort("'id_stand' of 'stand_static_input' should contain character values")
+  }
 
   if(!is.null(stand_dynamic_input)) {
     if(!inherits(stand_dynamic_input, "data.frame")) cli::cli_abort("'stand_dynamic_input' should be a data frame")

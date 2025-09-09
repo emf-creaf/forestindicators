@@ -53,3 +53,23 @@ NULL
 #' @keywords data
 #' @seealso indicator_definition
 NULL
+
+#' Example datasets
+#'
+#' Example datasets for package function testing and documentation
+#'
+#' @name example_datasets
+#' @aliases example_stand_static_input
+#' @aliases example_stand_dynamic_input
+#' @aliases example_plant_static_input
+#' @aliases example_plant_dynamic_input
+#'
+#' @docType data
+#'
+#' @format
+#'
+#' @examples
+#' data(example_stand_static_input)
+#' @keywords data
+#' @seealso indicator_definition
+NULL

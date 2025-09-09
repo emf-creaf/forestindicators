@@ -6,7 +6,7 @@
 \usage{
 estimate_indicators(
   indicators,
-  stand_static_input,
+  stand_static_input = NULL,
   stand_dynamic_input = NULL,
   plant_static_input = NULL,
   plant_dynamic_input = NULL,
