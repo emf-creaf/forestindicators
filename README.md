@@ -3,6 +3,13 @@
 
 ## Introduction
 
+Package **forestindicators** is meant to assist the estimation of
+indicators (metrics) for forest stands, either derived from forest
+inventory data or forest model simulations. Most often, those indicators
+will estimate the provision of forest ecosystem services, but the
+package can be understood more generally as a platform to estimate
+forest metrics.
+
 ## Package installation
 
 Package **forestindicators** can be installed from GitHub. At present,
@@ -23,9 +30,10 @@ remotes::install_github("emf-creaf/forestindicators")
 
 ## Documentation and training
 
-- A number of *vignettes* illustrate how to use the R package to
-  estimate indicators, and how to define new indicators
-  [here](https://emf-creaf.github.io/forestindicators/articles/).
+Two *vignettes* are included
+[here](https://emf-creaf.github.io/forestindicators/articles/)
+illustrate: (1) how to use the R package to estimate indicators; and (2)
+how to define new indicators.
 
 ## Authorship
 

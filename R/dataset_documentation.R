@@ -11,17 +11,14 @@
 #' A data frame with parameters in rows and columns:
 #' \itemize{
 #'   \item{\code{indicator_name}: String with indicator name. Should not contain spaces (use underscore for multiple word separation).}
-#'   \item{\code{stand_static_variables}: .}
-#'   \item{\code{stand_dynamic_input}: .}
-#'   \item{\code{stand_dynamic_variables}: .}
-#'   \item{\code{plant_static_input}: .}
-#'   \item{\code{plant_static_variables}: .}
-#'   \item{\code{plant_dynamic_input}: .}
-#'   \item{\code{plant_dynamic_variables}: .}
-#'   \item{\code{output_units}: .}
-#'   \item{\code{estimation_method}: .}
-#'   \item{\code{interpretation}: .}
-#'   \item{\code{implementation_responsible}: .}
+#'   \item{\code{stand_static_variables}: String with \emph{stand static variables} (e.g. slope) separated by commas. Variable names should not contain spaces (use underscore for multiple word separation).}
+#'   \item{\code{stand_dynamic_variables}: String with \emph{stand dynamic variables} (e.g. canopy cover, stand leaf area index) separated by commas. Variable names should not contain spaces (use underscore for multiple word separation).}
+#'   \item{\code{plant_static_variables}: String with \emph{plant static variables} separated by commas. Variable names should not contain spaces (use underscore for multiple word separation).}
+#'   \item{\code{plant_dynamic_variables}: String with \emph{plant dynamic variables} (e.g. dbh, height, cover) separated by commas. Variable names should not contain spaces (use underscore for multiple word separation).}
+#'   \item{\code{output_units}: String describing the units of the indicator metric (e.g. Mg/ha).}
+#'   \item{\code{estimation_method}: String describing the procedure for indicator estimation.}
+#'   \item{\code{interpretation}: String describing how the indicator should be interpreted and common usage.}
+#'   \item{\code{implementation_responsible}: Name of the person responsible for the definition and implementation of the indicator within the package.}
 #' }
 #'
 #' @examples
@@ -43,9 +40,10 @@ NULL
 #' A data frame with parameters in rows and columns:
 #' \itemize{
 #'   \item{\code{variable_name}: String with variable name. Should not contain spaces (use underscore for multiple word separation).}
-#'   \item{\code{level}: .}
-#'   \item{\code{units}: .}
-#'   \item{\code{description}: .}
+#'   \item{\code{level}: String describing the level (scale) to which the variable applies, either 'stand' or 'plant'.}
+#'   \item{\code{type}: String with variable type, either 'character' or 'numeric'.}
+#'   \item{\code{units}: String indicating the variable units.}
+#'   \item{\code{description}: String with the verbal description of the variable.}
 #' }
 #'
 #' @examples
@@ -65,8 +63,6 @@ NULL
 #' @aliases example_plant_dynamic_input
 #'
 #' @docType data
-#'
-#' @format
 #'
 #' @examples
 #' data(example_stand_static_input)
