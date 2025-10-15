@@ -2,10 +2,10 @@
 # and 2 dummy variables just to test the workflow, both static, but one at the stand level, the other at the plant level
 # All the indicators will be always computed at the plot level!
 
-.recreational_value_01 <- function(stand_static_input,
-                                  stand_dynamic_input = NULL,
-                                  plant_static_input = NULL,
-                                  plant_dynamic_input = NULL,
+.recreational_value <- function(stand_static_input = NULL,
+                                stand_dynamic_input = NULL,
+                                plant_static_input = NULL,
+                                plant_dynamic_input = NULL,
                                   ...){
 
   # The tree list (i.e., species, dbh, h, n) is always described in the plant_dynamic_input.
@@ -34,6 +34,6 @@
     mutate(recreational_value_01 = (mn_dbh / sd_dbh) * n_spp * mn_beautiness / area)
 
   ## Return the output data frame
-  res = df |> select(id_stand, date, recreational_value_01)
+  res = df |> select(id_stand, date, recreational_value)
   return(res)
 }
