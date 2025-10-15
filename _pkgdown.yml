@@ -8,7 +8,7 @@ template:
     primary: "#241F1C"
 
 reference:
-- title: User functions
+- title: Indicator estimation
   desc: Functions to estimate forest indicators
 - contents:
   - available_indicators
