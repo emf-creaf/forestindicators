@@ -45,17 +45,14 @@
     <div class="section level2">
     <h2 id="format">Format<a class="anchor" aria-label="anchor" href="#format"></a></h2>
     <p>A data frame with parameters in rows and columns:</p><ul><li><p><code>indicator_name</code>: String with indicator name. Should not contain spaces (use underscore for multiple word separation).</p></li>
-<li><p><code>stand_static_variables</code>: .</p></li>
-<li><p><code>stand_dynamic_input</code>: .</p></li>
-<li><p><code>stand_dynamic_variables</code>: .</p></li>
-<li><p><code>plant_static_input</code>: .</p></li>
-<li><p><code>plant_static_variables</code>: .</p></li>
-<li><p><code>plant_dynamic_input</code>: .</p></li>
-<li><p><code>plant_dynamic_variables</code>: .</p></li>
-<li><p><code>output_units</code>: .</p></li>
-<li><p><code>estimation_method</code>: .</p></li>
-<li><p><code>interpretation</code>: .</p></li>
-<li><p><code>implementation_responsible</code>: .</p></li>
+<li><p><code>stand_static_variables</code>: String with stand static variables (e.g. slope) separated by commas. Variable names should not contain spaces (use underscore for multiple word separation).</p></li>
+<li><p><code>stand_dynamic_variables</code>: String with stand dynamic variables (e.g. canopy cover, stand leaf area index) separated by commas. Variable names should not contain spaces (use underscore for multiple word separation).</p></li>
+<li><p><code>plant_static_variables</code>: String with plant static variables separated by commas. Variable names should not contain spaces (use underscore for multiple word separation).</p></li>
+<li><p><code>plant_dynamic_variables</code>: String with plant dynamic variables (e.g. dbh, height, cover) separated by commas. Variable names should not contain spaces (use underscore for multiple word separation).</p></li>
+<li><p><code>output_units</code>: String describing the units of the indicator metric (e.g. Mg/ha).</p></li>
+<li><p><code>estimation_method</code>: String describing the procedure for indicator estimation.</p></li>
+<li><p><code>interpretation</code>: String describing how the indicator should be interpreted and common usage.</p></li>
+<li><p><code>implementation_responsible</code>: Person responsible for the definition and implementation of the indicator within the package.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
