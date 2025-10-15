@@ -71,16 +71,118 @@ Cáceres / Núria Aquilué</h4>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>Note the various macros within the <code>vignette</code> section of
-the metadata block above. These are required in order to instruct R how
-to build the vignette. Note that you should change the
-<code>title</code> field and the <code>\VignetteIndexEntry</code> to
-match the title of your vignette.</p>
+<p>In this vignette, you will learn:</p>
+<ol style="list-style-type: decimal">
+<li>How to format your data for indicator estimation.</li>
+<li>How to discover which indicator functions are available, their data
+requirements and additional parameters.</li>
+<li>How to perform the estimation of multiple indicators at once.</li>
+</ol>
 </div>
 <div class="section level2">
-<h2 id="data-inputs">Data inputs<a class="anchor" aria-label="anchor" href="#data-inputs"></a>
+<h2 id="data-frame-inputs">Data frame inputs<a class="anchor" aria-label="anchor" href="#data-frame-inputs"></a>
 </h2>
+<p>Data inputs for the estimation of indicators are data frames. Not all
+indicators require the same inputs, and the data frames can be of four
+different kinds, depending on:</p>
+<ul>
+<li>Whether they describe <em>stand-level</em> vs. <em>plant-level</em>
+data</li>
+<li>Whether they contain <em>static</em> vs. <em>dynamic</em> data</li>
+</ul>
+<p>The following subsections provide examples of the four different data
+frames. A single indicator may only need data of one kind
+(e.g. plant-level dynamic data), but when calculating several indicators
+at once, one may end-up supplying more than one data frame.</p>
+<div class="section level3">
+<h3 id="stand-level-static-data">Stand-level static data<a class="anchor" aria-label="anchor" href="#stand-level-static-data"></a>
+</h3>
+<p>This data frame contains <strong>stand-level</strong> information
+that <strong>does not change through time</strong>, such as topographic
+features, the area represented, etc.</p>
+<p>The actual columns will depend on the indicator to be calculated, but
+at least a column <code>id_stand</code> (character) should be defined to
+identify stands. An example of stand-level static data frame is the
+following:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">example_stand_static_input</span></span>
+<span><span class="co">#&gt;   id_stand  area slope</span></span>
+<span><span class="co">#&gt; 1   080001  14.3   5.1</span></span>
+<span><span class="co">#&gt; 2   080002 362.6   3.1</span></span>
+<span><span class="co">#&gt; 3   080003 319.6   8.9</span></span>
+<span><span class="co">#&gt; 4   080004 635.2   4.4</span></span>
+<span><span class="co">#&gt; 5   080005 774.8   8.9</span></span>
+<span><span class="co">#&gt; 6   080006 166.6   5.3</span></span>
+<span><span class="co">#&gt; 7   080007 368.0   4.7</span></span>
+<span><span class="co">#&gt; 8   080008 945.9   4.3</span></span>
+<span><span class="co">#&gt; 9   080009 548.9   1.4</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="stand-level-dynamic-data">Stand-level dynamic data<a class="anchor" aria-label="anchor" href="#stand-level-dynamic-data"></a>
+</h3>
+<p>This data frame contains <strong>stand-level</strong> information
+that <strong>does change through time</strong>, such as temperature,
+precipitation, the stand leaf area index, canopy cover, etc.</p>
+<p>The actual columns will depend on the indicator to be calculated, but
+at least columns <code>id_stand</code> (character) and <code>date</code>
+(Date) should be defined to identify stands and time points,
+respectively. An example of stand-level dynamic data frame is the
+following:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">example_stand_dynamic_input</span></span>
+<span><span class="co">#&gt;    id_stand       date mean_precipitation canopy_cover</span></span>
+<span><span class="co">#&gt; 1    080001 2025-01-01              353.2          8.4</span></span>
+<span><span class="co">#&gt; 2    080002 2025-01-01              355.1         63.2</span></span>
+<span><span class="co">#&gt; 3    080003 2025-01-01              377.0         68.9</span></span>
+<span><span class="co">#&gt; 4    080004 2025-01-01              836.6         24.8</span></span>
+<span><span class="co">#&gt; 5    080005 2025-01-01              742.4         45.4</span></span>
+<span><span class="co">#&gt; 6    080006 2025-01-01              405.7         12.7</span></span>
+<span><span class="co">#&gt; 7    080007 2025-01-01              103.3         96.3</span></span>
+<span><span class="co">#&gt; 8    080008 2025-01-01              561.8          1.6</span></span>
+<span><span class="co">#&gt; 9    080009 2025-01-01              522.1         10.6</span></span>
+<span><span class="co">#&gt; 10   080001 2025-02-01              383.2         22.5</span></span>
+<span><span class="co">#&gt; 11   080002 2025-02-01              511.2         85.9</span></span>
+<span><span class="co">#&gt; 12   080003 2025-02-01              552.0         61.7</span></span>
+<span><span class="co">#&gt; 13   080004 2025-02-01              813.3         32.9</span></span>
+<span><span class="co">#&gt; 14   080005 2025-02-01              368.0         50.7</span></span>
+<span><span class="co">#&gt; 15   080006 2025-02-01              436.1         30.2</span></span>
+<span><span class="co">#&gt; 16   080007 2025-02-01              867.9         51.0</span></span>
+<span><span class="co">#&gt; 17   080008 2025-02-01              304.6         85.8</span></span>
+<span><span class="co">#&gt; 18   080009 2025-02-01              349.1         67.8</span></span>
+<span><span class="co">#&gt; 19   080001 2025-03-01               46.3         44.1</span></span>
+<span><span class="co">#&gt; 20   080002 2025-03-01              335.6         33.1</span></span>
+<span><span class="co">#&gt; 21   080003 2025-03-01              509.6         96.3</span></span>
+<span><span class="co">#&gt; 22   080004 2025-03-01              824.6         59.1</span></span>
+<span><span class="co">#&gt; 23   080005 2025-03-01              607.5         76.7</span></span>
+<span><span class="co">#&gt; 24   080006 2025-03-01              554.8         57.4</span></span>
+<span><span class="co">#&gt; 25   080007 2025-03-01              710.4         43.8</span></span>
+<span><span class="co">#&gt; 26   080008 2025-03-01              111.7         17.6</span></span>
+<span><span class="co">#&gt; 27   080009 2025-03-01              623.2         12.1</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="plant-level-static-data">Plant-level static data<a class="anchor" aria-label="anchor" href="#plant-level-static-data"></a>
+</h3>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">example_plant_static_input</span></span>
+<span><span class="co">#&gt;    id_stand     plant_entity beautiness</span></span>
+<span><span class="co">#&gt; 1    080001 Pinus halepensis       0.26</span></span>
+<span><span class="co">#&gt; 2    080002 Pinus halepensis       0.03</span></span>
+<span><span class="co">#&gt; 3    080003 Pinus sylvestris       0.28</span></span>
+<span><span class="co">#&gt; 4    080004 Pinus sylvestris       0.02</span></span>
+<span><span class="co">#&gt; 5    080005     Quercus ilex       0.52</span></span>
+<span><span class="co">#&gt; 6    080006     Quercus ilex       0.36</span></span>
+<span><span class="co">#&gt; 7    080007     Quercus ilex       0.51</span></span>
+<span><span class="co">#&gt; 8    080008    Quercus suber       0.08</span></span>
+<span><span class="co">#&gt; 9    080009    Quercus suber       0.98</span></span>
+<span><span class="co">#&gt; 10   080001      Pinus nigra       0.62</span></span>
+<span><span class="co">#&gt; 11   080002      Pinus nigra       0.42</span></span>
+<span><span class="co">#&gt; 12   080005 Pinus halepensis       0.72</span></span>
+<span><span class="co">#&gt; 13   080006 Pinus halepensis       0.43</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="plant-level-dynamic-data">Plant-level dynamic data<a class="anchor" aria-label="anchor" href="#plant-level-dynamic-data"></a>
+</h3>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_plant_dynamic_input</span></span>
 <span><span class="co">#&gt;    id_stand     plant_entity       date state  dbh    h   n</span></span>
 <span><span class="co">#&gt; 1    080001 Pinus halepensis 2025-01-01  live 18.3 22.3 352</span></span>
@@ -128,14 +230,15 @@ match the title of your vignette.</p>
 <span><span class="co">#&gt; 43   080005     Quercus ilex 2025-03-01  dead 35.1  2.5  74</span></span>
 <span><span class="co">#&gt; 44   080005     Quercus ilex 2025-03-01  dead  7.1  7.6  69</span></span></code></pre></div>
 </div>
+</div>
 <div class="section level2">
 <h2 id="indicator-functions-and-parameters">Indicator functions and parameters<a class="anchor" aria-label="anchor" href="#indicator-functions-and-parameters"></a>
 </h2>
 <p>The figure sizes have been customised so that you can easily put two
 images side-by-side.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">indicators</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"timber_harvest"</span>, <span class="st">"density_dead_wood"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">additional_parameters</span><span class="op">[</span><span class="va">additional_parameters</span><span class="op">$</span><span class="va">indicator</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">indicators</span>, <span class="op">]</span></span>
 <span><span class="co">#&gt;           indicator        parameter default_value</span></span>
 <span><span class="co">#&gt; 1    timber_harvest         province          &lt;NA&gt;</span></span>
@@ -160,33 +263,33 @@ images side-by-side.</p>
 <div class="section level3">
 <h3 id="define-values-for-additional-parameters">Define values for additional parameters<a class="anchor" aria-label="anchor" href="#define-values-for-additional-parameters"></a>
 </h3>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>timber_harvest <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>province <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>,</span>
 <span>               density_dead_wood <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>max_tree_dbh <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="estimation-function">Estimation function<a class="anchor" aria-label="anchor" href="#estimation-function"></a>
 </h3>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimate_indicators.html">estimate_indicators</a></span><span class="op">(</span><span class="va">indicators</span>,</span>
 <span>                           plant_dynamic_input <span class="op">=</span> <span class="va">example_plant_dynamic_input</span>,</span>
 <span>                           timber_volume_function <span class="op">=</span> <span class="fu">forestindicators</span><span class="fu">:::</span><span class="va">.ifn_volume_forestindicators</span>,</span>
 <span>                           additional_params <span class="op">=</span> <span class="va">params</span>,</span>
 <span>                           verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking overall inputs</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking overall inputs <span style="color: #B2B2B2;">[15ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking overall inputs <span style="color: #B2B2B2;">[16ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking inputs for 'timber_harvest'.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking inputs for 'timber_harvest'. <span style="color: #B2B2B2;">[16ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking inputs for 'timber_harvest'. <span style="color: #B2B2B2;">[10ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Processing 'timber_harvest'.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Processing 'timber_harvest'. <span style="color: #B2B2B2;">[122ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Processing 'timber_harvest'. <span style="color: #B2B2B2;">[113ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking inputs for 'density_dead_wood'.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking inputs for 'density_dead_wood'. <span style="color: #B2B2B2;">[15ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking inputs for 'density_dead_wood'. <span style="color: #B2B2B2;">[10ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Processing 'density_dead_wood'.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Processing 'density_dead_wood'. <span style="color: #B2B2B2;">[19ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Processing 'density_dead_wood'. <span style="color: #B2B2B2;">[17ms]</span></span></span>
 <span><span class="co">#&gt; </span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
