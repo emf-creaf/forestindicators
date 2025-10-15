@@ -1,13 +1,13 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
-<url><loc>/404.html</loc></url>
-<url><loc>/authors.html</loc></url>
-<url><loc>/index.html</loc></url>
-<url><loc>/reference/available_indicators.html</loc></url>
-<url><loc>/reference/estimate_indicators.html</loc></url>
-<url><loc>/reference/example_datasets.html</loc></url>
-<url><loc>/reference/forestindicators-package.html</loc></url>
-<url><loc>/reference/index.html</loc></url>
-<url><loc>/reference/indicator_definition.html</loc></url>
-<url><loc>/reference/variable_definition.html</loc></url>
+<url><loc>https://emf-creaf.github.io/forestindicators/404.html</loc></url>
+<url><loc>https://emf-creaf.github.io/forestindicators/authors.html</loc></url>
+<url><loc>https://emf-creaf.github.io/forestindicators/index.html</loc></url>
+<url><loc>https://emf-creaf.github.io/forestindicators/reference/available_indicators.html</loc></url>
+<url><loc>https://emf-creaf.github.io/forestindicators/reference/estimate_indicators.html</loc></url>
+<url><loc>https://emf-creaf.github.io/forestindicators/reference/example_datasets.html</loc></url>
+<url><loc>https://emf-creaf.github.io/forestindicators/reference/forestindicators-package.html</loc></url>
+<url><loc>https://emf-creaf.github.io/forestindicators/reference/index.html</loc></url>
+<url><loc>https://emf-creaf.github.io/forestindicators/reference/indicator_definition.html</loc></url>
+<url><loc>https://emf-creaf.github.io/forestindicators/reference/variable_definition.html</loc></url>
 </urlset>
 
