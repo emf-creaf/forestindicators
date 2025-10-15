@@ -1,4 +1,4 @@
-.timber_harvest_01 <- function(stand_static_input,
+.timber_harvest_01 <- function(stand_static_input = NULL,
                                stand_dynamic_input = NULL,
                                plant_static_input = NULL,
                                plant_dynamic_input = NULL,
