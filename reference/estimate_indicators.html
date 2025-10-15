@@ -89,7 +89,7 @@
 
 
 <dt id="arg-additional-params">additional_params<a class="anchor" aria-label="anchor" href="#arg-additional-params"></a></dt>
-<dd><p>Optional named list where each element is in turn a list of additional parameters required for internal indicator functions.</p></dd>
+<dd><p>Optional named list where each element is in turn a list of additional parameters required for internal indicator functions. The additional parameters of each indicator are found in table <code><a href="additional_parameters.html">additional_parameters</a></code>.</p></dd>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
@@ -112,30 +112,49 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Vector of indicator names to be estimated</span></span></span>
 <span class="r-in"><span><span class="va">indicators</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"timber_harvest"</span>, <span class="st">"density_dead_wood"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Determine which additional parameters are needed</span></span></span>
+<span class="r-in"><span><span class="va">additional_parameters</span><span class="op">[</span><span class="va">additional_parameters</span><span class="op">$</span><span class="va">indicator</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">indicators</span>, <span class="op">]</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           indicator        parameter default_value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    timber_harvest         province          &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    timber_harvest     min_tree_dbh          &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    timber_harvest     max_tree_dbh          &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    timber_harvest targeted_species          &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5    timber_harvest excluded_species          &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8 density_dead_wood     min_tree_dbh          17.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9 density_dead_wood     max_tree_dbh          &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                            description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                                      Spanish province (numeric code)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2            Minimum  tree diameter to be included in the estimation of harvest volume</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 Maximum  tree diameter to be included in the estimation of density of harvest volume</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                         Tree species included in the calculation of harvested volume</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                     Tree species not included in the calculation of harvested volume</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8      Minimum  tree diameter to be included in the estimation of density of dead wood</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9      Maximum  tree diameter to be included in the estimation of density of dead wood</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Named lists with additional parameters needed for each indicator</span></span></span>
-<span class="r-in"><span><span class="va">additional_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>timber_harvest <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>province <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                          density_dead_wood <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>max_tree_dbh <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">add_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>timber_harvest <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>province <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                   density_dead_wood <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>max_tree_dbh <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Call indicator estimation</span></span></span>
 <span class="r-in"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">estimate_indicators</span><span class="op">(</span><span class="va">indicators</span>,</span></span>
 <span class="r-in"><span>                           plant_dynamic_input <span class="op">=</span> <span class="va">example_plant_dynamic_input</span>,</span></span>
 <span class="r-in"><span>                           timber_volume_function <span class="op">=</span> <span class="fu">forestindicators</span><span class="fu">:::</span><span class="va">.ifn_volume_forestindicators</span>,</span></span>
-<span class="r-in"><span>                           additional_params <span class="op">=</span> <span class="va">additional_params</span>,</span></span>
+<span class="r-in"><span>                           additional_params <span class="op">=</span> <span class="va">add_params</span>,</span></span>
 <span class="r-in"><span>                           verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Checking overall inputs</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Checking overall inputs <span style="color: #B2B2B2;">[7ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Checking overall inputs <span style="color: #B2B2B2;">[11ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Checking inputs for 'timber_harvest'.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Checking inputs for 'timber_harvest'. <span style="color: #B2B2B2;">[17ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Checking inputs for 'timber_harvest'. <span style="color: #B2B2B2;">[14ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Processing 'timber_harvest'.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Processing 'timber_harvest'. <span style="color: #B2B2B2;">[92ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Processing 'timber_harvest'. <span style="color: #B2B2B2;">[121ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Checking inputs for 'density_dead_wood'.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Checking inputs for 'density_dead_wood'. <span style="color: #B2B2B2;">[17ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Checking inputs for 'density_dead_wood'. <span style="color: #B2B2B2;">[12ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Processing 'density_dead_wood'.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Processing 'density_dead_wood'. <span style="color: #B2B2B2;">[26ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Processing 'density_dead_wood'. <span style="color: #B2B2B2;">[18ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
