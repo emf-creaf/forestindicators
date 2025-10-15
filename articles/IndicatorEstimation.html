@@ -97,8 +97,8 @@ at once, one may end-up supplying more than one data frame.</p>
 <div class="section level3">
 <h3 id="stand-level-static-data">Stand-level static data<a class="anchor" aria-label="anchor" href="#stand-level-static-data"></a>
 </h3>
-<p>This data frame contains <strong>stand-level</strong> information
-that <strong>does not change through time</strong>, such as topographic
+<p>This data frame contains <strong>STAND-level</strong> information
+that <strong>DOES NOT change through time</strong>, such as topographic
 features, the area represented, etc.</p>
 <p>The actual columns will depend on the indicator to be calculated, but
 at least a column <code>id_stand</code> (character) should be defined to
@@ -120,8 +120,8 @@ following:</p>
 <div class="section level3">
 <h3 id="stand-level-dynamic-data">Stand-level dynamic data<a class="anchor" aria-label="anchor" href="#stand-level-dynamic-data"></a>
 </h3>
-<p>This data frame contains <strong>stand-level</strong> information
-that <strong>does change through time</strong>, such as temperature,
+<p>This data frame contains <strong>STAND-level</strong> information
+that <strong>DOES change through time</strong>, such as temperature,
 precipitation, the stand leaf area index, canopy cover, etc.</p>
 <p>The actual columns will depend on the indicator to be calculated, but
 at least columns <code>id_stand</code> (character) and <code>date</code>
@@ -162,6 +162,14 @@ following:</p>
 <div class="section level3">
 <h3 id="plant-level-static-data">Plant-level static data<a class="anchor" aria-label="anchor" href="#plant-level-static-data"></a>
 </h3>
+<p>This data frame contains <strong>PLANT-level</strong> information
+that <strong>DOES NOT change through time</strong>, such as taxonomy,
+traits, etc.</p>
+<p>The actual columns will depend on the indicator to be calculated, but
+at least a columns <code>id_stand</code> (character) and
+<code>plant_entity</code> (character) should be defined to identify
+stands and plants, respectively. An example of plant-level static data
+frame is the following:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_plant_static_input</span></span>
 <span><span class="co">#&gt;    id_stand     plant_entity beautiness</span></span>
@@ -182,6 +190,14 @@ following:</p>
 <div class="section level3">
 <h3 id="plant-level-dynamic-data">Plant-level dynamic data<a class="anchor" aria-label="anchor" href="#plant-level-dynamic-data"></a>
 </h3>
+<p>This data frame contains <strong>PLANT-level</strong> information
+that <strong>DOES change through time</strong>, such as dbh, height,
+cover, etc.</p>
+<p>The actual columns will depend on the indicator to be calculated, but
+at least a columns <code>id_stand</code> (character),
+<code>plant_entity</code> (character) and <code>date</code> (Date)
+should be defined to identify stands and plants, respectively. An
+example of plant-level dynamic data frame is the following:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_plant_dynamic_input</span></span>
 <span><span class="co">#&gt;    id_stand     plant_entity       date state  dbh    h   n</span></span>
@@ -232,50 +248,177 @@ following:</p>
 </div>
 </div>
 <div class="section level2">
-<h2 id="indicator-functions-and-parameters">Indicator functions and parameters<a class="anchor" aria-label="anchor" href="#indicator-functions-and-parameters"></a>
-</h2>
-<p>The figure sizes have been customised so that you can easily put two
-images side-by-side.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">indicators</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"timber_harvest"</span>, <span class="st">"density_dead_wood"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">additional_parameters</span><span class="op">[</span><span class="va">additional_parameters</span><span class="op">$</span><span class="va">indicator</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">indicators</span>, <span class="op">]</span></span>
-<span><span class="co">#&gt;           indicator        parameter default_value</span></span>
-<span><span class="co">#&gt; 1    timber_harvest         province          &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2    timber_harvest     min_tree_dbh          &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3    timber_harvest     max_tree_dbh          &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4    timber_harvest targeted_species          &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5    timber_harvest excluded_species          &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 8 density_dead_wood     min_tree_dbh          17.5</span></span>
-<span><span class="co">#&gt; 9 density_dead_wood     max_tree_dbh          &lt;NA&gt;</span></span>
-<span><span class="co">#&gt;                                                                            description</span></span>
-<span><span class="co">#&gt; 1                                                      Spanish province (numeric code)</span></span>
-<span><span class="co">#&gt; 2            Minimum  tree diameter to be included in the estimation of harvest volume</span></span>
-<span><span class="co">#&gt; 3 Maximum  tree diameter to be included in the estimation of density of harvest volume</span></span>
-<span><span class="co">#&gt; 4                         Tree species included in the calculation of harvested volume</span></span>
-<span><span class="co">#&gt; 5                     Tree species not included in the calculation of harvested volume</span></span>
-<span><span class="co">#&gt; 8      Minimum  tree diameter to be included in the estimation of density of dead wood</span></span>
-<span><span class="co">#&gt; 9      Maximum  tree diameter to be included in the estimation of density of dead wood</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="indicator-estimation">Indicator estimation<a class="anchor" aria-label="anchor" href="#indicator-estimation"></a>
+<h2 id="indicators">Indicators<a class="anchor" aria-label="anchor" href="#indicators"></a>
 </h2>
 <div class="section level3">
-<h3 id="define-values-for-additional-parameters">Define values for additional parameters<a class="anchor" aria-label="anchor" href="#define-values-for-additional-parameters"></a>
+<h3 id="indicator-definition">Indicator definition<a class="anchor" aria-label="anchor" href="#indicator-definition"></a>
 </h3>
+<p>All the information regarding which indicators are included in the
+package and their requirements can be found in the data table
+<code>indicator_definition</code>. For each indicator, it includes:</p>
+<ul>
+<li>Description</li>
+<li>Method of estimation</li>
+<li>Output units</li>
+<li>Person responsible of its implementation in the package, who is to
+be contacted in case of issues/doubts.</li>
+<li>Variable names required for its estimation (grouped by input data
+frame)</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="variable-definition">Variable definition<a class="anchor" aria-label="anchor" href="#variable-definition"></a>
+</h3>
+<p>The type and units of all input variables can be found in table
+<code>variable_definition</code>.</p>
+</div>
+<div class="section level3">
+<h3 id="indicator-functions">Indicator functions<a class="anchor" aria-label="anchor" href="#indicator-functions"></a>
+</h3>
+<p>Each indicator is implemented in the package as an <strong>internal
+function</strong>, maintained by the responsible person. This functions
+is not directly accessible to the user, but is called via
+<code><a href="../reference/estimate_indicators.html">estimate_indicators()</a></code> (see below).</p>
+</div>
+<div class="section level3">
+<h3 id="additional-parameters">Additional parameters<a class="anchor" aria-label="anchor" href="#additional-parameters"></a>
+</h3>
+<p>The estimation of indicators may require other information in
+addition to the input data frame. Table
+<code>additional_parameters</code> contains the description of
+additional parameters for those functions that require them. The way
+these parameters are specified is described below.</p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="indicator-estimation-procedure">Indicator estimation procedure<a class="anchor" aria-label="anchor" href="#indicator-estimation-procedure"></a>
+</h2>
+<p>The general procedure for the estimation of forest indicators follows
+three main steps, which we illustrate in the following subsections:</p>
+<div class="section level3">
+<h3 id="step-1-choose-target-indicators-and-examine-their-requirements">Step 1: Choose target indicators and examine their requirements<a class="anchor" aria-label="anchor" href="#step-1-choose-target-indicators-and-examine-their-requirements"></a>
+</h3>
+<p>The first step is to decide which indicators are to be estimated. You
+can examine the names of the available indicators in the package by
+calling function <code><a href="../reference/available_indicators.html">available_indicators()</a></code>:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/available_indicators.html">available_indicators</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "timber_harvest"     "carbon_stock"       "density_dead_wood" </span></span>
+<span><span class="co">#&gt; [4] "soil_erosion_rusle" "recreational_value"</span></span></code></pre></div>
+<p>Say we decide to estimate the <em>timber harvest volume</em>
+(<code>"timber_harvest"</code>) and the <em>density of dead wood</em>
+(<code>"density_dead_wood"</code>). We may need to check which data
+inputs are required, their units, etc. We can find this information
+using function <code><a href="../reference/show_information.html">show_information()</a></code>:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/show_information.html">show_information</a></span><span class="op">(</span><span class="st">"timber_harvest"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; A) DEFINITION</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;    Name:  timber_harvest </span></span>
+<span><span class="co">#&gt;    Estimation:  NA </span></span>
+<span><span class="co">#&gt;    Interpretation:  Volume over bark of harvested wood </span></span>
+<span><span class="co">#&gt;    Output units:  NA </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; B) DATA INPUTS</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; B.1) Stand-level static data: &lt;NONE&gt;</span></span>
+<span><span class="co">#&gt; B.2) Stand-level dynamic data: &lt;NONE&gt;</span></span>
+<span><span class="co">#&gt; B.3) Plant-level static data: &lt;NONE&gt;</span></span>
+<span><span class="co">#&gt; B.4) Plant-level dynamic data:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  variable      type   units</span></span>
+<span><span class="co">#&gt;     state character       -</span></span>
+<span><span class="co">#&gt;       dbh   numeric      cm</span></span>
+<span><span class="co">#&gt;         h   numeric       m</span></span>
+<span><span class="co">#&gt;         n   numeric ind./ha</span></span>
+<span><span class="co">#&gt;                                                    description</span></span>
+<span><span class="co">#&gt;  state of the cohort, tree, … can be 'live', 'cut', or 'death'</span></span>
+<span><span class="co">#&gt;                                      diameter at breast height</span></span>
+<span><span class="co">#&gt;                                                         height</span></span>
+<span><span class="co">#&gt;                                                        density</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; C) ADDITIONAL PARAMETERS</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;         parameter default_value</span></span>
+<span><span class="co">#&gt;          province          &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;      min_tree_dbh          &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;      max_tree_dbh          &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  targeted_species          &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  excluded_species          &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;                                                                           description</span></span>
+<span><span class="co">#&gt;                                                       Spanish province (numeric code)</span></span>
+<span><span class="co">#&gt;             Minimum  tree diameter to be included in the estimation of harvest volume</span></span>
+<span><span class="co">#&gt;  Maximum  tree diameter to be included in the estimation of density of harvest volume</span></span>
+<span><span class="co">#&gt;                          Tree species included in the calculation of harvested volume</span></span>
+<span><span class="co">#&gt;                      Tree species not included in the calculation of harvested volume</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/show_information.html">show_information</a></span><span class="op">(</span><span class="st">"density_dead_wood"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; A) DEFINITION</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;    Name:  density_dead_wood </span></span>
+<span><span class="co">#&gt;    Estimation:  NA </span></span>
+<span><span class="co">#&gt;    Interpretation:  Density of large dead wood. By default, large dead tree is as DBH &gt;= 17.5 cm </span></span>
+<span><span class="co">#&gt;    Output units:  NA </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; B) DATA INPUTS</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; B.1) Stand-level static data: &lt;NONE&gt;</span></span>
+<span><span class="co">#&gt; B.2) Stand-level dynamic data: &lt;NONE&gt;</span></span>
+<span><span class="co">#&gt; B.3) Plant-level static data: &lt;NONE&gt;</span></span>
+<span><span class="co">#&gt; B.4) Plant-level dynamic data:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  variable      type   units</span></span>
+<span><span class="co">#&gt;     state character       -</span></span>
+<span><span class="co">#&gt;       dbh   numeric      cm</span></span>
+<span><span class="co">#&gt;         h   numeric       m</span></span>
+<span><span class="co">#&gt;         n   numeric ind./ha</span></span>
+<span><span class="co">#&gt;                                                    description</span></span>
+<span><span class="co">#&gt;  state of the cohort, tree, … can be 'live', 'cut', or 'death'</span></span>
+<span><span class="co">#&gt;                                      diameter at breast height</span></span>
+<span><span class="co">#&gt;                                                         height</span></span>
+<span><span class="co">#&gt;                                                        density</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; C) ADDITIONAL PARAMETERS</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     parameter default_value</span></span>
+<span><span class="co">#&gt;  min_tree_dbh          17.5</span></span>
+<span><span class="co">#&gt;  max_tree_dbh          &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;                                                                      description</span></span>
+<span><span class="co">#&gt;  Minimum  tree diameter to be included in the estimation of density of dead wood</span></span>
+<span><span class="co">#&gt;  Maximum  tree diameter to be included in the estimation of density of dead wood</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="step-2-assemble-inputs-and-define-values-for-additional-parameters">Step 2: Assemble inputs and define values for additional
+parameters<a class="anchor" aria-label="anchor" href="#step-2-assemble-inputs-and-define-values-for-additional-parameters"></a>
+</h3>
+<p>Once the format of inputs is know, it is the responsibility of the
+user to build the necessary data frames to be used as inputs. In our
+case, we will use <code>example_plant_dynamic_input</code> that already
+contains the necessary data for the estimation of the two
+indicators.</p>
+<p>However, we will normally need to define additional parameters to
+fine-tune the estimation of indicators, For that, we define a
+<strong>named list</strong> where each element corresponds to a
+different indicator and, in turn, contains a named list of parameters.
+In our case:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>timber_harvest <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>province <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>,</span>
 <span>               density_dead_wood <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>max_tree_dbh <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="estimation-function">Estimation function<a class="anchor" aria-label="anchor" href="#estimation-function"></a>
+<h3 id="step-3-call-general-estimation-function">Step 3: Call general estimation function<a class="anchor" aria-label="anchor" href="#step-3-call-general-estimation-function"></a>
 </h3>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimate_indicators.html">estimate_indicators</a></span><span class="op">(</span><span class="va">indicators</span>,</span>
+<p>Once we have our inputs ready, the indicators are estimated by
+calling function <code><a href="../reference/estimate_indicators.html">estimate_indicators()</a></code> as follows:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimate_indicators.html">estimate_indicators</a></span><span class="op">(</span>indicators <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"timber_harvest"</span>, <span class="st">"density_dead_wood"</span><span class="op">)</span>,</span>
 <span>                           plant_dynamic_input <span class="op">=</span> <span class="va">example_plant_dynamic_input</span>,</span>
 <span>                           timber_volume_function <span class="op">=</span> <span class="fu">forestindicators</span><span class="fu">:::</span><span class="va">.ifn_volume_forestindicators</span>,</span>
-<span>                           additional_params <span class="op">=</span> <span class="va">params</span>,</span>
-<span>                           verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>                           additional_params <span class="op">=</span> <span class="va">params</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking overall inputs</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking overall inputs <span style="color: #B2B2B2;">[16ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
@@ -283,60 +426,30 @@ images side-by-side.</p>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking inputs for 'timber_harvest'. <span style="color: #B2B2B2;">[10ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Processing 'timber_harvest'.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Processing 'timber_harvest'. <span style="color: #B2B2B2;">[113ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Processing 'timber_harvest'. <span style="color: #B2B2B2;">[108ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking inputs for 'density_dead_wood'.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking inputs for 'density_dead_wood'. <span style="color: #B2B2B2;">[10ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Processing 'density_dead_wood'.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Processing 'density_dead_wood'. <span style="color: #B2B2B2;">[17ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Processing 'density_dead_wood'. <span style="color: #B2B2B2;">[20ms]</span></span></span>
 <span><span class="co">#&gt; </span></span></code></pre></div>
-<table class="table">
-<thead><tr class="header">
-<th align="left">id_stand</th>
-<th align="left">date</th>
-<th align="right">timber_harvest</th>
-<th align="right">density_dead_wood</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">080001</td>
-<td align="left">2025-01-01</td>
-<td align="right">51.93306</td>
-<td align="right">187</td>
-</tr>
-<tr class="even">
-<td align="left">080001</td>
-<td align="left">2025-02-01</td>
-<td align="right">29.21134</td>
-<td align="right">73</td>
-</tr>
-<tr class="odd">
-<td align="left">080001</td>
-<td align="left">2025-03-01</td>
-<td align="right">25.56520</td>
-<td align="right">NA</td>
-</tr>
-<tr class="even">
-<td align="left">080005</td>
-<td align="left">2025-01-01</td>
-<td align="right">34.36544</td>
-<td align="right">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">080005</td>
-<td align="left">2025-02-01</td>
-<td align="right">6.98107</td>
-<td align="right">22</td>
-</tr>
-<tr class="even">
-<td align="left">080005</td>
-<td align="left">2025-03-01</td>
-<td align="right">11.28768</td>
-<td align="right">17</td>
-</tr>
-</tbody>
-</table>
+<p>Note that <code>"timber_harvest"</code> requires specifying the
+function to be used to calculate timber volumes,
+i.e. <code>timber_volume_function</code>, for which in our case we use a
+predefined package function.</p>
+<p>The result of the estimation is the following:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">res</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 4</span></span></span>
+<span><span class="co">#&gt;   id_stand date       timber_harvest density_dead_wood</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 080001   2025-01-01          51.9                187</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 080001   2025-02-01          29.2                 73</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 080001   2025-03-01          25.6                 <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 080005   2025-01-01          34.4                 <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 080005   2025-02-01           6.98                22</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 080005   2025-03-01          11.3                 17</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
