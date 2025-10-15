@@ -4,7 +4,7 @@ Title: Estimation of multiple indicators of forest ecosystem services
 Version: 0.1.0
 Authors@R: c(
 	  person('Miquel', 'De Cáceres', role=c('aut','cre', 'cph'), email='miquelcaceres@gmail.com', comment = c(ORCID = "0000-0001-7132-2080")),
-    person('Núria', 'Aquilué', role=c('aut','cre', 'cph'), comment = c(ORCID = "0000-0001-7911-3144")),
+    person('Núria', 'Aquilué', role=c('aut','cph'), comment = c(ORCID = "0000-0001-7911-3144")),
     person('Víctor', 'Granda', role='ctb', comment = c(ORCID = "0000-0002-0469-1991")),
     person('José', 'Salgado', role='ctb'),
     person('Giuseppe', 'Capizzi', role='ctb')
