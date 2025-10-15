@@ -1,0 +1,24 @@
+url: https://emf-creaf.github.io/forestindicators/
+
+template:
+  bootstrap: 5
+  bslib:
+    bootswatch: materia
+    pkgdown-nav-height: 100px
+    primary: "#241F1C"
+
+reference:
+- title: Indicator estimation
+  desc: Functions to estimate forest indicators
+- contents:
+  - available_indicators
+  - estimate_indicators
+- title: Example datasets
+  desc: Datasets provided as examples for indicator estimation
+- contents:
+  - example_datasets
+- title: Indicator definition
+  desc: Indicators included and raw variable definitions
+- contents:
+  - variable_definition
+  - indicator_definition
