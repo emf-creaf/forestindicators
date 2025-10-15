@@ -7,7 +7,7 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", fig.path = "README-")
 knitr::opts_chunk$set(fig.path = "man/figures/")
 ```
 
-# Indicators of forest ecosystem services
+# Indicators of forest stands
 
 ## Introduction
 

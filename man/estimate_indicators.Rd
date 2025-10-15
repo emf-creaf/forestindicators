@@ -31,7 +31,7 @@ estimate_indicators(
 
 \item{plant_biomass_function}{Optional function supplied for whole-plant biomass calculation.}
 
-\item{additional_params}{Optional named list where each element is in turn a list of additional parameters required for internal indicator functions.}
+\item{additional_params}{Optional named list where each element is in turn a list of additional parameters required for internal indicator functions. The additional parameters of each indicator are found in table \code{\link{additional_parameters}}.}
 
 \item{verbose}{A logical flag to provide information on progress}
 }
@@ -53,15 +53,18 @@ Additional details...
 ## Vector of indicator names to be estimated
 indicators <- c("timber_harvest", "density_dead_wood")
 
+## Determine which additional parameters are needed
+additional_parameters[additional_parameters$indicator \%in\% indicators, ]
+
 ## Named lists with additional parameters needed for each indicator
-additional_params <- list(timber_harvest = list(province = 8),
-                          density_dead_wood = list(max_tree_dbh = 20))
+add_params <- list(timber_harvest = list(province = 8),
+                   density_dead_wood = list(max_tree_dbh = 20))
 
 ## Call indicator estimation
 res <- estimate_indicators(indicators,
                            plant_dynamic_input = example_plant_dynamic_input,
                            timber_volume_function = forestindicators:::.ifn_volume_forestindicators,
-                           additional_params = additional_params,
+                           additional_params = add_params,
                            verbose = TRUE)
 
 }

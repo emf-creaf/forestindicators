@@ -1,5 +1,5 @@
 
-# Indicators of forest ecosystem services
+# Indicators of forest stands
 
 ## Introduction
 

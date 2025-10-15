@@ -4,7 +4,7 @@ author: "Miquel De Cáceres / Núria Aquilué"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Indicator Estimation}
+  %\VignetteIndexEntry{Indicator estimation}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,52 +14,96 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+library(forestindicators)
 ```
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+## Introduction
 
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
+In this vignette, you will learn:
 
-## Vignette Info
+  1. How to format your data for indicator estimation.
+  2. How to discover which indicator functions are available, their data requirements and additional parameters.
+  3. How to perform the estimation of multiple indicators at once.
 
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+## Data frame inputs
 
-## Styles
+Data inputs for the estimation of indicators are data frames. Not all indicators require the same inputs, and the data frames can be of four different kinds, depending on:
 
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
+ - Whether they describe *stand-level* vs. *plant-level* data
+ - Whether they contain *static* vs. *dynamic* data
+ 
+The following subsections provide examples of the four different data frames. A single indicator may only need data of one kind (e.g. plant-level dynamic data), but when calculating several indicators at once, one may end-up supplying more than one data frame.
 
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
+### Stand-level static data
 
-## Figures
+This data frame contains **stand-level** information that **does not change through time**, such as topographic features, the area represented, etc. 
+
+The actual columns will depend on the indicator to be calculated, but at least a column `id_stand` (character) should be defined to identify stands. An example of stand-level static data frame is the following:
+
+```{r}
+example_stand_static_input
+```
+
+### Stand-level dynamic data
+
+This data frame contains **stand-level** information that **does change through time**, such as temperature, precipitation, the stand leaf area index, canopy cover, etc. 
+
+The actual columns will depend on the indicator to be calculated, but at least columns `id_stand` (character) and `date` (Date) should be defined to identify stands and time points, respectively. An example of stand-level dynamic data frame is the following:
+
+```{r}
+example_stand_dynamic_input
+```
+
+
+### Plant-level static data
+
+
+```{r}
+example_plant_static_input
+```
+
+### Plant-level dynamic data
+
+```{r}
+example_plant_dynamic_input
+```
+
+
+## Indicator functions and parameters
 
 The figure sizes have been customised so that you can easily put two images side-by-side. 
 
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
+```{r}
+indicators <- c("timber_harvest", "density_dead_wood")
 ```
 
-You can enable figure captions by `fig_caption: yes` in YAML:
+```{r}
+additional_parameters[additional_parameters$indicator %in% indicators, ]
+```
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
 
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+## Indicator estimation
 
-## More Examples
+### Define values for additional parameters
 
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+```{r}
+params <- list(timber_harvest = list(province = 8),
+               density_dead_wood = list(max_tree_dbh = 20))
+```
+
+### Estimation function
+
+```{r}
+res <- estimate_indicators(indicators,
+                           plant_dynamic_input = example_plant_dynamic_input,
+                           timber_volume_function = forestindicators:::.ifn_volume_forestindicators,
+                           additional_params = params,
+                           verbose = TRUE)
+```
+
 
 ```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
+knitr::kable(head(res, 10))
 ```
 
-Also a quote using `>`:
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))

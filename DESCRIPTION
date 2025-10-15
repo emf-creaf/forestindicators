@@ -1,6 +1,6 @@
 Package: forestindicators
 Type: Package
-Title: Estimation of multiple indicators of forest ecosystem services
+Title: Estimation of indicators of forest stands
 Version: 0.1.0
 Authors@R: c(
 	  person('Miquel', 'De Cáceres', role=c('aut','cre', 'cph'), email='miquelcaceres@gmail.com', comment = c(ORCID = "0000-0001-7132-2080")),
@@ -9,7 +9,7 @@ Authors@R: c(
     person('José', 'Salgado', role='ctb'),
     person('Giuseppe', 'Capizzi', role='ctb')
   )
-Description: Facilitates the estimation multiple indicators of forest ecosystem services.
+Description: Assists the estimation multiple indicators of forest stands, notably forest ecosystem services.
     Indicators are defined in internal functions and tables.
 License: GPL (>= 2)
 URL: https://emf-creaf.github.io/forestindicators/, https://github.com/emf-creaf/forestindicators
