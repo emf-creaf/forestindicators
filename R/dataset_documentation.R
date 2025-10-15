@@ -8,7 +8,7 @@
 #' @docType data
 #'
 #' @format
-#' A data frame with parameters in rows and columns:
+#' A data frame with indicators in rows and columns:
 #' \itemize{
 #'   \item{\code{indicator_name}: String with indicator name. Should not contain spaces (use underscore for multiple word separation).}
 #'   \item{\code{stand_static_variables}: String with \emph{stand static variables} (e.g. slope) separated by commas. Variable names should not contain spaces (use underscore for multiple word separation).}
@@ -24,7 +24,31 @@
 #' @examples
 #' data(indicator_definition)
 #' @keywords data
-#' @seealso variable_definition
+#' @seealso \code{\link{variable_definition}}, \code{\link{additional_parameters}}
+NULL
+
+#' Additional parameters for indicators
+#'
+#' A data frame with the description of additional parameters for indicator functions
+#'
+#' @name additional_parameters
+#' @aliases additional_parameters
+#'
+#' @docType data
+#'
+#' @format
+#' A data frame with indicator additional parameters in rows and columns:
+#' \itemize{
+#'   \item{\code{indicator_name}: String with indicator name. Should not contain spaces (use underscore for multiple word separation).}
+#'   \item{\code{parameter}: String with parameter name, as defined in the indicator function.}
+#'   \item{\code{default_value}: Default value for the parameter.}
+#'   \item{\code{description}: String describing the function parameter.}
+#' }
+#'
+#' @examples
+#' data(additional_parameters)
+#' @keywords data
+#' @seealso \code{\link{indicator_definition}}, \code{\link{variable_definition}}
 NULL
 
 #' Input variable definitions
@@ -37,7 +61,7 @@ NULL
 #' @docType data
 #'
 #' @format
-#' A data frame with parameters in rows and columns:
+#' A data frame with variables in rows and columns:
 #' \itemize{
 #'   \item{\code{variable_name}: String with variable name. Should not contain spaces (use underscore for multiple word separation).}
 #'   \item{\code{level}: String describing the level (scale) to which the variable applies, either 'stand' or 'plant'.}
@@ -49,7 +73,7 @@ NULL
 #' @examples
 #' data(variable_definition)
 #' @keywords data
-#' @seealso indicator_definition
+#' @seealso \code{\link{indicator_definition}}, \code{\link{additional_parameters}}
 NULL
 
 #' Example datasets

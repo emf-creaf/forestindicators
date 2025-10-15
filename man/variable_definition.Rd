@@ -5,7 +5,7 @@
 \alias{variable_definition}
 \title{Input variable definitions}
 \format{
-A data frame with parameters in rows and columns:
+A data frame with variables in rows and columns:
 \itemize{
   \item{\code{variable_name}: String with variable name. Should not contain spaces (use underscore for multiple word separation).}
   \item{\code{level}: String describing the level (scale) to which the variable applies, either 'stand' or 'plant'.}
@@ -21,6 +21,6 @@ A data frame of variable definitions and units, as used in indicator estimation
 data(variable_definition)
 }
 \seealso{
-indicator_definition
+\code{\link{indicator_definition}}, \code{\link{additional_parameters}}
 }
 \keyword{data}

@@ -8,3 +8,4 @@
 available_indicators<-function() {
   return(indicator_definition$indicator)
 }
+

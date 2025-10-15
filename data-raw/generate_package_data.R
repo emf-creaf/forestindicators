@@ -1,3 +1,4 @@
+
 indicator_definition <-as.data.frame(readxl::read_xlsx("data-raw/forestindicators_input.xlsx",
                                                        sheet="indicators"), stringsAsFactors=FALSE)
 
@@ -6,6 +7,13 @@ variable_definition <-as.data.frame(readxl::read_xlsx("data-raw/forestindicators
 
 additional_parameters <-as.data.frame(readxl::read_xlsx("data-raw/forestindicators_input.xlsx",
                                                       sheet="additional_parameters"), stringsAsFactors=FALSE)
+
+# Check that functions exist
+for(i in 1:length(indicator_definition$indicator)) {
+  indicator  <- indicator_definition$indicator[i]
+  indicator_function_name <- paste0(".", indicator)
+  if(!exists(indicator_function_name, envir = getNamespace("forestindicators"))) cli::cli_abort(paste0("Function '", indicator_function_name," not found!"))
+}
 
 # Check that variables cited in indicator definition are actually defined in variable definition
 .check_var<-function(varname, input) {
@@ -31,6 +39,27 @@ for(i in 1:nrow(indicator_definition)) {
     for(var in plant_dynamic_variables) .check_var(var, "plant_dynamic_input")
   }
 }
+
+# Check that function additional parameters match data of additional_parameters  --------
+for(i in 1:length(indicator_definition$indicator)) {
+  indicator  <- indicator_definition$indicator[i]
+  indicator_function_name <- paste0(".", indicator)
+  f <- get(indicator_function_name, envir = getNamespace("forestindicators"))
+  additional_f <- names(formals(f))
+  additional_f <- additional_f[!(additional_f %in% c("stand_static_input", "stand_dynamic_input",
+                                                     "plant_static_input", "plant_dynamic_input",
+                                                     "timber_volume_function", "plant_biomass_function",
+                                                     "..."))]
+  additional_data <- additional_parameters$parameter[additional_parameters$indicator==indicator]
+  if(!all(additional_f %in% additional_data)) {
+    cli::cli_abort(paste0("Some additional parameters of '", indicator_function_name,"' not found in documentation"))
+  }
+  if(!all(additional_data %in% additional_f)) {
+    cli::cli_abort(paste0("Some additional documented parameters of '", indicator_function_name,"' not found in function definition"))
+  }
+}
+
+
 
 usethis::use_data(indicator_definition, overwrite = TRUE)
 usethis::use_data(variable_definition, overwrite = TRUE)

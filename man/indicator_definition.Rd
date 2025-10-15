@@ -5,7 +5,7 @@
 \alias{indicator_definition}
 \title{Indicator definition and requirements}
 \format{
-A data frame with parameters in rows and columns:
+A data frame with indicators in rows and columns:
 \itemize{
   \item{\code{indicator_name}: String with indicator name. Should not contain spaces (use underscore for multiple word separation).}
   \item{\code{stand_static_variables}: String with \emph{stand static variables} (e.g. slope) separated by commas. Variable names should not contain spaces (use underscore for multiple word separation).}
@@ -25,6 +25,6 @@ A data frame of implemented indicator metrics and their requirements
 data(indicator_definition)
 }
 \seealso{
-variable_definition
+\code{\link{variable_definition}}, \code{\link{additional_parameters}}
 }
 \keyword{data}

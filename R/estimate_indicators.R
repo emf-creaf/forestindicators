@@ -21,6 +21,20 @@
 #'
 #' @details
 #' Additional details...
+#' @examples
+#' ## Vector of indicator names to be estimated
+#' indicators <- c("timber_harvest", "density_dead_wood")
+#'
+#' ## Named lists with additional parameters needed for each indicator
+#' additional_params <- list(timber_harvest = list(province = 8),
+#'                           density_dead_wood = list(max_tree_dbh = 20))
+#'
+#' ## Call indicator estimation
+#' res <- estimate_indicators(indicators,
+#'                            plant_dynamic_input = example_plant_dynamic_input,
+#'                            timber_volume_function = forestindicators:::.ifn_volume_forestindicators,
+#'                            additional_params = additional_params,
+#'                            verbose = TRUE)
 #'
 #' @export
 #'
@@ -77,7 +91,7 @@ estimate_indicators <- function(indicators,
     indicator_function_name <- paste0(".", indicator)
     if(!exists(indicator_function_name)) cli::cli_abort(paste0("Function '", indicator_function_name," not found!"))
     indicator_function <- get(indicator_function_name)
-    
+
     # Check structure of indicators
     if(verbose) cli::cli_progress_step(paste0("Checking inputs for '", indicator,"'."))
     .check_var_type<-function(varname, vector, input) {
@@ -123,7 +137,7 @@ estimate_indicators <- function(indicators,
         .check_var_type(var, plant_dynamic_input[[var]], "plant_dynamic_input")
       }
     }
-    
+
     #
     if(verbose) cli::cli_progress_step(paste0("Processing '", indicator,"'."))
     argList <- list(stand_static_input = stand_static_input,

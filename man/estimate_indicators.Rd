@@ -49,3 +49,19 @@ Estimates forest indicators for a given set of forest stands during a given set 
 \details{
 Additional details...
 }
+\examples{
+## Vector of indicator names to be estimated
+indicators <- c("timber_harvest", "density_dead_wood")
+
+## Named lists with additional parameters needed for each indicator
+additional_params <- list(timber_harvest = list(province = 8),
+                          density_dead_wood = list(max_tree_dbh = 20))
+
+## Call indicator estimation
+res <- estimate_indicators(indicators,
+                           plant_dynamic_input = example_plant_dynamic_input,
+                           timber_volume_function = forestindicators:::.ifn_volume_forestindicators,
+                           additional_params = additional_params,
+                           verbose = TRUE)
+
+}

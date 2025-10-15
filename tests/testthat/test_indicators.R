@@ -1,16 +1,16 @@
 ## 1.
 test_that("Obvious errors are dealt",{
   expect_error(estimate_indicators("wrong indicator name", data.frame(), verbose = FALSE))
-  expect_error(estimate_indicators("soil_erosion_01", data.frame(), verbose = FALSE))
-  expect_error(estimate_indicators("soil_erosion_01", c(2,3), verbose = FALSE))
+  expect_error(estimate_indicators("soil_erosion", data.frame(), verbose = FALSE))
+  expect_error(estimate_indicators("soil_erosion", c(2,3), verbose = FALSE))
 })
 
 
 ## 2.
 test_that("timber harvest calculation",{
-  expect_error(estimate_indicators("timber_harvest_01", data.frame(id_stand = "stand 1"), verbose = FALSE))
-  additional_params = list(timber_harvest_01 = list(province = 8))
-  expect_s3_class(estimate_indicators("timber_harvest_01",
+  expect_error(estimate_indicators("timber_harvest", data.frame(id_stand = "stand 1"), verbose = FALSE))
+  additional_params <- list(timber_harvest = list(province = 8))
+  expect_s3_class(estimate_indicators("timber_harvest",
                                       plant_dynamic_input = example_plant_dynamic_input,
                                       timber_volume_function = forestindicators:::.ifn_volume_forestindicators,
                                       additional_params = additional_params,
@@ -20,7 +20,7 @@ test_that("timber harvest calculation",{
 
 ## 3.
 test_that("density dead wood calculation",{
-  additional_params = list(density_dead_wood = list(large_tree_dbh = 10))
+  additional_params <- list(density_dead_wood = list(max_tree_dbh = 10))
   expect_s3_class(estimate_indicators("density_dead_wood",
                                       plant_dynamic_input = example_plant_dynamic_input,
                                       additional_params = additional_params,
@@ -52,4 +52,4 @@ test_that("density dead wood calculation",{
 #                                       plant_dynamic_input = example_plant_dynamic_input,
 #                                       verbose = FALSE), "data.frame")
 # })
-# 
+#
