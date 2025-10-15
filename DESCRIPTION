@@ -12,6 +12,7 @@ Authors@R: c(
 Description: Facilitates the estimation multiple indicators of forest ecosystem services.
     Indicators are defined in internal functions and tables.
 License: GPL (>= 2)
+URL: https://emf-creaf.github.io/forestindicators/, https://github.com/emf-creaf/forestindicators
 Depends: R (>= 4.1.0)
 Imports:
     cli,

@@ -7,17 +7,21 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", fig.path = "README-")
 knitr::opts_chunk$set(fig.path = "man/figures/")
 ```
 
-# Estimation of indicators of forest ecosystem services
+# Indicators of forest ecosystem services
 
 ## Introduction
 
 
 ## Package installation
 
-Package **forestindicators** can be installed from GitHub. At present, it requires the installation of package [**IFNallometry**](https://emf-creaf.github.io/IFNallometry/index.html):
+Package **forestindicators** can be installed from GitHub. At present, it requires the previous installation of package [**IFNallometry**](https://emf-creaf.github.io/IFNallometry/index.html) also available in GitHub only:
 
-```{r installation github, eval = FALSE}
+```{r installation github IFNallometry, eval = FALSE}
 remotes::install_github("emf-creaf/IFNallometry")
+```
+
+Once installed, you can proceed to the installation of **forestindicators**:
+```{r installation github forestindicators, eval = FALSE}
 remotes::install_github("emf-creaf/forestindicators")
 ```
 
@@ -29,6 +33,10 @@ remotes::install_github("emf-creaf/forestindicators")
 ## Authorship
 
 Package **forestindicators** is developed and maintained by the [*Ecosystem Modelling Facility*](https://emf.creaf.cat) unit at [*CREAF*](https://www.creaf.cat/) (in Spain) and the *Landscape Modelling Group* at [*CTFC*](https://www.ctfc.cat/) (in Spain).
+
+```{r, out.width='50%', fig.align="center", echo=FALSE}
+knitr::include_graphics("man/figures/institution_logos.png")
+```
 
 ## Funding
 
