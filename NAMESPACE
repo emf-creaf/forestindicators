@@ -2,6 +2,7 @@
 
 export(available_indicators)
 export(estimate_indicators)
+export(show_information)
 import(cli)
 import(sf)
 importFrom(dplyr,bind_rows)

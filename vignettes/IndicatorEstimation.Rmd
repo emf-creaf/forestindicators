@@ -36,7 +36,7 @@ The following subsections provide examples of the four different data frames. A 
 
 ### Stand-level static data
 
-This data frame contains **stand-level** information that **does not change through time**, such as topographic features, the area represented, etc. 
+This data frame contains **STAND-level** information that **DOES NOT change through time**, such as topographic features, the area represented, etc. 
 
 The actual columns will depend on the indicator to be calculated, but at least a column `id_stand` (character) should be defined to identify stands. An example of stand-level static data frame is the following:
 
@@ -46,7 +46,7 @@ example_stand_static_input
 
 ### Stand-level dynamic data
 
-This data frame contains **stand-level** information that **does change through time**, such as temperature, precipitation, the stand leaf area index, canopy cover, etc. 
+This data frame contains **STAND-level** information that **DOES change through time**, such as temperature, precipitation, the stand leaf area index, canopy cover, etc. 
 
 The actual columns will depend on the indicator to be calculated, but at least columns `id_stand` (character) and `date` (Date) should be defined to identify stands and time points, respectively. An example of stand-level dynamic data frame is the following:
 
@@ -57,6 +57,9 @@ example_stand_dynamic_input
 
 ### Plant-level static data
 
+This data frame contains **PLANT-level** information that **DOES NOT change through time**, such as taxonomy, traits, etc. 
+
+The actual columns will depend on the indicator to be calculated, but at least a columns `id_stand` (character) and `plant_entity` (character) should be defined to identify stands and plants, respectively. An example of plant-level static data frame is the following:
 
 ```{r}
 example_plant_static_input
@@ -64,46 +67,90 @@ example_plant_static_input
 
 ### Plant-level dynamic data
 
+
+This data frame contains **PLANT-level** information that **DOES change through time**, such as dbh, height, cover, etc. 
+
+The actual columns will depend on the indicator to be calculated, but at least a columns `id_stand` (character), `plant_entity` (character) and `date` (Date) should be defined to identify stands and plants, respectively. An example of plant-level dynamic data frame is the following:
+
 ```{r}
 example_plant_dynamic_input
 ```
 
 
-## Indicator functions and parameters
+## Indicators
 
-The figure sizes have been customised so that you can easily put two images side-by-side. 
+### Indicator definition
+
+All the information regarding which indicators are included in the package and their requirements can be found in the data table `indicator_definition`. For each indicator, it includes:
+
+ + Description
+ + Method of estimation
+ + Output units
+ + Person responsible of its implementation in the package, who is to be contacted in case of issues/doubts.
+ + Variable names required for its estimation (grouped by input data frame)
+
+### Variable definition
+
+The type and units of all input variables can be found in table `variable_definition`.
+
+### Indicator functions
+
+Each indicator is implemented in the package as an **internal function**, maintained by the responsible person. This functions is not directly accessible to the user, but is called via `estimate_indicators()` (see below).
+
+### Additional parameters
+
+The estimation of indicators may require other information in addition to the input data frame. Table `additional_parameters` contains the description of additional parameters for those functions that require them. The way these parameters are specified is described below.
+
+## Indicator estimation procedure
+
+The general procedure for the estimation of forest indicators follows three main steps, which we illustrate in the following subsections:
+
+### Step 1: Choose target indicators and examine their requirements
+
+The first step is to decide which indicators are to be estimated. You can examine the names of the available indicators in the package by calling function `available_indicators()`:
 
 ```{r}
-indicators <- c("timber_harvest", "density_dead_wood")
+available_indicators()
+```
+
+Say we decide to estimate the *timber harvest volume* (`"timber_harvest"`) and the *density of dead wood* (`"density_dead_wood"`). We may need to check which data inputs are required, their units, etc. We can find this information using function `show_information()`:
+
+```{r}
+show_information("timber_harvest")
 ```
 
 ```{r}
-additional_parameters[additional_parameters$indicator %in% indicators, ]
+show_information("density_dead_wood")
 ```
 
 
-## Indicator estimation
+### Step 2: Assemble inputs and define values for additional parameters
 
-### Define values for additional parameters
+Once the format of inputs is know, it is the responsibility of the user to build the necessary data frames to be used as inputs. In our case, we will use `example_plant_dynamic_input` that already contains the necessary data for the estimation of the two indicators.
+
+However, we will normally need to define additional parameters to fine-tune the estimation of indicators, For that, we define a **named list** where each element corresponds to a different indicator and, in turn, contains a named list of parameters. In our case:
 
 ```{r}
 params <- list(timber_harvest = list(province = 8),
                density_dead_wood = list(max_tree_dbh = 20))
 ```
 
-### Estimation function
+### Step 3: Call general estimation function
+
+Once we have our inputs ready, the indicators are estimated by calling function `estimate_indicators()` as follows:
 
 ```{r}
-res <- estimate_indicators(indicators,
+res <- estimate_indicators(indicators = c("timber_harvest", "density_dead_wood"),
                            plant_dynamic_input = example_plant_dynamic_input,
                            timber_volume_function = forestindicators:::.ifn_volume_forestindicators,
-                           additional_params = params,
-                           verbose = TRUE)
+                           additional_params = params)
 ```
 
+Note that `"timber_harvest"` requires specifying the function to be used to calculate timber volumes, i.e. `timber_volume_function`, for which in our case we use a predefined package function.
 
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(res, 10))
+The result of the estimation is the following:
+```{r}
+res
 ```
 
 
