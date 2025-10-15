@@ -8,14 +8,14 @@
 A data frame with parameters in rows and columns:
 \itemize{
   \item{\code{indicator_name}: String with indicator name. Should not contain spaces (use underscore for multiple word separation).}
-  \item{\code{stand_static_variables}: String with stand static variables (e.g. slope) separated by commas. Variable names should not contain spaces (use underscore for multiple word separation).}
-  \item{\code{stand_dynamic_variables}: String with stand dynamic variables (e.g. canopy cover, stand leaf area index) separated by commas. Variable names should not contain spaces (use underscore for multiple word separation).}
-  \item{\code{plant_static_variables}: String with plant static variables separated by commas. Variable names should not contain spaces (use underscore for multiple word separation).}
-  \item{\code{plant_dynamic_variables}: String with plant dynamic variables (e.g. dbh, height, cover) separated by commas. Variable names should not contain spaces (use underscore for multiple word separation).}
+  \item{\code{stand_static_variables}: String with \emph{stand static variables} (e.g. slope) separated by commas. Variable names should not contain spaces (use underscore for multiple word separation).}
+  \item{\code{stand_dynamic_variables}: String with \emph{stand dynamic variables} (e.g. canopy cover, stand leaf area index) separated by commas. Variable names should not contain spaces (use underscore for multiple word separation).}
+  \item{\code{plant_static_variables}: String with \emph{plant static variables} separated by commas. Variable names should not contain spaces (use underscore for multiple word separation).}
+  \item{\code{plant_dynamic_variables}: String with \emph{plant dynamic variables} (e.g. dbh, height, cover) separated by commas. Variable names should not contain spaces (use underscore for multiple word separation).}
   \item{\code{output_units}: String describing the units of the indicator metric (e.g. Mg/ha).}
   \item{\code{estimation_method}: String describing the procedure for indicator estimation.}
   \item{\code{interpretation}: String describing how the indicator should be interpreted and common usage.}
-  \item{\code{implementation_responsible}: Person responsible for the definition and implementation of the indicator within the package.}
+  \item{\code{implementation_responsible}: Name of the person responsible for the definition and implementation of the indicator within the package.}
 }
 }
 \description{

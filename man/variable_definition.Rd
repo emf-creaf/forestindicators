@@ -8,9 +8,10 @@
 A data frame with parameters in rows and columns:
 \itemize{
   \item{\code{variable_name}: String with variable name. Should not contain spaces (use underscore for multiple word separation).}
-  \item{\code{level}: .}
-  \item{\code{units}: .}
-  \item{\code{description}: .}
+  \item{\code{level}: String describing the level (scale) to which the variable applies, either 'stand' or 'plant'.}
+  \item{\code{type}: String with variable type, either 'character' or 'numeric'.}
+  \item{\code{units}: String indicating the variable units.}
+  \item{\code{description}: String with the verbal description of the variable.}
 }
 }
 \description{
