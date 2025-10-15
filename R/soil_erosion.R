@@ -4,14 +4,13 @@
 ## S is the slope steepness factor, C is a cover management factor,
 ## and P is a supporting practices factor.
 
-.soil_erosion_01 <- function(stand_static_input,
-                             stand_dynamic_input = NULL,
-                             plant_static_input = NULL,
-                             plant_dynamic_input = NULL,
-                             k = 0, ...){
+.soil_erosion_rusle <- function(stand_static_input = NULL,
+                                stand_dynamic_input = NULL,
+                                plant_static_input = NULL,
+                                plant_dynamic_input = NULL, ...){
 
   ## Check additional parameters (add as many as additional arguments)
-  if(!inherits(k, "numeric") | k < 0) cli::cli_abort("'k' should be a positive numeric value")
+  # if(!inherits(k, "numeric") | k < 0) cli::cli_abort("'k' should be a positive numeric value")
 
   ## Build a single data frame with all the required inputs
   df = stand_dynamic_input |>
@@ -22,7 +21,7 @@
   df$soil_erosion_01 = df$mean_precipitation * df$slope * (df$canopy_cover / 100) * k
 
   ## Return the output data frame
-  res = df |> dplyr::select("id_stand", "date", "soil_erosion_01")
+  res = df |> dplyr::select("id_stand", "date", "soil_erosion_rusle")
   return(res)
 }
 

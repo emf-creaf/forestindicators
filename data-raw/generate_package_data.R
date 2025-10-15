@@ -4,6 +4,8 @@ indicator_definition <-as.data.frame(readxl::read_xlsx("data-raw/forestindicator
 variable_definition <-as.data.frame(readxl::read_xlsx("data-raw/forestindicators_input.xlsx",
                                                       sheet="variables"), stringsAsFactors=FALSE)
 
+additional_parameters <-as.data.frame(readxl::read_xlsx("data-raw/forestindicators_input.xlsx",
+                                                      sheet="additional_parameters"), stringsAsFactors=FALSE)
 
 # Check that variables cited in indicator definition are actually defined in variable definition
 .check_var<-function(varname, input) {
@@ -32,6 +34,7 @@ for(i in 1:nrow(indicator_definition)) {
 
 usethis::use_data(indicator_definition, overwrite = TRUE)
 usethis::use_data(variable_definition, overwrite = TRUE)
+usethis::use_data(additional_parameters, overwrite = TRUE)
 
 
 # Example datasets --------------------------------------------------------
