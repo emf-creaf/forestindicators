@@ -42,7 +42,6 @@ estimate_indicators <- function(indicators,
     if(!("id_stand" %in% names(stand_static_input))) cli::cli_abort("'stand_static_input' should contain a character column called 'id_stand'")
     if(!is.character(stand_static_input$id_stand)) cli::cli_abort("'id_stand' of 'stand_static_input' should contain character values")
   }
-
   if(!is.null(stand_dynamic_input)) {
     if(!inherits(stand_dynamic_input, "data.frame")) cli::cli_abort("'stand_dynamic_input' should be a data frame")
     if(!("id_stand" %in% names(stand_dynamic_input))) cli::cli_abort("'stand_dynamic_input' should contain a character column called 'id_stand'")
@@ -78,7 +77,8 @@ estimate_indicators <- function(indicators,
     indicator_function_name <- paste0(".", indicator)
     if(!exists(indicator_function_name)) cli::cli_abort(paste0("Function '", indicator_function_name," not found!"))
     indicator_function <- get(indicator_function_name)
-
+    
+    # Check structure of indicators
     if(verbose) cli::cli_progress_step(paste0("Checking inputs for '", indicator,"'."))
     .check_var_type<-function(varname, vector, input) {
       if(!(varname %in% variable_definition$variable)) cli::cli_abort(paste0("Variable '",varname,"' of ", input, " not found in variable definition!"))
@@ -123,7 +123,8 @@ estimate_indicators <- function(indicators,
         .check_var_type(var, plant_dynamic_input[[var]], "plant_dynamic_input")
       }
     }
-
+    
+    #
     if(verbose) cli::cli_progress_step(paste0("Processing '", indicator,"'."))
     argList <- list(stand_static_input = stand_static_input,
                     stand_dynamic_input = stand_dynamic_input,
@@ -135,6 +136,7 @@ estimate_indicators <- function(indicators,
     if(indicator %in% names(additional_params)) argList = c(argList, additional_params[[indicator]])
     indicator_table <- do.call(indicator_function, args=argList) |>
       tibble::as_tibble()
+    # browser()
     if(i==1) {
       result <- indicator_table
     } else {

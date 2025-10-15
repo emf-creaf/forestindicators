@@ -1,23 +1,26 @@
-## All outputs will be at the plot-level
-
 .timber_harvest_01 <- function(stand_static_input,
                                stand_dynamic_input = NULL,
                                plant_static_input = NULL,
                                plant_dynamic_input = NULL,
                                timber_volume_function = NULL,
                                plant_biomass_function = NULL,
-                               a = 0, ...){
+                               province = NULL, ...){
 
   ## Check additional parameters (add as many as additional arguments)
-  if(!inherits(a, "numeric")) cli::cli_abort("'a' should be a numeric value")
+  if(!inherits(province, "numeric")) cli::cli_abort("'province' should be a numeric value")
 
+  ## If province is not null, add it in plant_dynamic_input
+  if(!is.null(province)){
+    plant_dynamic_input = plant_dynamic_input |> mutate(Province = province)
+  }
+  
   ## Filter plant_dynamic_input by state = "cut"
   plant_input = plant_dynamic_input |> dplyr::filter(state == "cut")
 
-  ##
+  ## Compute volume over bark at the tree-level
   plant_input$vol = timber_volume_function(plant_input)
 
-  ## Summarize
+  ## Summarize at the plot-level
   df <- plant_input |> dplyr::group_by(id_stand, date) |> dplyr::summarise(timber_harvest_01 = sum(vol))
 
   ## Return the output data frame
