@@ -73,9 +73,9 @@ Cáceres / Núria Aquilué</h4>
 </h2>
 <p>Package <strong>forestindicators</strong> is meant to provide a
 flexible framework into which implement the estimation of multiple
-forest metrics. This implies a collaborative work leading to the
-progressive extension of the package capabilities. In this vignette, you
-will learn how to contribute with new indicators.</p>
+forest metrics. This implies a <em>collaborative work</em> leading to
+the progressive extension of the set of metrics included. In this
+vignette, you will learn how to contribute with new indicators.</p>
 </div>
 <div class="section level2">
 <h2 id="elements-in-the-description-of-indicators">Elements in the description of indicators<a class="anchor" aria-label="anchor" href="#elements-in-the-description-of-indicators"></a>
@@ -84,14 +84,30 @@ will learn how to contribute with new indicators.</p>
 package and their requirements can be found in the data table
 <code>indicator_definition</code>. For each indicator, it includes:</p>
 <ul>
-<li>Description</li>
+<li>Name</li>
 <li>Method of estimation</li>
+<li>Interpretation</li>
 <li>Output units</li>
 <li>Person responsible of its implementation in the package, who is to
 be contacted in case of issues/doubts.</li>
 <li>Variable names required for its estimation (grouped by input data
 frame)</li>
 </ul>
+<p>Variables cited in <code>indicator_definition</code> are defined in
+the data table <code>variable_definition</code>, which includes for each
+variable its level (<em>plant</em> or <em>stand</em>), type
+(<em>numeric</em> or <em>character</em>), units and description.</p>
+</div>
+<div class="section level2">
+<h2 id="indicator-functions">Indicator functions<a class="anchor" aria-label="anchor" href="#indicator-functions"></a>
+</h2>
+<p>Each indicator has a corresponding <em>internal function</em> in the
+package, with the same name, but starting with a dot (<code>.</code>).
+All indicator functions have a common set of parameters, corresponding
+to the four different input data frames. The functions can also require
+ancillary functions to calculate biomass or volumes via allometric
+equations. Finally, the functions can have additional parameters, which
+are described in data table <code>additional_parameters</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="how-to-define-new-indicators">How to define new indicators?<a class="anchor" aria-label="anchor" href="#how-to-define-new-indicators"></a>
@@ -109,24 +125,24 @@ you will need to <em>re-synchronize</em> to get the latest updates since
 your last contribution.</p>
 </div>
 <div class="section level3">
-<h3 id="task-1--update-of-forest-indicator-tables">Task 1. Update of forest indicator tables<a class="anchor" aria-label="anchor" href="#task-1--update-of-forest-indicator-tables"></a>
+<h3 id="task-1--update-of-indicator-variable-and-additional-parameter-tables">Task 1. Update of indicator, variable and additional parameter
+tables<a class="anchor" aria-label="anchor" href="#task-1--update-of-indicator-variable-and-additional-parameter-tables"></a>
 </h3>
 <div class="section level4">
 <h4 id="indicator-description">Indicator description<a class="anchor" aria-label="anchor" href="#indicator-description"></a>
 </h4>
 <p>The new indicator needs to be described in data table
-<code>indicator_definition</code>, providing:</p>
+<code>indicator_definition</code>, providing at minimum:</p>
 <ul>
 <li>Name</li>
-<li>Description</li>
-<li>Method of estimation</li>
 <li>Output units</li>
 <li>Person responsible of its implementation in the package, who is to
 be contacted in case of issues/doubts.</li>
-<li>Variable names required for its estimation (see below)</li>
+<li>Variable names required for its estimation (see below).</li>
 </ul>
-<p>The indicator naming should be in lower case and words separated by
-underscores.</p>
+<p>Other fields (interpretation and description) are also strongly
+encouraged. The indicator naming should be in lower case and words
+separated by underscores.</p>
 </div>
 <div class="section level4">
 <h4 id="variables">Variables<a class="anchor" aria-label="anchor" href="#variables"></a>
@@ -136,23 +152,87 @@ underscores. For each variable, it is important to identify to which
 input data group the required variables belongs
 (i.e. <em>stand-level</em> vs. <em>plant-level</em> or <em>static</em>
 vs. <em>dynamic</em>). Note that a given variable name can only belong
-to one group.</p>
+to one group. If new variables need to be defined, you should modify the
+data table <code>variable_definition</code>, providing for each variable
+its type, units and description.</p>
 </div>
 <div class="section level4">
-<h4 id="section"></h4>
+<h4 id="additional-parameters">Additional parameters<a class="anchor" aria-label="anchor" href="#additional-parameters"></a>
+</h4>
+<p>Apart from the data frame inputs, some indicators will require
+additional parameters. These should be described in data table
+<code>additional_parameters</code>. Note that during the package
+building procedure, there is a check between parameter names in
+<code>additional_parameters</code> and the implementation of internal
+indicator functions (see below).</p>
 </div>
 </div>
 <div class="section level3">
-<h3 id="task-2--implementation-of-indicator-functions">Task 2. Implementation of indicator functions<a class="anchor" aria-label="anchor" href="#task-2--implementation-of-indicator-functions"></a>
+<h3 id="task-2--implementation-of-internal-indicator-functions">Task 2. Implementation of internal indicator functions<a class="anchor" aria-label="anchor" href="#task-2--implementation-of-internal-indicator-functions"></a>
 </h3>
+<p>As stated above, each indicator has a corresponding <em>internal
+function</em> in the package, with the same name, but starting with a
+dot (<code>.</code>). This function implements the estimation procedure
+described in the indicator definition. The general structure of the
+internal function will be:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>.[indicator name] <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">stand_static_input =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>                              <span class="at">stand_dynamic_input =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>                              <span class="at">plant_static_input =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>                              <span class="at">plant_dynamic_input =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>                              <span class="co"># [additional param 1],</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>                              <span class="co"># [additional param n],</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>                              ...){</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>}</span></code></pre></div>
+<p>The three dots (i.e. <code>...</code>) are used to ignore additional
+parameters passed by function <code><a href="../reference/estimate_indicators.html">estimate_indicators()</a></code>. This
+has the advantage of allowing the omission of data input parameters that
+are not to be used. As an example we show here the internal function for
+the estimation of basal area, which only requires one data frame,
+<code>stand_dynamic_input</code>, and has two additional parameters:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">forestindicators</span><span class="fu">:::</span><span class="va">.basal_area</span></span>
+<span><span class="co">#&gt; function(plant_dynamic_input = NULL,</span></span>
+<span><span class="co">#&gt;                         min_tree_dbh = 7.5,</span></span>
+<span><span class="co">#&gt;                         tree_state = "live",</span></span>
+<span><span class="co">#&gt;                         ...){</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   ## Filter plant_dynamic_input by state = "cut"</span></span>
+<span><span class="co">#&gt;   plant_input &lt;- plant_dynamic_input |&gt;</span></span>
+<span><span class="co">#&gt;     dplyr::filter(state == tree_state)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   ## Compute volume over bark at the tree-level</span></span>
+<span><span class="co">#&gt;   plant_input &lt;- plant_input |&gt;</span></span>
+<span><span class="co">#&gt;     dplyr::filter(dbh &gt;= min_tree_dbh) |&gt;</span></span>
+<span><span class="co">#&gt;     dplyr::mutate(basal_area = n*pi*(dbh/200)^2)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   ## Summarize at the plot-level</span></span>
+<span><span class="co">#&gt;   df &lt;- plant_input |&gt;</span></span>
+<span><span class="co">#&gt;     dplyr::group_by(id_stand, date) |&gt;</span></span>
+<span><span class="co">#&gt;     dplyr::summarise(basal_area = sum(basal_area))</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   ## Return the output data frame</span></span>
+<span><span class="co">#&gt;   res &lt;- df |&gt; dplyr::select(id_stand, date, basal_area)</span></span>
+<span><span class="co">#&gt;   return(res)</span></span>
+<span><span class="co">#&gt; }</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x60abcaab6780&gt;</span></span>
+<span><span class="co">#&gt; &lt;environment: namespace:forestindicators&gt;</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="task-3--write-tests-to-check-functionnality">Task 3. Write tests to check functionnality<a class="anchor" aria-label="anchor" href="#task-3--write-tests-to-check-functionnality"></a>
+<h3 id="task-3--write-tests-to-check-functionality">Task 3. Write tests to check functionality<a class="anchor" aria-label="anchor" href="#task-3--write-tests-to-check-functionality"></a>
 </h3>
+<p>Along with the implementation of the indicator internal function, it
+is good practice to include tests in the package to ensure that the
+function works and has the intended behavior. Tests should be written
+following the guidelines of package <strong>test_that</strong>.</p>
 </div>
 <div class="section level3">
-<h3 id="task-4--perform-a-pull-request">Task 4. Perform a pull request<a class="anchor" aria-label="anchor" href="#task-4--perform-a-pull-request"></a>
+<h3 id="task-4--checks-and-pull-request">Task 4. Checks and pull request<a class="anchor" aria-label="anchor" href="#task-4--checks-and-pull-request"></a>
 </h3>
+<p>When the other tasks are finished, you should reload package data and
+be sure that the package passes formal checks. If so, you can then push
+changes to your GitHub repository and then make a pull request to the
+main repository. The package maintainers should then revise the changes
+and approve or not the package modifications.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

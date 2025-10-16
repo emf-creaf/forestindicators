@@ -257,8 +257,9 @@ example of plant-level dynamic data frame is the following:</p>
 package and their requirements can be found in the data table
 <code>indicator_definition</code>. For each indicator, it includes:</p>
 <ul>
-<li>Description</li>
+<li>Indicator name</li>
 <li>Method of estimation</li>
+<li>Interpretation</li>
 <li>Output units</li>
 <li>Person responsible of its implementation in the package, who is to
 be contacted in case of issues/doubts.</li>
@@ -386,18 +387,18 @@ calling function <code><a href="../reference/estimate_indicators.html">estimate_
 <span>                           additional_params <span class="op">=</span> <span class="va">params</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking overall inputs</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking inputs for 'timber_harvest'.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking inputs for 'timber_harvest'. <span style="color: #B2B2B2;">[4ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking inputs for 'timber_harvest'. <span style="color: #B2B2B2;">[5ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking overall inputs<span style="color: #00BB00;">✔</span> Checking overall inputs <span style="color: #B2B2B2;">[26ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking overall inputs<span style="color: #00BB00;">✔</span> Checking overall inputs <span style="color: #B2B2B2;">[34ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Processing 'timber_harvest'.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking inputs for 'density_dead_wood'.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking inputs for 'density_dead_wood'. <span style="color: #B2B2B2;">[8ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking inputs for 'density_dead_wood'. <span style="color: #B2B2B2;">[9ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Processing 'timber_harvest'.<span style="color: #00BB00;">✔</span> Processing 'timber_harvest'. <span style="color: #B2B2B2;">[119ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Processing 'timber_harvest'.<span style="color: #00BB00;">✔</span> Processing 'timber_harvest'. <span style="color: #B2B2B2;">[133ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Processing 'density_dead_wood'.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Processing 'density_dead_wood'. <span style="color: #B2B2B2;">[20ms]</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Processing 'density_dead_wood'. <span style="color: #B2B2B2;">[24ms]</span></span></span></code></pre></div>
 <p>Note that <code>"timber_harvest"</code> requires specifying the
 function to be used to calculate timber volumes,
 i.e. <code>timber_volume_function</code>, for which in our case we use a
