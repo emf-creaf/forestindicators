@@ -3,16 +3,16 @@
                         tree_state = "live",
                         ...){
 
-  ## Filter plant_dynamic_input by state = "cut"
+  ## Filter plant_dynamic_input by state
   plant_input <- plant_dynamic_input |>
     dplyr::filter(state == tree_state)
 
-  ## Compute volume over bark at the tree-level
+  ## Compute basal area at the tree-cohort level
   plant_input <- plant_input |>
     dplyr::filter(dbh >= min_tree_dbh) |>
     dplyr::mutate(basal_area = n*pi*(dbh/200)^2)
 
-  ## Summarize at the plot-level
+  ## Aggregate basal area to the plot-level
   df <- plant_input |>
     dplyr::group_by(id_stand, date) |>
     dplyr::summarise(basal_area = sum(basal_area))
