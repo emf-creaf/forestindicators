@@ -20,5 +20,5 @@ forest indicator.
 show_information("timber_harvest")
 }
 \seealso{
-\code{\link{available_indicators}}
+\code{\link{available_indicators}}, \code{\link{estimate_indicators}}
 }

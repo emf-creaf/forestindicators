@@ -1,10 +1,10 @@
 ---
-title: "Indicator estimation"
+title: "Indicator estimation procedures"
 author: "Miquel De Cáceres / Núria Aquilué"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Indicator estimation}
+  %\VignetteIndexEntry{Indicator estimation procedures}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -79,7 +79,7 @@ example_plant_dynamic_input
 
 ## Indicators
 
-### Indicator definition
+### Indicator definition table
 
 All the information regarding which indicators are included in the package and their requirements can be found in the data table `indicator_definition`. For each indicator, it includes:
 
@@ -89,7 +89,7 @@ All the information regarding which indicators are included in the package and t
  + Person responsible of its implementation in the package, who is to be contacted in case of issues/doubts.
  + Variable names required for its estimation (grouped by input data frame)
 
-### Variable definition
+### Variable definition table
 
 The type and units of all input variables can be found in table `variable_definition`.
 
@@ -107,28 +107,26 @@ The general procedure for the estimation of forest indicators follows three main
 
 ### Step 1: Choose target indicators and examine their requirements
 
-The first step is to decide which indicators are to be estimated. You can examine the names of the available indicators in the package by calling function `available_indicators()`:
+The first step is to decide which indicators are to be estimated. The list of all indicators is given in table `indicator_definition`. Additionally, you can examine the names of the indicators in the package that could be estimated with your data by calling function `available_indicators()`:
 
 ```{r}
-available_indicators()
+available_indicators(plant_dynamic_input = example_plant_dynamic_input)
 ```
 
-Say we decide to estimate the *timber harvest volume* (`"timber_harvest"`) and the *density of dead wood* (`"density_dead_wood"`). We may need to check which data inputs are required, their units, etc. We can find this information using function `show_information()`:
+Say we decide to estimate the *timber harvest volume* (i.e. indicator `"timber_harvest"`) and the *density of dead wood* (i.e. indicator `"density_dead_wood"`).
+
+We may need to check which data inputs are required, their units, etc. We can find this information using function `show_information()`, for example:
 
 ```{r}
 show_information("timber_harvest")
 ```
 
-```{r}
-show_information("density_dead_wood")
-```
-
 
 ### Step 2: Assemble inputs and define values for additional parameters
 
-Once the format of inputs is know, it is the responsibility of the user to build the necessary data frames to be used as inputs. In our case, we will use `example_plant_dynamic_input` that already contains the necessary data for the estimation of the two indicators.
+Once the requested format and content of inputs is know, it is the responsibility of the user to build the necessary data frames to be used as inputs. In our case, we will use `example_plant_dynamic_input` that already contains the necessary data for the estimation of the two indicators.
 
-However, we will normally need to define additional parameters to fine-tune the estimation of indicators, For that, we define a **named list** where each element corresponds to a different indicator and, in turn, contains a named list of parameters. In our case:
+We will normally need to define additional parameters to fine-tune the estimation of indicators, For that, we define a **named list** where each element corresponds to a different indicator and, in turn, contains a named list of parameters. In our case:
 
 ```{r}
 params <- list(timber_harvest = list(province = 8),

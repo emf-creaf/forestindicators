@@ -6,7 +6,7 @@
 #' @param indicator Character string of the indicator to be described.
 #'
 #' @returns The function returns console output only.
-#' @seealso \code{\link{available_indicators}}
+#' @seealso \code{\link{available_indicators}}, \code{\link{estimate_indicators}}
 #'
 #' @export
 #'
