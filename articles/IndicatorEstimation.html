@@ -305,7 +305,8 @@ names of the indicators in the package that could be estimated with your
 data by calling function <code><a href="../reference/available_indicators.html">available_indicators()</a></code>:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/available_indicators.html">available_indicators</a></span><span class="op">(</span>plant_dynamic_input <span class="op">=</span> <span class="va">example_plant_dynamic_input</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "timber_harvest"    "carbon_stock"      "density_dead_wood"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "basal_area"        "carbon_stock"      "density_dead_wood"</span></span>
+<span><span class="co">#&gt; [4] "timber_harvest"</span></span></code></pre></div>
 <p>Say we decide to estimate the <em>timber harvest volume</em>
 (i.e. indicator <code>"timber_harvest"</code>) and the <em>density of
 dead wood</em> (i.e. indicator <code>"density_dead_wood"</code>).</p>
@@ -330,15 +331,15 @@ etc. We can find this information using function
 <span><span class="co">#&gt; B.4) Plant-level dynamic data:</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  variable      type   units</span></span>
-<span><span class="co">#&gt;     state character       -</span></span>
 <span><span class="co">#&gt;       dbh   numeric      cm</span></span>
 <span><span class="co">#&gt;         h   numeric       m</span></span>
 <span><span class="co">#&gt;         n   numeric ind./ha</span></span>
+<span><span class="co">#&gt;     state character       -</span></span>
 <span><span class="co">#&gt;                                                    description</span></span>
-<span><span class="co">#&gt;  state of the cohort, tree, … can be 'live', 'cut', or 'death'</span></span>
 <span><span class="co">#&gt;                                      diameter at breast height</span></span>
 <span><span class="co">#&gt;                                                         height</span></span>
 <span><span class="co">#&gt;                                                        density</span></span>
+<span><span class="co">#&gt;  state of the cohort, tree, … can be 'live', 'cut', or 'death'</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; C) ADDITIONAL PARAMETERS</span></span>
@@ -385,18 +386,18 @@ calling function <code><a href="../reference/estimate_indicators.html">estimate_
 <span>                           additional_params <span class="op">=</span> <span class="va">params</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking overall inputs</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking inputs for 'timber_harvest'.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking inputs for 'timber_harvest'. <span style="color: #B2B2B2;">[5ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking inputs for 'timber_harvest'. <span style="color: #B2B2B2;">[4ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking overall inputs<span style="color: #00BB00;">✔</span> Checking overall inputs <span style="color: #B2B2B2;">[26ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Processing 'timber_harvest'.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking inputs for 'density_dead_wood'.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking inputs for 'density_dead_wood'. <span style="color: #B2B2B2;">[9ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking inputs for 'density_dead_wood'. <span style="color: #B2B2B2;">[8ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Processing 'timber_harvest'.<span style="color: #00BB00;">✔</span> Processing 'timber_harvest'. <span style="color: #B2B2B2;">[123ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Processing 'timber_harvest'.<span style="color: #00BB00;">✔</span> Processing 'timber_harvest'. <span style="color: #B2B2B2;">[119ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Processing 'density_dead_wood'.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Processing 'density_dead_wood'. <span style="color: #B2B2B2;">[23ms]</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Processing 'density_dead_wood'. <span style="color: #B2B2B2;">[20ms]</span></span></span></code></pre></div>
 <p>Note that <code>"timber_harvest"</code> requires specifying the
 function to be used to calculate timber volumes,
 i.e. <code>timber_volume_function</code>, for which in our case we use a
