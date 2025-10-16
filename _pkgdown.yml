@@ -9,18 +9,18 @@ template:
 
 reference:
 - title: Indicator estimation
-  desc: Functions to estimate forest indicators
+  desc: Functions to discover and estimate forest indicators
 - contents:
+  - available_indicators
   - show_information
   - estimate_indicators
 - title: Example datasets
-  desc: Datasets provided as examples for indicator estimation
+  desc: Datasets provided as examples of data input to illustrate indicator estimation
 - contents:
   - example_datasets
-- title: Indicator definition
-  desc: Set of indicators defined in the package, additional parameters and raw variable definitions
+- title: Indicator definition tables
+  desc: Tables describing the set of indicators defined in the package, additional parameters and raw variable definitions.
 - contents:
-  - available_indicators
   - variable_definition
   - indicator_definition
   - additional_parameters

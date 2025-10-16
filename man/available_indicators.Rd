@@ -2,13 +2,33 @@
 % Please edit documentation in R/available_indicators.R
 \name{available_indicators}
 \alias{available_indicators}
-\title{Available indicator information}
+\title{Available indicators}
 \usage{
-available_indicators()
+available_indicators(
+  stand_static_input = NULL,
+  stand_dynamic_input = NULL,
+  plant_static_input = NULL,
+  plant_dynamic_input = NULL
+)
+}
+\arguments{
+\item{stand_static_input}{A data frame (or \code{\link[sf]{sf}} object) containing static stand variables. Minimum required column are \code{id_stand} (character).}
+
+\item{stand_dynamic_input}{Optional data frame containing dynamic stand variables. Minimum required columns are \code{id_stand} (character) and \code{date} (\code{\link{Date}}).}
+
+\item{plant_static_input}{Optional data frame containing static plant variables. Minimum required columns are \code{id_stand} (character) and \code{plant_entity} (character).}
+
+\item{plant_dynamic_input}{Optional data frame containing dynamic plant variables. Minimum required columns are \code{id_stand} (character), \code{plant_entity} (character) and \code{date} (\code{\link{Date}}).}
 }
 \value{
-A data frame with information of available indicator functions and their requirements.
+A character string with the set of indicators that can be estimated given the supplied input data.
 }
 \description{
-Provides the list of indicators currently available
+Provides the set of indicators available for the supplied input data
+}
+\examples{
+available_indicators(plant_dynamic_input = example_plant_dynamic_input)
+}
+\seealso{
+\code{\link{show_information}}, \code{\link{estimate_indicators}}
 }

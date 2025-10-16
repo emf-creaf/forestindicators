@@ -76,9 +76,10 @@ NULL
 #' @seealso \code{\link{indicator_definition}}, \code{\link{additional_parameters}}
 NULL
 
-#' Example datasets
+#' Example datasets for indicator estimation
 #'
-#' Example datasets for package function testing and documentation
+#' Datasets provided as examples of data input to illustrate indicator estimation and for
+#' indicator function testing.
 #'
 #' @name example_datasets
 #' @aliases example_stand_static_input

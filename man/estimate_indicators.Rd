@@ -68,3 +68,6 @@ res <- estimate_indicators(indicators,
                            verbose = TRUE)
 
 }
+\seealso{
+\code{\link{available_indicators}}, \code{\link{show_information}}
+}

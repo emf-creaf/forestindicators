@@ -7,9 +7,10 @@
 \alias{example_stand_dynamic_input}
 \alias{example_plant_static_input}
 \alias{example_plant_dynamic_input}
-\title{Example datasets}
+\title{Example datasets for indicator estimation}
 \description{
-Example datasets for package function testing and documentation
+Datasets provided as examples of data input to illustrate indicator estimation and for
+indicator function testing.
 }
 \examples{
 data(example_stand_static_input)
