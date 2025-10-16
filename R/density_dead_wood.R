@@ -1,9 +1,4 @@
-.density_dead_wood <- function(stand_static_input = NULL,
-                               stand_dynamic_input = NULL,
-                               plant_static_input = NULL,
-                               plant_dynamic_input = NULL,
-                               timber_volume_function = NULL,
-                               plant_biomass_function = NULL,
+.density_dead_wood <- function(plant_dynamic_input = NULL,
                                min_tree_dbh = 17.5,
                                max_tree_dbh = NA, ...){
 

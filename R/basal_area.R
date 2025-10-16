@@ -1,9 +1,4 @@
-.basal_area <- function(stand_static_input = NULL,
-                        stand_dynamic_input = NULL,
-                        plant_static_input = NULL,
-                        plant_dynamic_input = NULL,
-                        timber_volume_function = NULL,
-                        plant_biomass_function = NULL,
+.basal_area <- function(plant_dynamic_input = NULL,
                         min_tree_dbh = 7.5,
                         tree_state = "live",
                         ...){

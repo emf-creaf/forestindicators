@@ -83,8 +83,9 @@ example_plant_dynamic_input
 
 All the information regarding which indicators are included in the package and their requirements can be found in the data table `indicator_definition`. For each indicator, it includes:
 
- + Description
+ + Indicator name
  + Method of estimation
+ + Interpretation
  + Output units
  + Person responsible of its implementation in the package, who is to be contacted in case of issues/doubts.
  + Variable names required for its estimation (grouped by input data frame)
