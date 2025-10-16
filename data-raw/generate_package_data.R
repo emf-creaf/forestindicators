@@ -1,12 +1,15 @@
 
 indicator_definition <-as.data.frame(readxl::read_xlsx("data-raw/forestindicators_input.xlsx",
-                                                       sheet="indicators"), stringsAsFactors=FALSE)
+                                                       sheet="indicators"), stringsAsFactors=FALSE) |>
+  dplyr::arrange(indicator)
 
 variable_definition <-as.data.frame(readxl::read_xlsx("data-raw/forestindicators_input.xlsx",
-                                                      sheet="variables"), stringsAsFactors=FALSE)
+                                                      sheet="variables"), stringsAsFactors=FALSE) |>
+  dplyr::arrange(variable)
 
 additional_parameters <-as.data.frame(readxl::read_xlsx("data-raw/forestindicators_input.xlsx",
-                                                      sheet="additional_parameters"), stringsAsFactors=FALSE)
+                                                      sheet="additional_parameters"), stringsAsFactors=FALSE) |>
+  dplyr::arrange(indicator)
 
 # Check that functions exist
 for(i in 1:length(indicator_definition$indicator)) {

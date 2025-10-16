@@ -5,6 +5,12 @@ test_that("Obvious errors are dealt",{
   expect_error(estimate_indicators("soil_erosion", c(2,3), verbose = FALSE))
 })
 
+test_that("basal area calculation",{
+  expect_error(estimate_indicators("basal_area", data.frame(id_stand = "stand 1"), verbose = FALSE))
+  expect_s3_class(estimate_indicators("basal_area",
+                                      plant_dynamic_input = example_plant_dynamic_input,
+                                      verbose = FALSE), "data.frame")
+})
 
 ## 2.
 test_that("timber harvest calculation",{

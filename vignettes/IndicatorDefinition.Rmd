@@ -1,10 +1,10 @@
 ---
-title: "Indicator definition"
+title: "Defining new indicators"
 author: "Miquel De Cáceres / Núria Aquilué"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Indicator definition}
+  %\VignetteIndexEntry{Defining new indicators}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -19,12 +19,49 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
+Package **forestindicators** is meant to provide a flexible framework into which implement the estimation of multiple forest metrics. This implies a collaborative work leading to the progressive extension of the package capabilities. In this vignette, you will learn how to contribute with new indicators.
+
 ## Elements in the description of indicators
 
+All the information regarding which indicators are included in the package and their requirements can be found in the data table `indicator_definition`. For each indicator, it includes:
 
+ + Description
+ + Method of estimation
+ + Output units
+ + Person responsible of its implementation in the package, who is to be contacted in case of issues/doubts.
+ + Variable names required for its estimation (grouped by input data frame)
 
 ## How to define new indicators?
 
-### Update of forest indicator tables
+The inclusion of new indicators involves several tasks, which may not be executed sequentially, but all of them should be completed.
 
-### Implementation of indicator functions
+### Task 0. Fork (or re-synchronize) `forestindicators`
+
+In order to define new indicators, you need to *fork* the GitHub repository to your user. With this, you will be able to perform developments without interfering with the main repository. If this is not the first time you contribute, the forked repository will exist, but you will need to *re-synchronize* to get the latest updates since your last contribution.
+
+### Task 1. Update of forest indicator tables
+
+#### Indicator description
+
+The new indicator needs to be described in data table `indicator_definition`, providing:
+
+ + Name
+ + Description
+ + Method of estimation
+ + Output units
+ + Person responsible of its implementation in the package, who is to be contacted in case of issues/doubts.
+ + Variable names required for its estimation (see below)
+
+The indicator naming should be in lower case and words separated by underscores. 
+
+#### Variables 
+
+Variable names should be in lower case with words separated by underscores. For each variable, it is important to identify to which input data group the required variables belongs (i.e. *stand-level* vs. *plant-level* or *static* vs. *dynamic*). Note that a given variable name can only belong to one group.
+
+#### 
+
+### Task 2. Implementation of indicator functions
+
+### Task 3. Write tests to check functionnality
+
+### Task 4. Perform a pull request
