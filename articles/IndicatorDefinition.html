@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Indicator definition • forestindicators</title>
+<title>Defining new indicators • forestindicators</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Indicator definition">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Defining new indicators">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -33,7 +33,7 @@
 <li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/IndicatorDefinition.html">Indicator definition</a></li>
+<li><a class="dropdown-item" href="../articles/IndicatorDefinition.html">Defining new indicators</a></li>
     <li><a class="dropdown-item" href="../articles/IndicatorEstimation.html">Indicator estimation procedures</a></li>
   </ul>
 </li>
@@ -56,7 +56,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
-      <h1>Indicator definition</h1>
+      <h1>Defining new indicators</h1>
                         <h4 data-toc-skip class="author">Miquel De
 Cáceres / Núria Aquilué</h4>
             
@@ -71,20 +71,87 @@ Cáceres / Núria Aquilué</h4>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
+<p>Package <strong>forestindicators</strong> is meant to provide a
+flexible framework into which implement the estimation of multiple
+forest metrics. This implies a collaborative work leading to the
+progressive extension of the package capabilities. In this vignette, you
+will learn how to contribute with new indicators.</p>
 </div>
 <div class="section level2">
 <h2 id="elements-in-the-description-of-indicators">Elements in the description of indicators<a class="anchor" aria-label="anchor" href="#elements-in-the-description-of-indicators"></a>
 </h2>
+<p>All the information regarding which indicators are included in the
+package and their requirements can be found in the data table
+<code>indicator_definition</code>. For each indicator, it includes:</p>
+<ul>
+<li>Description</li>
+<li>Method of estimation</li>
+<li>Output units</li>
+<li>Person responsible of its implementation in the package, who is to
+be contacted in case of issues/doubts.</li>
+<li>Variable names required for its estimation (grouped by input data
+frame)</li>
+</ul>
 </div>
 <div class="section level2">
 <h2 id="how-to-define-new-indicators">How to define new indicators?<a class="anchor" aria-label="anchor" href="#how-to-define-new-indicators"></a>
 </h2>
+<p>The inclusion of new indicators involves several tasks, which may not
+be executed sequentially, but all of them should be completed.</p>
 <div class="section level3">
-<h3 id="update-of-forest-indicator-tables">Update of forest indicator tables<a class="anchor" aria-label="anchor" href="#update-of-forest-indicator-tables"></a>
+<h3 id="task-0--fork-or-re-synchronize-forestindicators">Task 0. Fork (or re-synchronize) <code>forestindicators</code><a class="anchor" aria-label="anchor" href="#task-0--fork-or-re-synchronize-forestindicators"></a>
+</h3>
+<p>In order to define new indicators, you need to <em>fork</em> the
+GitHub repository to your user. With this, you will be able to perform
+developments without interfering with the main repository. If this is
+not the first time you contribute, the forked repository will exist, but
+you will need to <em>re-synchronize</em> to get the latest updates since
+your last contribution.</p>
+</div>
+<div class="section level3">
+<h3 id="task-1--update-of-forest-indicator-tables">Task 1. Update of forest indicator tables<a class="anchor" aria-label="anchor" href="#task-1--update-of-forest-indicator-tables"></a>
+</h3>
+<div class="section level4">
+<h4 id="indicator-description">Indicator description<a class="anchor" aria-label="anchor" href="#indicator-description"></a>
+</h4>
+<p>The new indicator needs to be described in data table
+<code>indicator_definition</code>, providing:</p>
+<ul>
+<li>Name</li>
+<li>Description</li>
+<li>Method of estimation</li>
+<li>Output units</li>
+<li>Person responsible of its implementation in the package, who is to
+be contacted in case of issues/doubts.</li>
+<li>Variable names required for its estimation (see below)</li>
+</ul>
+<p>The indicator naming should be in lower case and words separated by
+underscores.</p>
+</div>
+<div class="section level4">
+<h4 id="variables">Variables<a class="anchor" aria-label="anchor" href="#variables"></a>
+</h4>
+<p>Variable names should be in lower case with words separated by
+underscores. For each variable, it is important to identify to which
+input data group the required variables belongs
+(i.e. <em>stand-level</em> vs. <em>plant-level</em> or <em>static</em>
+vs. <em>dynamic</em>). Note that a given variable name can only belong
+to one group.</p>
+</div>
+<div class="section level4">
+<h4 id="section"></h4>
+</div>
+</div>
+<div class="section level3">
+<h3 id="task-2--implementation-of-indicator-functions">Task 2. Implementation of indicator functions<a class="anchor" aria-label="anchor" href="#task-2--implementation-of-indicator-functions"></a>
 </h3>
 </div>
 <div class="section level3">
-<h3 id="implementation-of-indicator-functions">Implementation of indicator functions<a class="anchor" aria-label="anchor" href="#implementation-of-indicator-functions"></a>
+<h3 id="task-3--write-tests-to-check-functionnality">Task 3. Write tests to check functionnality<a class="anchor" aria-label="anchor" href="#task-3--write-tests-to-check-functionnality"></a>
+</h3>
+</div>
+<div class="section level3">
+<h3 id="task-4--perform-a-pull-request">Task 4. Perform a pull request<a class="anchor" aria-label="anchor" href="#task-4--perform-a-pull-request"></a>
 </h3>
 </div>
 </div>
