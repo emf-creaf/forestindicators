@@ -11,6 +11,12 @@ test_that("basal area calculation",{
                                       plant_dynamic_input = example_plant_dynamic_input,
                                       verbose = FALSE), "data.frame")
 })
+test_that("tree density calculation",{
+  expect_error(estimate_indicators("tree_density", data.frame(id_stand = "stand 1"), verbose = FALSE))
+  expect_s3_class(estimate_indicators("tree_density",
+                                      plant_dynamic_input = example_plant_dynamic_input,
+                                      verbose = FALSE), "data.frame")
+})
 
 test_that("quadratic mean tree diameter calculation",{
   expect_error(estimate_indicators("quadratic_mean_tree_diameter", data.frame(id_stand = "stand 1"), verbose = FALSE))
@@ -21,6 +27,12 @@ test_that("quadratic mean tree diameter calculation",{
 test_that("dominant tree height calculation",{
   expect_error(estimate_indicators("dominant_tree_height", data.frame(id_stand = "stand 1"), verbose = FALSE))
   expect_s3_class(estimate_indicators("dominant_tree_height",
+                                      plant_dynamic_input = example_plant_dynamic_input,
+                                      verbose = FALSE), "data.frame")
+})
+test_that("mean tree height calculation",{
+  expect_error(estimate_indicators("mean_tree_height", data.frame(id_stand = "stand 1"), verbose = FALSE))
+  expect_s3_class(estimate_indicators("mean_tree_height",
                                       plant_dynamic_input = example_plant_dynamic_input,
                                       verbose = FALSE), "data.frame")
 })
