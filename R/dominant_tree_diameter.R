@@ -1,0 +1,34 @@
+.dominant_tree_diameter<-function(plant_dynamic_input = NULL,
+                                  min_tree_dbh = 7.5, ...) {
+  if(!min_tree_dbh >= 0) cli::cli_abort("'min_tree_dbh' should be a numeric positive value")
+
+  .dtd<-function(n, dbh, min_tree_dbh) {
+    if(length(n)<1) return(NA)
+    o <-order(dbh, decreasing=TRUE)
+    dbh = dbh[o]
+    n = n[o]
+    n = n[dbh>=min_tree_dbh]
+    dbh = dbh[dbh>=min_tree_dbh]
+    if(length(dbh)>0) {
+      ncum = 0
+      for(i in 1:length(dbh)) {
+        ncum = ncum + n[i]
+        if(ncum>100) return(sum(dbh[1:i]*n[1:i])/sum(n[1:i]))
+      }
+      reutnr(sum(dbh*n)/sum(n))
+    }
+    return(NA)
+  }
+
+  ## Filter plant_dynamic_input by state
+  plant_input <- plant_dynamic_input |>
+    dplyr::filter(state == "live")
+
+  df <- plant_input |>
+    dplyr::group_by(id_stand, date) |>
+    dplyr::summarise(dominant_tree_diameter = .dtd(n, dbh, min_tree_dbh = min_tree_dbh))
+
+  ## Return the output data frame
+  res <- df |> dplyr::select(id_stand, date, dominant_tree_diameter)
+  return(res)
+}

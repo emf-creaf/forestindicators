@@ -1,4 +1,4 @@
-## 1.
+
 test_that("Obvious errors are dealt",{
   expect_error(estimate_indicators("wrong indicator name", data.frame(), verbose = FALSE))
   expect_error(estimate_indicators("soil_erosion", data.frame(), verbose = FALSE))
@@ -12,6 +12,19 @@ test_that("basal area calculation",{
                                       verbose = FALSE), "data.frame")
 })
 
+test_that("dominant tree height calculation",{
+  expect_error(estimate_indicators("dominant_tree_height", data.frame(id_stand = "stand 1"), verbose = FALSE))
+  expect_s3_class(estimate_indicators("dominant_tree_height",
+                                      plant_dynamic_input = example_plant_dynamic_input,
+                                      verbose = FALSE), "data.frame")
+})
+
+test_that("dominant tree diameter calculation",{
+  expect_error(estimate_indicators("dominant_tree_diameter", data.frame(id_stand = "stand 1"), verbose = FALSE))
+  expect_s3_class(estimate_indicators("dominant_tree_diameter",
+                                      plant_dynamic_input = example_plant_dynamic_input,
+                                      verbose = FALSE), "data.frame")
+})
 ## 2.
 test_that("timber harvest calculation",{
   expect_error(estimate_indicators("timber_harvest", data.frame(id_stand = "stand 1"), verbose = FALSE))
@@ -24,7 +37,6 @@ test_that("timber harvest calculation",{
 })
 
 
-## 3.
 test_that("density dead wood calculation",{
   additional_params <- list(density_dead_wood = list(max_tree_dbh = 10))
   expect_s3_class(estimate_indicators("density_dead_wood",
