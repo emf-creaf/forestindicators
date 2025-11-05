@@ -1,28 +1,28 @@
+.dtd<-function(n, dbh, min_tree_dbh) {
+  if(length(n)<1) return(NA)
+  o <-order(dbh, decreasing=TRUE)
+  dbh <- dbh[o]
+  n <- n[o]
+  n <- n[dbh>=min_tree_dbh]
+  dbh <- dbh[dbh>=min_tree_dbh]
+  if(length(dbh)>0) {
+    ncum <- 0
+    for(i in 1:length(dbh)) {
+      ncum_prev <- ncum
+      ncum <- ncum + n[i]
+      if(ncum>=100) {
+        n[i] <- 100 - ncum_prev # Only adds up to 100 trees
+        return(sum(dbh[1:i]*n[1:i])/sum(n[1:i]))
+      }
+    }
+    reutnr(sum(dbh*n)/sum(n))
+  }
+  return(NA)
+}
+
 .dominant_tree_diameter<-function(plant_dynamic_input = NULL,
                                   min_tree_dbh = 7.5, ...) {
   if(!min_tree_dbh >= 0) cli::cli_abort("'min_tree_dbh' should be a numeric positive value")
-
-  .dtd<-function(n, dbh, min_tree_dbh) {
-    if(length(n)<1) return(NA)
-    o <-order(dbh, decreasing=TRUE)
-    dbh <- dbh[o]
-    n <- n[o]
-    n <- n[dbh>=min_tree_dbh]
-    dbh <- dbh[dbh>=min_tree_dbh]
-    if(length(dbh)>0) {
-      ncum <- 0
-      for(i in 1:length(dbh)) {
-        ncum_prev <- ncum
-        ncum <- ncum + n[i]
-        if(ncum>=100) {
-          n[i] <- 100 - ncum_prev # Only adds up to 100 trees
-          return(sum(dbh[1:i]*n[1:i])/sum(n[1:i]))
-        }
-      }
-      reutnr(sum(dbh*n)/sum(n))
-    }
-    return(NA)
-  }
 
   ## Filter plant_dynamic_input by state
   plant_input <- plant_dynamic_input |>

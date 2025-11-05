@@ -24,6 +24,12 @@ test_that("dominant tree height calculation",{
                                       plant_dynamic_input = example_plant_dynamic_input,
                                       verbose = FALSE), "data.frame")
 })
+test_that("hart-becking calculation",{
+  expect_error(estimate_indicators("hart_becking_index", data.frame(id_stand = "stand 1"), verbose = FALSE))
+  expect_s3_class(estimate_indicators("hart_becking_index",
+                                      plant_dynamic_input = example_plant_dynamic_input,
+                                      verbose = FALSE), "data.frame")
+})
 
 test_that("dominant tree diameter calculation",{
   expect_error(estimate_indicators("dominant_tree_diameter", data.frame(id_stand = "stand 1"), verbose = FALSE))
