@@ -5,15 +5,19 @@
   .dtd<-function(n, dbh, min_tree_dbh) {
     if(length(n)<1) return(NA)
     o <-order(dbh, decreasing=TRUE)
-    dbh = dbh[o]
-    n = n[o]
-    n = n[dbh>=min_tree_dbh]
-    dbh = dbh[dbh>=min_tree_dbh]
+    dbh <- dbh[o]
+    n <- n[o]
+    n <- n[dbh>=min_tree_dbh]
+    dbh <- dbh[dbh>=min_tree_dbh]
     if(length(dbh)>0) {
-      ncum = 0
+      ncum <- 0
       for(i in 1:length(dbh)) {
-        ncum = ncum + n[i]
-        if(ncum>100) return(sum(dbh[1:i]*n[1:i])/sum(n[1:i]))
+        ncum_prev <- ncum
+        ncum <- ncum + n[i]
+        if(ncum>=100) {
+          n[i] <- 100 - ncum_prev # Only adds up to 100 trees
+          return(sum(dbh[1:i]*n[1:i])/sum(n[1:i]))
+        }
       }
       reutnr(sum(dbh*n)/sum(n))
     }

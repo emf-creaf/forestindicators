@@ -6,15 +6,19 @@
     if(length(n)<1) return(NA)
     o <-order(h, decreasing=TRUE)
     dbh = dbh[o]
-    h = h[o]
-    n = n[o]
-    n = n[dbh>=min_tree_dbh]
-    h = h[dbh>=min_tree_dbh]
+    h <- h[o]
+    n <- n[o]
+    n <- n[dbh>=min_tree_dbh]
+    h <- h[dbh>=min_tree_dbh]
     if(length(n)>0) {
-      ncum = 0
+      ncum <- 0
       for(i in 1:length(h)) {
-        ncum = ncum + n[i]
-        if(ncum>100) return(sum(h[1:i]*n[1:i])/sum(n[1:i]))
+        ncum_prev <- ncum
+        ncum <- ncum + n[i]
+        if(ncum>100) {
+          n[i] <- 100 - ncum_prev # Only adds up to 100 trees
+          return(sum(h[1:i]*n[1:i])/sum(n[1:i]))
+        }
       }
       return(sum(h*n)/sum(n))
     }
