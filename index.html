@@ -55,17 +55,107 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="indicators-of-forest-stands">Indicators of forest stands<a class="anchor" aria-label="anchor" href="#indicators-of-forest-stands"></a>
 </h1></div>
+<!-- badges: start -->
+
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p>Package <strong>forestindicators</strong> is meant to assist the estimation of indicators (metrics) for forest stands, either derived from forest inventory data or forest model simulations. Most often, those indicators will estimate the provision of forest ecosystem services, but the package can be understood more generally as a platform to estimate forest metrics.</p>
 </div>
 <div class="section level2">
-<h2 id="package-installation">Package installation<a class="anchor" aria-label="anchor" href="#package-installation"></a>
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>Package <strong>forestindicators</strong> can be installed from GitHub using:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"emf-creaf/forestindicators"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+</h2>
+<div class="section level3">
+<h3 id="step-1-choose-target-indicators-and-examine-their-requirements">Step 1: Choose target indicators and examine their requirements<a class="anchor" aria-label="anchor" href="#step-1-choose-target-indicators-and-examine-their-requirements"></a>
+</h3>
+<p>The first step is to decide which indicators are to be estimated. You can examine the names of the indicators in the package that could be estimated with your data by calling function <code><a href="reference/available_indicators.html">available_indicators()</a></code>:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://emf-creaf.github.io/forestindicators/">forestindicators</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/available_indicators.html">available_indicators</a></span><span class="op">(</span>plant_dynamic_input <span class="op">=</span> <span class="va">example_plant_dynamic_input</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  [1] "cut_tree_basal_area"          "cut_tree_density"            </span></span>
+<span><span class="co">#&gt;  [3] "dead_tree_basal_area"         "dead_tree_density"           </span></span>
+<span><span class="co">#&gt;  [5] "density_dead_wood"            "dominant_tree_diameter"      </span></span>
+<span><span class="co">#&gt;  [7] "dominant_tree_height"         "hart_becking_index"          </span></span>
+<span><span class="co">#&gt;  [9] "live_tree_basal_area"         "live_tree_biomass_stock"     </span></span>
+<span><span class="co">#&gt; [11] "live_tree_carbon_stock"       "live_tree_density"           </span></span>
+<span><span class="co">#&gt; [13] "mean_tree_height"             "quadratic_mean_tree_diameter"</span></span>
+<span><span class="co">#&gt; [15] "timber_harvest"</span></span></code></pre></div>
+<p>We may need to check which data inputs are required, their units, etc. for a particular indicator. We can find this information using function <code><a href="reference/show_information.html">show_information()</a></code>, for example:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/show_information.html">show_information</a></span><span class="op">(</span><span class="st">"live_tree_basal_area"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; A) DEFINITION</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;    Name:  live_tree_basal_area </span></span>
+<span><span class="co">#&gt;    Estimation:  The sum of tree sections weighted by tree density of living trees larger than a pre-specified minimum parameter </span></span>
+<span><span class="co">#&gt;    Interpretation:  Basal area of the stand, focusing of living trees </span></span>
+<span><span class="co">#&gt;    Output units:  m2/ha </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; B) DATA INPUTS</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; B.1) Stand-level static data: &lt;NONE&gt;</span></span>
+<span><span class="co">#&gt; B.2) Stand-level dynamic data: &lt;NONE&gt;</span></span>
+<span><span class="co">#&gt; B.3) Plant-level static data: &lt;NONE&gt;</span></span>
+<span><span class="co">#&gt; B.4) Plant-level dynamic data:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  variable      type   units</span></span>
+<span><span class="co">#&gt;       dbh   numeric      cm</span></span>
+<span><span class="co">#&gt;         n   numeric ind./ha</span></span>
+<span><span class="co">#&gt;     state character       -</span></span>
+<span><span class="co">#&gt;                                                   description</span></span>
+<span><span class="co">#&gt;                                     diameter at breast height</span></span>
+<span><span class="co">#&gt;                                                       density</span></span>
+<span><span class="co">#&gt;  state of the cohort, tree, … can be 'live', 'cut', or 'dead'</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; C) ADDITIONAL PARAMETERS</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     parameter default_value</span></span>
+<span><span class="co">#&gt;  min_tree_dbh           7.5</span></span>
+<span><span class="co">#&gt;                                                                          description</span></span>
+<span><span class="co">#&gt;  Minimum  tree diameter to be included in the estimation of basal area of live trees</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="step-2-assemble-inputs-and-define-values-for-additional-parameters">Step 2: Assemble inputs and define values for additional parameters<a class="anchor" aria-label="anchor" href="#step-2-assemble-inputs-and-define-values-for-additional-parameters"></a>
+</h3>
+<p>Once the requested format and content of inputs is know, it is the responsibility of the user to build the necessary data frames to be used as inputs. We will normally need to define additional parameters to fine-tune the estimation of indicators, For that, we define a <strong>named list</strong> where each element corresponds to a different indicator and, in turn, contains a named list of parameters:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>live_tree_basal_area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>min_dbh <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>,</span>
+<span>               live_tree_density <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>min_dbh <span class="op">=</span> <span class="fl">8</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="step-3-call-general-estimation-function">Step 3: Call general estimation function<a class="anchor" aria-label="anchor" href="#step-3-call-general-estimation-function"></a>
+</h3>
+<p>Once we have our inputs ready, the indicators are estimated by calling function <code><a href="reference/estimate_indicators.html">estimate_indicators()</a></code> as follows:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/estimate_indicators.html">estimate_indicators</a></span><span class="op">(</span>indicators <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"live_tree_basal_area"</span>, <span class="st">"live_tree_density"</span><span class="op">)</span>,</span>
+<span>                           plant_dynamic_input <span class="op">=</span> <span class="va">example_plant_dynamic_input</span>,</span>
+<span>                           additional_params <span class="op">=</span> <span class="va">params</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ℹ Checking overall inputsℹ Checking inputs for 'live_tree_basal_area'.✔ Checking inputs for 'live_tree_basal_area'. [5ms]</span></span>
+<span><span class="co">#&gt; ℹ Checking overall inputs✔ Checking overall inputs [142ms]</span></span>
+<span><span class="co">#&gt; ℹ Processing 'live_tree_basal_area'.ℹ Checking inputs for 'live_tree_density'.✔ Checking inputs for 'live_tree_density'. [14ms]</span></span>
+<span><span class="co">#&gt; ℹ Processing 'live_tree_basal_area'.✔ Processing 'live_tree_basal_area'. [56ms]</span></span>
+<span><span class="co">#&gt; ℹ Processing 'live_tree_density'.✔ Processing 'live_tree_density'. [23ms]</span></span></code></pre></div>
+<p>The result of the estimation is the following:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">res</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 4</span></span>
+<span><span class="co">#&gt;   id_stand date       live_tree_basal_area live_tree_density</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;    &lt;date&gt;                    &lt;dbl&gt;             &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 080001   2025-01-01                306.               3282</span></span>
+<span><span class="co">#&gt; 2 080001   2025-02-01                292.               3000</span></span>
+<span><span class="co">#&gt; 3 080001   2025-03-01                226.               2285</span></span>
+<span><span class="co">#&gt; 4 080005   2025-01-01                 79.3              1489</span></span>
+<span><span class="co">#&gt; 5 080005   2025-02-01                171.               2249</span></span>
+<span><span class="co">#&gt; 6 080005   2025-03-01                151.               1885</span></span></code></pre></div>
+</div>
 </div>
 <div class="section level2">
 <h2 id="documentation-and-training">Documentation and training<a class="anchor" aria-label="anchor" href="#documentation-and-training"></a>
@@ -76,7 +166,7 @@
 <h2 id="volumebiomass-allometric-functions">Volume/biomass allometric functions<a class="anchor" aria-label="anchor" href="#volumebiomass-allometric-functions"></a>
 </h2>
 <p>Some of the indicators require the use of allometric relationships for <em>volume</em> or <em>biomass</em> estimation. Users of <strong>forestindicators</strong> can define their own functions for volume/biomass estimation and provide them to calls of <code><a href="reference/estimate_indicators.html">estimate_indicators()</a></code>. Alternatively, they can resort on additional packages and write wrapper functions. Even though it is not a strict requirement for <strong>forestindicators</strong>, applications of the package within Spain will be most useful if package <a href="https://emf-creaf.github.io/IFNallometry/index.html" class="external-link"><strong>IFNallometry</strong></a> is available, because it contains wrapper functions for <em>volume</em> or <em>biomass</em> estimation, which can be readily used when calculating forest indicators. Package <strong>IFNallometry</strong> is also installed from GitHub using:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"emf-creaf/IFNallometry"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -125,7 +215,12 @@
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/emf-creaf/forestindicators/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/emf-creaf/forestindicators/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>
