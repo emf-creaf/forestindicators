@@ -1,8 +1,7 @@
-.carbon_stock <- function(plant_dynamic_input = NULL,
-                          plant_biomass_function = NULL,
-                          fraction = "total",
-                          targeted_species = NA,
-                          excluded_species = NA, ...){
+.live_tree_biomass_stock <- function(plant_dynamic_input = NULL,
+                               plant_biomass_function = NULL,
+                               targeted_species = NA,
+                               excluded_species = NA, ...){
 
   plant_input <- plant_dynamic_input |>
     dplyr::filter(state == "live")
@@ -18,14 +17,14 @@
 
   ## Compute biomass at the tree-level
   ## Other parameters (such as area for Spanish IFN) should go into "..."
-  plant_input$biomass <- plant_biomass_function(plant_input, fraction = fraction, ...)
+  plant_input$biomass <- plant_biomass_function(plant_input, fraction = "total", as.CO2 = FALSE, ...)
 
   ## Summarize at the plot-level
   df <- plant_input |>
     dplyr::group_by(id_stand, date) |>
-    dplyr::summarise(carbon_stock = sum(biomass))
+    dplyr::summarise(live_tree_biomass_stock = sum(biomass))
 
   ## Return the output data frame
-  res <- df |> dplyr::select(id_stand, date, carbon_stock)
+  res <- df |> dplyr::select(id_stand, date, live_tree_biomass_stock)
   return(res)
 }
