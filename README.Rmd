@@ -9,6 +9,10 @@ knitr::opts_chunk$set(fig.path = "man/figures/")
 
 # Indicators of forest stands
 
+<!-- badges: start -->
+  [![R-CMD-check](https://github.com/emf-creaf/forestindicators/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/emf-creaf/forestindicators/actions/workflows/R-CMD-check.yaml)
+  <!-- badges: end -->
+  
 ## Introduction
 
 Package **forestindicators** is meant to assist the estimation of indicators (metrics) for forest stands, either derived from forest inventory data or forest model simulations. Most often, those indicators will estimate the provision of forest ecosystem services, but the package can be understood more generally as a platform to estimate forest metrics.

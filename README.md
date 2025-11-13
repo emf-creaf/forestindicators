@@ -1,6 +1,11 @@
 
 # Indicators of forest stands
 
+<!-- badges: start -->
+
+[![R-CMD-check](https://github.com/emf-creaf/forestindicators/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/emf-creaf/forestindicators/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
 ## Introduction
 
 Package **forestindicators** is meant to assist the estimation of
