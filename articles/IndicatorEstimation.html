@@ -60,7 +60,7 @@
                         <h4 data-toc-skip class="author">Miquel De
 Cáceres / Núria Aquilué</h4>
             
-            <h4 data-toc-skip class="date">2025-11-05</h4>
+            <h4 data-toc-skip class="date">2025-11-13</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/emf-creaf/forestindicators/blob/HEAD/vignettes/IndicatorEstimation.Rmd" class="external-link"><code>vignettes/IndicatorEstimation.Rmd</code></a></small>
       <div class="d-none name"><code>IndicatorEstimation.Rmd</code></div>
@@ -306,11 +306,13 @@ names of the indicators in the package that could be estimated with your
 data by calling function <code><a href="../reference/available_indicators.html">available_indicators()</a></code>:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/available_indicators.html">available_indicators</a></span><span class="op">(</span>plant_dynamic_input <span class="op">=</span> <span class="va">example_plant_dynamic_input</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] "basal_area"                   "carbon_stock"                </span></span>
-<span><span class="co">#&gt;  [3] "density_dead_wood"            "dominant_tree_diameter"      </span></span>
-<span><span class="co">#&gt;  [5] "dominant_tree_height"         "hart_becking_index"          </span></span>
-<span><span class="co">#&gt;  [7] "mean_tree_height"             "quadratic_mean_tree_diameter"</span></span>
-<span><span class="co">#&gt;  [9] "timber_harvest"               "tree_density"</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] "carbon_stock"                 "cut_basal_area"              </span></span>
+<span><span class="co">#&gt;  [3] "cut_tree_density"             "dead_basal_area"             </span></span>
+<span><span class="co">#&gt;  [5] "dead_tree_density"            "density_dead_wood"           </span></span>
+<span><span class="co">#&gt;  [7] "dominant_tree_diameter"       "dominant_tree_height"        </span></span>
+<span><span class="co">#&gt;  [9] "hart_becking_index"           "live_basal_area"             </span></span>
+<span><span class="co">#&gt; [11] "live_tree_density"            "mean_tree_height"            </span></span>
+<span><span class="co">#&gt; [13] "quadratic_mean_tree_diameter" "timber_harvest"</span></span></code></pre></div>
 <p>Say we decide to estimate the <em>timber harvest volume</em>
 (i.e. indicator <code>"timber_harvest"</code>) and the <em>density of
 dead wood</em> (i.e. indicator <code>"density_dead_wood"</code>).</p>
@@ -322,9 +324,9 @@ etc. We can find this information using function
 <span><span class="co">#&gt; A) DEFINITION</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;    Name:  timber_harvest </span></span>
-<span><span class="co">#&gt;    Estimation:  NA </span></span>
+<span><span class="co">#&gt;    Estimation:  Allometric relationships published with the Spanish National Forest Inventory </span></span>
 <span><span class="co">#&gt;    Interpretation:  Volume over bark of harvested wood </span></span>
-<span><span class="co">#&gt;    Output units:  NA </span></span>
+<span><span class="co">#&gt;    Output units:  m3/ha </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; B) DATA INPUTS</span></span>
@@ -334,28 +336,28 @@ etc. We can find this information using function
 <span><span class="co">#&gt; B.3) Plant-level static data: &lt;NONE&gt;</span></span>
 <span><span class="co">#&gt; B.4) Plant-level dynamic data:</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  variable      type   units</span></span>
-<span><span class="co">#&gt;       dbh   numeric      cm</span></span>
-<span><span class="co">#&gt;         h   numeric       m</span></span>
-<span><span class="co">#&gt;         n   numeric ind./ha</span></span>
-<span><span class="co">#&gt;     state character       -</span></span>
-<span><span class="co">#&gt;                                                    description</span></span>
-<span><span class="co">#&gt;                                      diameter at breast height</span></span>
-<span><span class="co">#&gt;                                                         height</span></span>
-<span><span class="co">#&gt;                                                        density</span></span>
-<span><span class="co">#&gt;  state of the cohort, tree, … can be 'live', 'cut', or 'death'</span></span>
+<span><span class="co">#&gt;      variable      type   units</span></span>
+<span><span class="co">#&gt;           dbh   numeric      cm</span></span>
+<span><span class="co">#&gt;             h   numeric       m</span></span>
+<span><span class="co">#&gt;             n   numeric ind./ha</span></span>
+<span><span class="co">#&gt;  plant_entity character       -</span></span>
+<span><span class="co">#&gt;         state character       -</span></span>
+<span><span class="co">#&gt;                                                   description</span></span>
+<span><span class="co">#&gt;                                     diameter at breast height</span></span>
+<span><span class="co">#&gt;                                                        height</span></span>
+<span><span class="co">#&gt;                                                       density</span></span>
+<span><span class="co">#&gt;                   name or code? of the tree, shrub, … species</span></span>
+<span><span class="co">#&gt;  state of the cohort, tree, … can be 'live', 'cut', or 'dead'</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; C) ADDITIONAL PARAMETERS</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;         parameter default_value</span></span>
-<span><span class="co">#&gt;          province          &lt;NA&gt;</span></span>
-<span><span class="co">#&gt;      min_tree_dbh          &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;      min_tree_dbh           7.5</span></span>
 <span><span class="co">#&gt;      max_tree_dbh          &lt;NA&gt;</span></span>
 <span><span class="co">#&gt;  targeted_species          &lt;NA&gt;</span></span>
 <span><span class="co">#&gt;  excluded_species          &lt;NA&gt;</span></span>
 <span><span class="co">#&gt;                                                                           description</span></span>
-<span><span class="co">#&gt;                                                       Spanish province (numeric code)</span></span>
 <span><span class="co">#&gt;             Minimum  tree diameter to be included in the estimation of harvest volume</span></span>
 <span><span class="co">#&gt;  Maximum  tree diameter to be included in the estimation of density of harvest volume</span></span>
 <span><span class="co">#&gt;                          Tree species included in the calculation of harvested volume</span></span>
@@ -386,22 +388,22 @@ calling function <code><a href="../reference/estimate_indicators.html">estimate_
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimate_indicators.html">estimate_indicators</a></span><span class="op">(</span>indicators <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"timber_harvest"</span>, <span class="st">"density_dead_wood"</span><span class="op">)</span>,</span>
 <span>                           plant_dynamic_input <span class="op">=</span> <span class="va">example_plant_dynamic_input</span>,</span>
-<span>                           timber_volume_function <span class="op">=</span> <span class="fu">forestindicators</span><span class="fu">:::</span><span class="va">.ifn_volume_forestindicators</span>,</span>
+<span>                           timber_volume_function <span class="op">=</span> <span class="fu">IFNallometry</span><span class="fu">::</span><span class="va"><a href="https://emf-creaf.github.io/IFNallometry/reference/IFNvolume_forestindicators.html" class="external-link">IFNvolume_forestindicators</a></span>,</span>
 <span>                           additional_params <span class="op">=</span> <span class="va">params</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking overall inputs</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking inputs for 'timber_harvest'.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking inputs for 'timber_harvest'. <span style="color: #B2B2B2;">[5ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking inputs for 'timber_harvest'. <span style="color: #B2B2B2;">[6ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking overall inputs<span style="color: #00BB00;">✔</span> Checking overall inputs <span style="color: #B2B2B2;">[27ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking overall inputs<span style="color: #00BB00;">✔</span> Checking overall inputs <span style="color: #B2B2B2;">[32ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Processing 'timber_harvest'.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking inputs for 'density_dead_wood'.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking inputs for 'density_dead_wood'. <span style="color: #B2B2B2;">[9ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Processing 'timber_harvest'.<span style="color: #00BB00;">✔</span> Processing 'timber_harvest'. <span style="color: #B2B2B2;">[122ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Processing 'timber_harvest'.<span style="color: #00BB00;">✔</span> Processing 'timber_harvest'. <span style="color: #B2B2B2;">[136ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Processing 'density_dead_wood'.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Processing 'density_dead_wood'. <span style="color: #B2B2B2;">[20ms]</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Processing 'density_dead_wood'. <span style="color: #B2B2B2;">[21ms]</span></span></span></code></pre></div>
 <p>Note that <code>"timber_harvest"</code> requires specifying the
 function to be used to calculate timber volumes,
 i.e. <code>timber_volume_function</code>, for which in our case we use a
@@ -431,7 +433,7 @@ predefined package function.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

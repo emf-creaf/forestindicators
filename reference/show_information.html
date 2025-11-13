@@ -72,9 +72,9 @@ forest indicator.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A) DEFINITION</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Name:  timber_harvest </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Estimation:  NA </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Estimation:  Allometric relationships published with the Spanish National Forest Inventory </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Interpretation:  Volume over bark of harvested wood </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Output units:  NA </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Output units:  m3/ha </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> B) DATA INPUTS</span>
@@ -84,28 +84,28 @@ forest indicator.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> B.3) Plant-level static data: &lt;NONE&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> B.4) Plant-level dynamic data:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  variable      type   units</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       dbh   numeric      cm</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         h   numeric       m</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         n   numeric ind./ha</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     state character       -</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      diameter at breast height</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         height</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        density</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  state of the cohort, tree, … can be 'live', 'cut', or 'death'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      variable      type   units</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           dbh   numeric      cm</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             h   numeric       m</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             n   numeric ind./ha</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  plant_entity character       -</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         state character       -</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                   description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     diameter at breast height</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        height</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       density</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   name or code? of the tree, shrub, … species</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  state of the cohort, tree, … can be 'live', 'cut', or 'dead'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> C) ADDITIONAL PARAMETERS</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         parameter default_value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          province          &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      min_tree_dbh          &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      min_tree_dbh           7.5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      max_tree_dbh          &lt;NA&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  targeted_species          &lt;NA&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  excluded_species          &lt;NA&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                                           description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       Spanish province (numeric code)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             Minimum  tree diameter to be included in the estimation of harvest volume</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Maximum  tree diameter to be included in the estimation of density of harvest volume</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                          Tree species included in the calculation of harvested volume</span>
@@ -123,7 +123,7 @@ forest indicator.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>
