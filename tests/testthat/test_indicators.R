@@ -63,6 +63,9 @@ test_that("dominant tree diameter calculation",{
 })
 
 test_that("live tree carbon stock calculation",{
+  testthat::skip_on_ci()
+  testthat::skip_on_cran()
+  testthat::skip_if_not_installed("IFNallometry")
   expect_error(estimate_indicators("live_tree_carbon_stock", data.frame(id_stand = "stand 1"), verbose = FALSE))
   expect_error(estimate_indicators("live_tree_carbon_stock",
                                       plant_dynamic_input = example_plant_dynamic_input,
@@ -74,6 +77,9 @@ test_that("live tree carbon stock calculation",{
 })
 
 test_that("live tree biomass stock calculation",{
+  testthat::skip_on_ci()
+  testthat::skip_on_cran()
+  testthat::skip_if_not_installed("IFNallometry")
   expect_error(estimate_indicators("live_tree_biomass_stock", data.frame(id_stand = "stand 1"), verbose = FALSE))
   expect_error(estimate_indicators("live_tree_biomass_stock",
                                    plant_dynamic_input = example_plant_dynamic_input,
@@ -84,6 +90,9 @@ test_that("live tree biomass stock calculation",{
                                       verbose = FALSE), "data.frame")
 })
 test_that("timber harvest calculation",{
+  testthat::skip_on_ci()
+  testthat::skip_on_cran()
+  testthat::skip_if_not_installed("IFNallometry")
   expect_error(estimate_indicators("timber_harvest", data.frame(id_stand = "stand 1"), verbose = FALSE))
   additional_params <- list(timber_harvest = list(province = 8))
   expect_error(estimate_indicators("timber_harvest",
@@ -109,6 +118,9 @@ test_that("density dead wood calculation",{
 
 
 test_that("several indicators can be calculated",{
+  testthat::skip_on_ci()
+  testthat::skip_on_cran()
+  testthat::skip_if_not_installed("IFNallometry")
   additional_params <- list(timber_harvest = list(province=8),
                             density_dead_wood = list(max_tree_dbh = 10))
   expect_s3_class(estimate_indicators(c("live_basal_area", "dead_basal_area", "cut_basal_area", "density_dead_wood", "timber_harvest", "carbon_stock"),
