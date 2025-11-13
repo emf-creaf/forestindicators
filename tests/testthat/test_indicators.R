@@ -6,14 +6,26 @@ test_that("Obvious errors are dealt",{
 })
 
 test_that("basal area calculation",{
-  expect_error(estimate_indicators("basal_area", data.frame(id_stand = "stand 1"), verbose = FALSE))
-  expect_s3_class(estimate_indicators("basal_area",
+  expect_error(estimate_indicators("live_basal_area", data.frame(id_stand = "stand 1"), verbose = FALSE))
+  expect_s3_class(estimate_indicators("live_basal_area",
+                                      plant_dynamic_input = example_plant_dynamic_input,
+                                      verbose = FALSE), "data.frame")
+  expect_s3_class(estimate_indicators("dead_basal_area",
+                                      plant_dynamic_input = example_plant_dynamic_input,
+                                      verbose = FALSE), "data.frame")
+  expect_s3_class(estimate_indicators("cut_basal_area",
                                       plant_dynamic_input = example_plant_dynamic_input,
                                       verbose = FALSE), "data.frame")
 })
 test_that("tree density calculation",{
-  expect_error(estimate_indicators("tree_density", data.frame(id_stand = "stand 1"), verbose = FALSE))
-  expect_s3_class(estimate_indicators("tree_density",
+  expect_error(estimate_indicators("live_tree_density", data.frame(id_stand = "stand 1"), verbose = FALSE))
+  expect_s3_class(estimate_indicators("live_tree_density",
+                                      plant_dynamic_input = example_plant_dynamic_input,
+                                      verbose = FALSE), "data.frame")
+  expect_s3_class(estimate_indicators("dead_tree_density",
+                                      plant_dynamic_input = example_plant_dynamic_input,
+                                      verbose = FALSE), "data.frame")
+  expect_s3_class(estimate_indicators("cut_tree_density",
                                       plant_dynamic_input = example_plant_dynamic_input,
                                       verbose = FALSE), "data.frame")
 })
@@ -49,13 +61,32 @@ test_that("dominant tree diameter calculation",{
                                       plant_dynamic_input = example_plant_dynamic_input,
                                       verbose = FALSE), "data.frame")
 })
-## 2.
+
+test_that("carbon stock calculation",{
+  expect_error(estimate_indicators("carbon_stock", data.frame(id_stand = "stand 1"), verbose = FALSE))
+  additional_params <- list(carbon_stock = list(fraction = "total"))
+  expect_error(estimate_indicators("carbon_stock",
+                                      plant_dynamic_input = example_plant_dynamic_input,
+                                      additional_params = additional_params,
+                                      verbose = FALSE))
+  expect_s3_class(estimate_indicators("carbon_stock",
+                                      plant_dynamic_input = example_plant_dynamic_input,
+                                      plant_biomass_function = IFNallometry::IFNbiomass_forestindicators,
+                                      additional_params = additional_params,
+                                      verbose = FALSE), "data.frame")
+})
+
 test_that("timber harvest calculation",{
   expect_error(estimate_indicators("timber_harvest", data.frame(id_stand = "stand 1"), verbose = FALSE))
   additional_params <- list(timber_harvest = list(province = 8))
+  expect_error(estimate_indicators("timber_harvest",
+                                   plant_dynamic_input = example_plant_dynamic_input,
+                                   timber_volume_function = IFNallometry::IFNvolume_forestindicators,
+                                   additional_params = list(),
+                                   verbose = FALSE))
   expect_s3_class(estimate_indicators("timber_harvest",
                                       plant_dynamic_input = example_plant_dynamic_input,
-                                      timber_volume_function = forestindicators:::.ifn_volume_forestindicators,
+                                      timber_volume_function = IFNallometry::IFNvolume_forestindicators,
                                       additional_params = additional_params,
                                       verbose = FALSE), "data.frame")
 })
@@ -70,12 +101,19 @@ test_that("density dead wood calculation",{
 })
 
 
-# test_that("several indicators can be calculated",{
-#   expect_s3_class(estimate_indicators(c("soil_erosion_01", "recreational_value_01"),
-#                                      stand_static_input = example_stand_static_input,
-#                                      stand_dynamic_input = example_stand_dynamic_input, plant_dynamic_input = example_plant_dynamic_input, plant_static_input = example_plant_static_input,
-#                                      verbose = FALSE, additional_params = list(soil_erosion_01 = list(k=1))), "data.frame")
-# })
+test_that("several indicators can be calculated",{
+  additional_params <- list(timber_harvest = list(province=8),
+                            density_dead_wood = list(max_tree_dbh = 10))
+  expect_s3_class(estimate_indicators(c("live_basal_area", "dead_basal_area", "cut_basal_area", "density_dead_wood", "timber_harvest", "carbon_stock"),
+                                     stand_static_input = example_stand_static_input,
+                                     stand_dynamic_input = example_stand_dynamic_input,
+                                     plant_dynamic_input = example_plant_dynamic_input,
+                                     plant_static_input = example_plant_static_input,
+                                     timber_volume_function = IFNallometry::IFNvolume_forestindicators,
+                                     plant_biomass_function = IFNallometry::IFNbiomass_forestindicators,
+                                     additional_params = additional_params,
+                                     verbose = FALSE), "data.frame")
+})
 
 
 

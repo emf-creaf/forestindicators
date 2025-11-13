@@ -19,5 +19,36 @@
 
   ## Return the output data frame
   res <- df |> dplyr::select(id_stand, date, basal_area)
+
   return(res)
+}
+
+.live_basal_area <- function(plant_dynamic_input = NULL,
+                             min_tree_dbh = 7.5,
+                             ...){
+  return(.basal_area(plant_dynamic_input,
+                     min_tree_dbh,
+                     tree_state = "live",
+                     ...)|>
+           dplyr::rename(live_basal_area = basal_area))
+}
+
+.cut_basal_area <- function(plant_dynamic_input = NULL,
+                        min_tree_dbh = 7.5,
+                        ...){
+  return(.basal_area(plant_dynamic_input,
+                     min_tree_dbh,
+                     tree_state = "cut",
+                     ...)|>
+           dplyr::rename(cut_basal_area = basal_area))
+}
+
+.dead_basal_area <- function(plant_dynamic_input = NULL,
+                            min_tree_dbh = 7.5,
+                            ...){
+  return(.basal_area(plant_dynamic_input,
+                     min_tree_dbh,
+                     tree_state = "dead",
+                     ...)|>
+           dplyr::rename(dead_basal_area = basal_area))
 }

@@ -1,28 +1,34 @@
 .timber_harvest <- function(plant_dynamic_input = NULL,
                             timber_volume_function = NULL,
-                            province = NA,
-                            min_tree_dbh = NA,
+                            min_tree_dbh = 7.5,
                             max_tree_dbh = NA,
-                            targeted_species = NULL,
-                            excluded_species = NULL, ...){
-
-  ## Check additional parameters (add as many as additional arguments)
-  if(!is.na(province)) {
-    if(!inherits(province, "numeric")) cli::cli_abort("'province' should be a numeric value")
-  }
-
-  ## If province is not null, add it in plant_dynamic_input
-  if(!is.na(province)){
-    plant_dynamic_input <- plant_dynamic_input |>
-      dplyr::mutate(Province = province)
-  }
+                            targeted_species = NA,
+                            excluded_species = NA, ...){
 
   ## Filter plant_dynamic_input by state = "cut"
   plant_input <- plant_dynamic_input |>
     dplyr::filter(state == "cut")
 
+  if(!is.na(min_tree_dbh)) {
+    plant_input <- plant_input |>
+      dplyr::filter(dbh >= min_tree_dbh)
+  }
+  if(!is.na(max_tree_dbh)) {
+    plant_input <- plant_input |>
+      dplyr::filter(dbh <= max_tree_dbh)
+  }
+  if(!is.na(targeted_species)) {
+    plant_input <- plant_input |>
+      dplyr::filter(plant_entity %in% targeted_species)
+  }
+  if(!is.na(excluded_species)) {
+    plant_input <- plant_input |>
+      dplyr::filter(!(plant_entity %in% targeted_species))
+  }
+
   ## Compute volume over bark at the tree-level
-  plant_input$vol <- timber_volume_function(plant_input)
+  ## Other parameters (such as province for Spanish IFN) should go into "..."
+  plant_input$vol <- timber_volume_function(plant_input, ...)
 
   ## Summarize at the plot-level
   df <- plant_input |>
