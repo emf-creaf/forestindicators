@@ -328,16 +328,16 @@ res <- estimate_indicators(indicators = c("timber_harvest", "density_dead_wood")
 #> ℹ Checking inputs for 'timber_harvest'.
 #> ✔ Checking inputs for 'timber_harvest'. [4ms]
 #> 
-#> ℹ Checking overall inputs✔ Checking overall inputs [26ms]
+#> ℹ Checking overall inputs✔ Checking overall inputs [27ms]
 #> 
 #> ℹ Processing 'timber_harvest'.
 #> ℹ Checking inputs for 'density_dead_wood'.
-#> ✔ Checking inputs for 'density_dead_wood'. [9ms]
+#> ✔ Checking inputs for 'density_dead_wood'. [8ms]
 #> 
 #> ℹ Processing 'timber_harvest'.✔ Processing 'timber_harvest'. [124ms]
 #> 
 #> ℹ Processing 'density_dead_wood'.
-#> ✔ Processing 'density_dead_wood'. [20ms]
+#> ✔ Processing 'density_dead_wood'. [21ms]
 ```
 
 Note that `"timber_harvest"` requires specifying the function to be used
@@ -357,4 +357,112 @@ res
 #> 4 080005   2025-01-01          34.4                 NA
 #> 5 080005   2025-02-01           6.98                22
 #> 6 080005   2025-03-01          11.3                 17
+```
+
+## Example with data from forestables
+
+``` r
+library(forestables)
+#> Loading required package: data.table
+#> Loading required package: dtplyr
+ifn_output_example
+#> # A tibble: 8,997 × 24
+#>    id_unique_code    year plot  coordx coordy coord_sys   crs  elev aspect slope
+#>    <chr>            <int> <chr>  <dbl>  <dbl> <chr>     <dbl> <dbl>  <dbl> <dbl>
+#>  1 08_0001_NN_A1_A1  1990 0001  402000 4.68e6 ED50      23031  1900     NA    NA
+#>  2 08_0002_NN_A1_A1  1990 0002  400000 4.68e6 ED50      23031  1700     NA    NA
+#>  3 08_0003_NN_A1_A1  1990 0003  401000 4.68e6 ED50      23031  1700     NA    NA
+#>  4 08_0004_NN_A1_A1  1990 0004  402000 4.68e6 ED50      23031  1400     NA    NA
+#>  5 08_0005_NN_A1_A1  1990 0005  400000 4.68e6 ED50      23031  1300     NA    NA
+#>  6 08_0006_NN_A1_A1  1990 0006  397000 4.68e6 ED50      23031  1700     NA    NA
+#>  7 08_0007_NN_A1_xx  1990 0007  399000 4.68e6 ED50      23031  1400     NA    NA
+#>  8 08_0008_NN_A1_xx  1990 0008  401000 4.68e6 ED50      23031  1100     NA    NA
+#>  9 08_0009_NN_A1_xx  1990 0009  402000 4.68e6 ED50      23031  1100     52    NA
+#> 10 08_0010_NN_A1_xx  1990 0010  394000 4.68e6 ED50      23031  1500     NA    NA
+#> # ℹ 8,987 more rows
+#> # ℹ 14 more variables: country <chr>, version <chr>, class <chr>,
+#> #   subclass <chr>, province_code <chr>, province_name_original <chr>,
+#> #   ca_name_original <chr>, sheet_ntm <chr>, huso <dbl>, slope_mean <chr>,
+#> #   type <int>, tree <list>, understory <list>, regen <list>
+```
+
+``` r
+ifn4_example <- ifn_output_example|>
+  dplyr::filter(version == "ifn4")
+```
+
+``` r
+x <- ifn4_example |>
+  dplyr::select(id_unique_code, year, province_code, tree) |>
+  tidyr::unnest(cols = tree) |>
+  dplyr::select("id_unique_code", "year", "province_code", "sp_name", "density_factor", "dbh", "height", "tree_ifn4") |>
+  dplyr::mutate(province_code = as.numeric(province_code)) |>
+  dplyr::mutate(year = as.Date(paste0(year, "-01-01"))) |>
+  dplyr::rename(id_stand = id_unique_code, 
+                province = province_code,
+                date = year,
+                n = density_factor, 
+                h = height, 
+                plant_entity = sp_name) |>
+  dplyr::mutate(state = "live") |>
+  dplyr::filter(!is.na(n)) |>
+  dplyr::select(-tree_ifn4)
+```
+
+``` r
+summary(x)
+#>    id_stand              date               province plant_entity      
+#>  Length:33682       Min.   :2014-01-01   Min.   :8   Length:33682      
+#>  Class :character   1st Qu.:2014-01-01   1st Qu.:8   Class :character  
+#>  Mode  :character   Median :2015-01-01   Median :8   Mode  :character  
+#>                     Mean   :2014-11-08   Mean   :8                     
+#>                     3rd Qu.:2015-01-01   3rd Qu.:8                     
+#>                     Max.   :2016-01-01   Max.   :8                     
+#>        n                dbh               h            state          
+#>  Min.   :  5.093   Min.   :  7.50   Min.   : 1.40   Length:33682      
+#>  1st Qu.: 14.147   1st Qu.: 14.20   1st Qu.: 7.80   Class :character  
+#>  Median : 31.831   Median : 20.40   Median :10.70   Mode  :character  
+#>  Mean   : 36.773   Mean   : 22.03   Mean   :11.24                     
+#>  3rd Qu.: 31.831   3rd Qu.: 27.45   3rd Qu.:13.90                     
+#>  Max.   :127.324   Max.   :106.60   Max.   :39.70
+```
+
+``` r
+available_indicators(plant_dynamic_input = x)
+#>  [1] "cut_tree_basal_area"          "cut_tree_density"            
+#>  [3] "dead_tree_basal_area"         "dead_tree_density"           
+#>  [5] "density_dead_wood"            "dominant_tree_diameter"      
+#>  [7] "dominant_tree_height"         "hart_becking_index"          
+#>  [9] "live_tree_basal_area"         "live_tree_biomass_stock"     
+#> [11] "live_tree_carbon_stock"       "live_tree_density"           
+#> [13] "mean_tree_height"             "quadratic_mean_tree_diameter"
+#> [15] "timber_harvest"
+```
+
+``` r
+estimate_indicators(c("live_tree_density", 
+                      "live_tree_basal_area",
+                      "mean_tree_height",
+                      "dominant_tree_height", 
+                      "dominant_tree_diameter",
+                      "quadratic_mean_tree_diameter",
+                      "hart_becking_index"), 
+                    plant_dynamic_input = x, 
+                    verbose = FALSE)
+#> # A tibble: 1,568 × 9
+#>    id_stand   date       live_tree_density live_tree_basal_area mean_tree_height
+#>    <chr>      <date>                 <dbl>                <dbl>            <dbl>
+#>  1 08_0001_N… 2015-01-01              638.                 30.5             9.99
+#>  2 08_0002_N… 2014-01-01              162.                 16.3            14.1 
+#>  3 08_0003_N… 2015-01-01              827.                 26.0             8.91
+#>  4 08_0004_N… 2014-01-01             1924.                 18.5             7.41
+#>  5 08_0005_N… 2014-01-01              732.                 18.1             7.00
+#>  6 08_0006_N… 2014-01-01              387.                 33.2            11.8 
+#>  7 08_0009_x… 2016-01-01             1625.                 32.0             7.42
+#>  8 08_0014_N… 2015-01-01              679.                 21.1            13.2 
+#>  9 08_0016_x… 2014-01-01             1187.                 41.7            14.2 
+#> 10 08_0020_N… 2015-01-01             2088.                 61.6             9.95
+#> # ℹ 1,558 more rows
+#> # ℹ 4 more variables: dominant_tree_height <dbl>, dominant_tree_diameter <dbl>,
+#> #   quadratic_mean_tree_diameter <dbl>, hart_becking_index <dbl>
 ```
