@@ -306,13 +306,14 @@ names of the indicators in the package that could be estimated with your
 data by calling function <code><a href="../reference/available_indicators.html">available_indicators()</a></code>:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/available_indicators.html">available_indicators</a></span><span class="op">(</span>plant_dynamic_input <span class="op">=</span> <span class="va">example_plant_dynamic_input</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] "carbon_stock"                 "cut_basal_area"              </span></span>
-<span><span class="co">#&gt;  [3] "cut_tree_density"             "dead_basal_area"             </span></span>
-<span><span class="co">#&gt;  [5] "dead_tree_density"            "density_dead_wood"           </span></span>
-<span><span class="co">#&gt;  [7] "dominant_tree_diameter"       "dominant_tree_height"        </span></span>
-<span><span class="co">#&gt;  [9] "hart_becking_index"           "live_basal_area"             </span></span>
-<span><span class="co">#&gt; [11] "live_tree_density"            "mean_tree_height"            </span></span>
-<span><span class="co">#&gt; [13] "quadratic_mean_tree_diameter" "timber_harvest"</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] "cut_tree_basal_area"          "cut_tree_density"            </span></span>
+<span><span class="co">#&gt;  [3] "dead_tree_basal_area"         "dead_tree_density"           </span></span>
+<span><span class="co">#&gt;  [5] "density_dead_wood"            "dominant_tree_diameter"      </span></span>
+<span><span class="co">#&gt;  [7] "dominant_tree_height"         "hart_becking_index"          </span></span>
+<span><span class="co">#&gt;  [9] "live_tree_basal_area"         "live_tree_biomass_stock"     </span></span>
+<span><span class="co">#&gt; [11] "live_tree_carbon_stock"       "live_tree_density"           </span></span>
+<span><span class="co">#&gt; [13] "mean_tree_height"             "quadratic_mean_tree_diameter"</span></span>
+<span><span class="co">#&gt; [15] "timber_harvest"</span></span></code></pre></div>
 <p>Say we decide to estimate the <em>timber harvest volume</em>
 (i.e. indicator <code>"timber_harvest"</code>) and the <em>density of
 dead wood</em> (i.e. indicator <code>"density_dead_wood"</code>).</p>
@@ -324,7 +325,7 @@ etc. We can find this information using function
 <span><span class="co">#&gt; A) DEFINITION</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;    Name:  timber_harvest </span></span>
-<span><span class="co">#&gt;    Estimation:  Allometric relationships published with the Spanish National Forest Inventory </span></span>
+<span><span class="co">#&gt;    Estimation:  Allometric volume relationships </span></span>
 <span><span class="co">#&gt;    Interpretation:  Volume over bark of harvested wood </span></span>
 <span><span class="co">#&gt;    Output units:  m3/ha </span></span>
 <span><span class="co">#&gt; </span></span>
@@ -394,13 +395,13 @@ calling function <code><a href="../reference/estimate_indicators.html">estimate_
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking inputs for 'timber_harvest'.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking inputs for 'timber_harvest'. <span style="color: #B2B2B2;">[5ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking overall inputs<span style="color: #00BB00;">✔</span> Checking overall inputs <span style="color: #B2B2B2;">[26ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking overall inputs<span style="color: #00BB00;">✔</span> Checking overall inputs <span style="color: #B2B2B2;">[30ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Processing 'timber_harvest'.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking inputs for 'density_dead_wood'.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking inputs for 'density_dead_wood'. <span style="color: #B2B2B2;">[9ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking inputs for 'density_dead_wood'. <span style="color: #B2B2B2;">[10ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Processing 'timber_harvest'.<span style="color: #00BB00;">✔</span> Processing 'timber_harvest'. <span style="color: #B2B2B2;">[122ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Processing 'timber_harvest'.<span style="color: #00BB00;">✔</span> Processing 'timber_harvest'. <span style="color: #B2B2B2;">[137ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Processing 'density_dead_wood'.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Processing 'density_dead_wood'. <span style="color: #B2B2B2;">[22ms]</span></span></span></code></pre></div>

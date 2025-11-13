@@ -104,29 +104,20 @@ estimate_indicators(c("live_basal_area", "density_dead_wood"),
                     additional_params = add_params,
                     verbose = TRUE)
 #> ℹ Checking overall inputs
-#> ℹ Checking inputs for 'live_basal_area'.
-#> ✔ Checking inputs for 'live_basal_area'. [6ms]
-#> 
-#> ℹ Checking overall inputs
-#> ✔ Checking overall inputs [19ms]
-#> 
-#> ℹ Processing 'live_basal_area'.
 #> ℹ Checking inputs for 'density_dead_wood'.
 #> ✔ Checking inputs for 'density_dead_wood'. [5ms]
 #> 
-#> ℹ Processing 'live_basal_area'.
-#> ✔ Processing 'live_basal_area'. [42ms]
+#> ℹ Checking overall inputs
+#> ✔ Checking overall inputs [20ms]
 #> 
 #> ℹ Processing 'density_dead_wood'.
-#> ✔ Processing 'density_dead_wood'. [26ms]
+#> ✔ Processing 'density_dead_wood'. [27ms]
 #> 
-#> # A tibble: 6 × 4
-#>   id_stand date       live_basal_area density_dead_wood
-#>   <chr>    <date>               <dbl>             <dbl>
-#> 1 080001   2025-01-01           306.                187
-#> 2 080001   2025-02-01           292.                 73
-#> 3 080001   2025-03-01           226.                 NA
-#> 4 080005   2025-01-01            79.3                NA
-#> 5 080005   2025-02-01           171.                 22
-#> 6 080005   2025-03-01           151.                 17
+#> # A tibble: 4 × 3
+#>   id_stand date       density_dead_wood
+#>   <chr>    <date>                 <dbl>
+#> 1 080001   2025-01-01               187
+#> 2 080001   2025-02-01                73
+#> 3 080005   2025-02-01                22
+#> 4 080005   2025-03-01                17
 ```

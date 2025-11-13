@@ -31,7 +31,7 @@ show_information("timber_harvest")
 #> A) DEFINITION
 #> 
 #>    Name:  timber_harvest 
-#>    Estimation:  Allometric relationships published with the Spanish National Forest Inventory 
+#>    Estimation:  Allometric volume relationships 
 #>    Interpretation:  Volume over bark of harvested wood 
 #>    Output units:  m3/ha 
 #> 

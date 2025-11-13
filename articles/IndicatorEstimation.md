@@ -230,13 +230,14 @@ that could be estimated with your data by calling function
 
 ``` r
 available_indicators(plant_dynamic_input = example_plant_dynamic_input)
-#>  [1] "carbon_stock"                 "cut_basal_area"              
-#>  [3] "cut_tree_density"             "dead_basal_area"             
-#>  [5] "dead_tree_density"            "density_dead_wood"           
-#>  [7] "dominant_tree_diameter"       "dominant_tree_height"        
-#>  [9] "hart_becking_index"           "live_basal_area"             
-#> [11] "live_tree_density"            "mean_tree_height"            
-#> [13] "quadratic_mean_tree_diameter" "timber_harvest"
+#>  [1] "cut_tree_basal_area"          "cut_tree_density"            
+#>  [3] "dead_tree_basal_area"         "dead_tree_density"           
+#>  [5] "density_dead_wood"            "dominant_tree_diameter"      
+#>  [7] "dominant_tree_height"         "hart_becking_index"          
+#>  [9] "live_tree_basal_area"         "live_tree_biomass_stock"     
+#> [11] "live_tree_carbon_stock"       "live_tree_density"           
+#> [13] "mean_tree_height"             "quadratic_mean_tree_diameter"
+#> [15] "timber_harvest"
 ```
 
 Say we decide to estimate the *timber harvest volume* (i.e. indicator
@@ -253,7 +254,7 @@ show_information("timber_harvest")
 #> A) DEFINITION
 #> 
 #>    Name:  timber_harvest 
-#>    Estimation:  Allometric relationships published with the Spanish National Forest Inventory 
+#>    Estimation:  Allometric volume relationships 
 #>    Interpretation:  Volume over bark of harvested wood 
 #>    Output units:  m3/ha 
 #> 
@@ -327,13 +328,13 @@ res <- estimate_indicators(indicators = c("timber_harvest", "density_dead_wood")
 #> ℹ Checking inputs for 'timber_harvest'.
 #> ✔ Checking inputs for 'timber_harvest'. [5ms]
 #> 
-#> ℹ Checking overall inputs✔ Checking overall inputs [26ms]
+#> ℹ Checking overall inputs✔ Checking overall inputs [30ms]
 #> 
 #> ℹ Processing 'timber_harvest'.
 #> ℹ Checking inputs for 'density_dead_wood'.
-#> ✔ Checking inputs for 'density_dead_wood'. [9ms]
+#> ✔ Checking inputs for 'density_dead_wood'. [10ms]
 #> 
-#> ℹ Processing 'timber_harvest'.✔ Processing 'timber_harvest'. [122ms]
+#> ℹ Processing 'timber_harvest'.✔ Processing 'timber_harvest'. [137ms]
 #> 
 #> ℹ Processing 'density_dead_wood'.
 #> ✔ Processing 'density_dead_wood'. [22ms]

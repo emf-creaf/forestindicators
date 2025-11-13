@@ -54,11 +54,12 @@ given the supplied input data.
 
 ``` r
 available_indicators(plant_dynamic_input = example_plant_dynamic_input)
-#>  [1] "carbon_stock"                 "cut_basal_area"              
-#>  [3] "cut_tree_density"             "dead_basal_area"             
-#>  [5] "dead_tree_density"            "density_dead_wood"           
-#>  [7] "dominant_tree_diameter"       "dominant_tree_height"        
-#>  [9] "hart_becking_index"           "live_basal_area"             
-#> [11] "live_tree_density"            "mean_tree_height"            
-#> [13] "quadratic_mean_tree_diameter" "timber_harvest"              
+#>  [1] "cut_tree_basal_area"          "cut_tree_density"            
+#>  [3] "dead_tree_basal_area"         "dead_tree_density"           
+#>  [5] "density_dead_wood"            "dominant_tree_diameter"      
+#>  [7] "dominant_tree_height"         "hart_becking_index"          
+#>  [9] "live_tree_basal_area"         "live_tree_biomass_stock"     
+#> [11] "live_tree_carbon_stock"       "live_tree_density"           
+#> [13] "mean_tree_height"             "quadratic_mean_tree_diameter"
+#> [15] "timber_harvest"              
 ```
