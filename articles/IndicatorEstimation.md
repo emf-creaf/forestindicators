@@ -325,18 +325,18 @@ res <- estimate_indicators(indicators = c("timber_harvest", "density_dead_wood")
                            additional_params = params)
 #> ℹ Checking overall inputs
 #> ℹ Checking inputs for 'timber_harvest'.
-#> ✔ Checking inputs for 'timber_harvest'. [6ms]
+#> ✔ Checking inputs for 'timber_harvest'. [5ms]
 #> 
-#> ℹ Checking overall inputs✔ Checking overall inputs [32ms]
+#> ℹ Checking overall inputs✔ Checking overall inputs [26ms]
 #> 
 #> ℹ Processing 'timber_harvest'.
 #> ℹ Checking inputs for 'density_dead_wood'.
 #> ✔ Checking inputs for 'density_dead_wood'. [9ms]
 #> 
-#> ℹ Processing 'timber_harvest'.✔ Processing 'timber_harvest'. [136ms]
+#> ℹ Processing 'timber_harvest'.✔ Processing 'timber_harvest'. [122ms]
 #> 
 #> ℹ Processing 'density_dead_wood'.
-#> ✔ Processing 'density_dead_wood'. [21ms]
+#> ✔ Processing 'density_dead_wood'. [22ms]
 ```
 
 Note that `"timber_harvest"` requires specifying the function to be used

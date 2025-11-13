@@ -96,24 +96,37 @@ Additional details...
 ## the requested inputs
 
 ## Named lists with additional parameters needed for each indicator
-add_params <- list(timber_harvest = list(province = 8),
-                   density_dead_wood = list(max_tree_dbh = 20))
+add_params <- list(density_dead_wood = list(max_tree_dbh = 20))
 
 ## Call indicator estimation
-estimate_indicators(c("basal_area", "timber_harvest", "density_dead_wood"),
+estimate_indicators(c("live_basal_area", "density_dead_wood"),
                     plant_dynamic_input = example_plant_dynamic_input,
-                    timber_volume_function = forestindicators:::.ifn_volume_forestindicators,
                     additional_params = add_params,
                     verbose = TRUE)
 #> ℹ Checking overall inputs
-#> ℹ Checking inputs for 'timber_harvest'.
-#> ✔ Checking inputs for 'timber_harvest'. [8ms]
+#> ℹ Checking inputs for 'live_basal_area'.
+#> ✔ Checking inputs for 'live_basal_area'. [6ms]
 #> 
 #> ℹ Checking overall inputs
-#> ✔ Checking overall inputs [25ms]
+#> ✔ Checking overall inputs [19ms]
 #> 
-#> ℹ Processing 'timber_harvest'.
-#> Error in estimate_indicators(c("basal_area", "timber_harvest", "density_dead_wood"),     plant_dynamic_input = example_plant_dynamic_input, timber_volume_function = forestindicators:::.ifn_volume_forestindicators,     additional_params = add_params, verbose = TRUE): object '.ifn_volume_forestindicators' not found
-#> ✖ Processing 'timber_harvest'. [16ms]
+#> ℹ Processing 'live_basal_area'.
+#> ℹ Checking inputs for 'density_dead_wood'.
+#> ✔ Checking inputs for 'density_dead_wood'. [5ms]
 #> 
+#> ℹ Processing 'live_basal_area'.
+#> ✔ Processing 'live_basal_area'. [42ms]
+#> 
+#> ℹ Processing 'density_dead_wood'.
+#> ✔ Processing 'density_dead_wood'. [26ms]
+#> 
+#> # A tibble: 6 × 4
+#>   id_stand date       live_basal_area density_dead_wood
+#>   <chr>    <date>               <dbl>             <dbl>
+#> 1 080001   2025-01-01           306.                187
+#> 2 080001   2025-02-01           292.                 73
+#> 3 080001   2025-03-01           226.                 NA
+#> 4 080005   2025-01-01            79.3                NA
+#> 5 080005   2025-02-01           171.                 22
+#> 6 080005   2025-03-01           151.                 17
 ```

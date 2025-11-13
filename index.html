@@ -63,17 +63,21 @@
 <div class="section level2">
 <h2 id="package-installation">Package installation<a class="anchor" aria-label="anchor" href="#package-installation"></a>
 </h2>
-<p>Package <strong>forestindicators</strong> can be installed from GitHub. At present, it requires the previous installation of package <a href="https://emf-creaf.github.io/IFNallometry/index.html" class="external-link"><strong>IFNallometry</strong></a> also available in GitHub only:</p>
+<p>Package <strong>forestindicators</strong> can be installed from GitHub using:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"emf-creaf/IFNallometry"</span><span class="op">)</span></span></code></pre></div>
-<p>Once installed, you can proceed to the installation of <strong>forestindicators</strong>:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"emf-creaf/forestindicators"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="documentation-and-training">Documentation and training<a class="anchor" aria-label="anchor" href="#documentation-and-training"></a>
 </h2>
 <p>Two <em>vignettes</em> are included <a href="https://emf-creaf.github.io/forestindicators/articles/">here</a> illustrate: (1) how to use the R package to estimate indicators; and (2) how to define new indicators.</p>
+</div>
+<div class="section level2">
+<h2 id="volumebiomass-allometric-functions">Volume/biomass allometric functions<a class="anchor" aria-label="anchor" href="#volumebiomass-allometric-functions"></a>
+</h2>
+<p>Some of the indicators require the use of allometric relationships for <em>volume</em> or <em>biomass</em> estimation. Users of <strong>forestindicators</strong> can define their own functions for volume/biomass estimation and provide them to calls of <code><a href="reference/estimate_indicators.html">estimate_indicators()</a></code>. Alternatively, they can resort on additional packages and write wrapper functions. Even though it is not a strict requirement for <strong>forestindicators</strong>, applications of the package within Spain will be most useful if package <a href="https://emf-creaf.github.io/IFNallometry/index.html" class="external-link"><strong>IFNallometry</strong></a> is available, because it contains wrapper functions for <em>volume</em> or <em>biomass</em> estimation, which can be readily used when calculating forest indicators. Package <strong>IFNallometry</strong> is also installed from GitHub using:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"emf-creaf/IFNallometry"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="authorship">Authorship<a class="anchor" aria-label="anchor" href="#authorship"></a>
