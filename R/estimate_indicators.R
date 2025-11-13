@@ -27,13 +27,11 @@
 #' ## the requested inputs
 #'
 #' ## Named lists with additional parameters needed for each indicator
-#' add_params <- list(timber_harvest = list(province = 8),
-#'                    density_dead_wood = list(max_tree_dbh = 20))
+#' add_params <- list(density_dead_wood = list(max_tree_dbh = 20))
 #'
 #' ## Call indicator estimation
-#' estimate_indicators(c("basal_area", "timber_harvest", "density_dead_wood"),
+#' estimate_indicators(c("live_basal_area", "density_dead_wood"),
 #'                     plant_dynamic_input = example_plant_dynamic_input,
-#'                     timber_volume_function = forestindicators:::.ifn_volume_forestindicators,
 #'                     additional_params = add_params,
 #'                     verbose = TRUE)
 #'
