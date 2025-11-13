@@ -15,12 +15,117 @@ will estimate the provision of forest ecosystem services, but the
 package can be understood more generally as a platform to estimate
 forest metrics.
 
-## Package installation
+## Installation
 
 Package **forestindicators** can be installed from GitHub using:
 
 ``` r
 remotes::install_github("emf-creaf/forestindicators")
+```
+
+## Examples
+
+### Step 1: Choose target indicators and examine their requirements
+
+The first step is to decide which indicators are to be estimated. You
+can examine the names of the indicators in the package that could be
+estimated with your data by calling function `available_indicators()`:
+
+``` r
+library(forestindicators)
+available_indicators(plant_dynamic_input = example_plant_dynamic_input)
+#>  [1] "cut_tree_basal_area"          "cut_tree_density"            
+#>  [3] "dead_tree_basal_area"         "dead_tree_density"           
+#>  [5] "density_dead_wood"            "dominant_tree_diameter"      
+#>  [7] "dominant_tree_height"         "hart_becking_index"          
+#>  [9] "live_tree_basal_area"         "live_tree_biomass_stock"     
+#> [11] "live_tree_carbon_stock"       "live_tree_density"           
+#> [13] "mean_tree_height"             "quadratic_mean_tree_diameter"
+#> [15] "timber_harvest"
+```
+
+We may need to check which data inputs are required, their units, etc.
+for a particular indicator. We can find this information using function
+`show_information()`, for example:
+
+``` r
+show_information("live_tree_basal_area")
+#> A) DEFINITION
+#> 
+#>    Name:  live_tree_basal_area 
+#>    Estimation:  The sum of tree sections weighted by tree density of living trees larger than a pre-specified minimum parameter 
+#>    Interpretation:  Basal area of the stand, focusing of living trees 
+#>    Output units:  m2/ha 
+#> 
+#> 
+#> B) DATA INPUTS
+#> 
+#> B.1) Stand-level static data: <NONE>
+#> B.2) Stand-level dynamic data: <NONE>
+#> B.3) Plant-level static data: <NONE>
+#> B.4) Plant-level dynamic data:
+#> 
+#>  variable      type   units
+#>       dbh   numeric      cm
+#>         n   numeric ind./ha
+#>     state character       -
+#>                                                   description
+#>                                     diameter at breast height
+#>                                                       density
+#>  state of the cohort, tree, … can be 'live', 'cut', or 'dead'
+#> 
+#> 
+#> C) ADDITIONAL PARAMETERS
+#> 
+#>     parameter default_value
+#>  min_tree_dbh           7.5
+#>                                                                          description
+#>  Minimum  tree diameter to be included in the estimation of basal area of live trees
+```
+
+### Step 2: Assemble inputs and define values for additional parameters
+
+Once the requested format and content of inputs is know, it is the
+responsibility of the user to build the necessary data frames to be used
+as inputs. We will normally need to define additional parameters to
+fine-tune the estimation of indicators, For that, we define a **named
+list** where each element corresponds to a different indicator and, in
+turn, contains a named list of parameters:
+
+``` r
+params <- list(live_tree_basal_area = list(min_dbh = 8),
+               live_tree_density = list(min_dbh = 8))
+```
+
+### Step 3: Call general estimation function
+
+Once we have our inputs ready, the indicators are estimated by calling
+function `estimate_indicators()` as follows:
+
+``` r
+res <- estimate_indicators(indicators = c("live_tree_basal_area", "live_tree_density"),
+                           plant_dynamic_input = example_plant_dynamic_input,
+                           additional_params = params)
+#> ℹ Checking overall inputsℹ Checking inputs for 'live_tree_basal_area'.✔ Checking inputs for 'live_tree_basal_area'. [5ms]
+#> ℹ Checking overall inputs✔ Checking overall inputs [142ms]
+#> ℹ Processing 'live_tree_basal_area'.ℹ Checking inputs for 'live_tree_density'.✔ Checking inputs for 'live_tree_density'. [14ms]
+#> ℹ Processing 'live_tree_basal_area'.✔ Processing 'live_tree_basal_area'. [56ms]
+#> ℹ Processing 'live_tree_density'.✔ Processing 'live_tree_density'. [23ms]
+```
+
+The result of the estimation is the following:
+
+``` r
+res
+#> # A tibble: 6 × 4
+#>   id_stand date       live_tree_basal_area live_tree_density
+#>   <chr>    <date>                    <dbl>             <dbl>
+#> 1 080001   2025-01-01                306.               3282
+#> 2 080001   2025-02-01                292.               3000
+#> 3 080001   2025-03-01                226.               2285
+#> 4 080005   2025-01-01                 79.3              1489
+#> 5 080005   2025-02-01                171.               2249
+#> 6 080005   2025-03-01                151.               1885
 ```
 
 ## Documentation and training
