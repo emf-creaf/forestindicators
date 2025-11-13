@@ -141,7 +141,7 @@ Once we have our inputs ready, the indicators are estimated by calling function 
 ```{r}
 res <- estimate_indicators(indicators = c("timber_harvest", "density_dead_wood"),
                            plant_dynamic_input = example_plant_dynamic_input,
-                           timber_volume_function = forestindicators:::.ifn_volume_forestindicators,
+                           timber_volume_function = IFNallometry::IFNvolume_forestindicators,
                            additional_params = params)
 ```
 

@@ -82,10 +82,10 @@ As stated above, each indicator has a corresponding *internal function* in the p
 }
 ```
 
-The three dots (i.e. `...`) are used to ignore additional parameters passed by function `estimate_indicators()`. This has the advantage of allowing the omission of data input parameters that are not to be used. As an example we show here the internal function for the estimation of basal area, which only requires one data frame, `stand_dynamic_input`, and has two additional parameters:
+The three dots (i.e. `...`) are used to ignore additional parameters passed by function `estimate_indicators()`. This has the advantage of allowing the omission of data input parameters that are not to be used. As an example we show here the internal function for the estimation of dominant tree height, which only requires one data frame, `stand_dynamic_input`, and has one additional parameter:
 
 ```{r}
-forestindicators:::.basal_area
+forestindicators:::.dominant_tree_height
 ```
 
 
