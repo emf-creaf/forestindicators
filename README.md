@@ -12,17 +12,7 @@ forest metrics.
 
 ## Package installation
 
-Package **forestindicators** can be installed from GitHub. At present,
-it requires the previous installation of package
-[**IFNallometry**](https://emf-creaf.github.io/IFNallometry/index.html)
-also available in GitHub only:
-
-``` r
-remotes::install_github("emf-creaf/IFNallometry")
-```
-
-Once installed, you can proceed to the installation of
-**forestindicators**:
+Package **forestindicators** can be installed from GitHub using:
 
 ``` r
 remotes::install_github("emf-creaf/forestindicators")
@@ -34,6 +24,25 @@ Two *vignettes* are included
 [here](https://emf-creaf.github.io/forestindicators/articles/)
 illustrate: (1) how to use the R package to estimate indicators; and (2)
 how to define new indicators.
+
+## Volume/biomass allometric functions
+
+Some of the indicators require the use of allometric relationships for
+*volume* or *biomass* estimation. Users of **forestindicators** can
+define their own functions for volume/biomass estimation and provide
+them to calls of `estimate_indicators()`. Alternatively, they can resort
+on additional packages and write wrapper functions. Even though it is
+not a strict requirement for **forestindicators**, applications of the
+package within Spain will be most useful if package
+[**IFNallometry**](https://emf-creaf.github.io/IFNallometry/index.html)
+is available, because it contains wrapper functions for *volume* or
+*biomass* estimation, which can be readily used when calculating forest
+indicators. Package **IFNallometry** is also installed from GitHub
+using:
+
+``` r
+remotes::install_github("emf-creaf/IFNallometry")
+```
 
 ## Authorship
 
