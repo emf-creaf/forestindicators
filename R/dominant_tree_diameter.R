@@ -15,7 +15,7 @@
         return(sum(dbh[1:i]*n[1:i])/sum(n[1:i]))
       }
     }
-    reutnr(sum(dbh*n)/sum(n))
+    return(sum(dbh*n)/sum(n))
   }
   return(NA)
 }
