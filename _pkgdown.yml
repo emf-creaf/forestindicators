@@ -25,4 +25,6 @@ reference:
   - indicator_definition
   - additional_parameters
 - title: Data wrapper functions
-  - fordyn2forestindicators
+  desc: Functions to adapt the data structures from other packages
+- contents:
+  - medfate2forestindicators

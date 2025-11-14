@@ -11,7 +11,7 @@ medfate2forestindicators <- function(x, id_stand = NA, type = "plant_dynamic_inp
   if(!inherits(x, "fordyn")) stop("'x' has to be of class 'fordyn'")
   type <- match.arg(type, c("plant_dynamic_input", "stand_dynamic_input"))
   if(type=="plant_dynamic_input") {
-    ltt <- fd[["TreeTable"]] |>
+    ltt <- x[["TreeTable"]] |>
       dplyr::select(Year, Species, DBH, Height, N)
     if(nrow(ltt)>0) {
       ltt <- ltt |>
@@ -32,7 +32,7 @@ medfate2forestindicators <- function(x, id_stand = NA, type = "plant_dynamic_inp
                     h = Height,
                     n = N)
 
-    dtt <- fd[["DeadTreeTable"]] |>
+    dtt <- x[["DeadTreeTable"]] |>
       dplyr::select(Year, Species, DBH, Height, N)
     if(nrow(dtt)>0) {
       dtt <- dtt |>
@@ -42,7 +42,7 @@ medfate2forestindicators <- function(x, id_stand = NA, type = "plant_dynamic_inp
     dtt <- dtt |>
       dplyr::mutate(Year = tidyr::replace_na(Year, min(Year, na.rm=TRUE)-1)) |>
       dplyr::mutate(Year = as.Date(paste0(Year, "-01-01"))) |>
-      dplyr::mutate(id_stand = as.character(id),
+      dplyr::mutate(id_stand = as.character(id_stand),
                     Year = as.Date(Year),
                     Height = Height/100,
                     state = "dead") |>
@@ -52,7 +52,7 @@ medfate2forestindicators <- function(x, id_stand = NA, type = "plant_dynamic_inp
                     dbh = DBH,
                     h = Height,
                     n = N)
-    ctt <- fd[["CutTreeTable"]] |>
+    ctt <- x[["CutTreeTable"]] |>
       dplyr::select(Year, Species, DBH, Height, N)
     if(nrow(ctt)>0) {
       ctt <- ctt |>
@@ -60,7 +60,7 @@ medfate2forestindicators <- function(x, id_stand = NA, type = "plant_dynamic_inp
       dplyr::mutate(Year = as.Date(paste0(Year, "-01-01")))
     }
     ctt <- ctt |>
-      dplyr::mutate(id_stand = as.character(id),
+      dplyr::mutate(id_stand = as.character(id_stand),
                     Year = as.Date(Year),
                     Height = Height/100,
                     state = "cut") |>
