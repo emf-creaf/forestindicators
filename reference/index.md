@@ -34,3 +34,10 @@ additional parameters and raw variable definitions.
   : Indicator definition and requirements
 - [`additional_parameters`](https://emf-creaf.github.io/forestindicators/reference/additional_parameters.md)
   : Additional parameters for indicators
+
+## Data wrapper functions
+
+Functions to adapt the data structures from other packages
+
+- [`medfate2forestindicators()`](https://emf-creaf.github.io/forestindicators/reference/medfate2forestindicators.md)
+  : Wrapper function for simulations with package medfate or medfateland
