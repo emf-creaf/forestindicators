@@ -23,6 +23,8 @@ Suggests:
     testthat (>= 3.0.0),
     knitr,
     tidyr,
+    medfate,
+    medfateland,
     rmarkdown
 Encoding: UTF-8
 LazyData: true
