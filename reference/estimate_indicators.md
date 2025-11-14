@@ -111,7 +111,7 @@ estimate_indicators(c("live_basal_area", "density_dead_wood"),
 #> ✔ Checking overall inputs [20ms]
 #> 
 #> ℹ Processing 'density_dead_wood'.
-#> ✔ Processing 'density_dead_wood'. [31ms]
+#> ✔ Processing 'density_dead_wood'. [24ms]
 #> 
 #> # A tibble: 4 × 3
 #>   id_stand date       density_dead_wood
