@@ -56,7 +56,6 @@ Additional details...
 ## Call indicator estimation
 estimate_indicators(c("live_tree_basal_area", "dead_tree_basal_area"),
                     plant_dynamic_input = example_plant_dynamic_input,
-                    additional_params = add_params,
                     verbose = TRUE)
 
 }
