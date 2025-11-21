@@ -53,11 +53,8 @@ Additional details...
 ## Use functions show_information() and available_indicators() to learn
 ## the requested inputs
 
-## Named lists with additional parameters needed for each indicator
-add_params <- list(density_dead_wood = list(max_tree_dbh = 20))
-
 ## Call indicator estimation
-estimate_indicators(c("live_basal_area", "density_dead_wood"),
+estimate_indicators(c("live_tree_basal_area", "dead_tree_basal_area"),
                     plant_dynamic_input = example_plant_dynamic_input,
                     additional_params = add_params,
                     verbose = TRUE)

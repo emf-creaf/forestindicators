@@ -107,10 +107,10 @@ res <- estimate_indicators(indicators = c("live_tree_basal_area", "live_tree_den
                            plant_dynamic_input = example_plant_dynamic_input,
                            additional_params = params)
 #> ℹ Checking overall inputsℹ Checking inputs for 'live_tree_basal_area'.✔ Checking inputs for 'live_tree_basal_area'. [5ms]
-#> ℹ Checking overall inputs✔ Checking overall inputs [142ms]
-#> ℹ Processing 'live_tree_basal_area'.ℹ Checking inputs for 'live_tree_density'.✔ Checking inputs for 'live_tree_density'. [14ms]
-#> ℹ Processing 'live_tree_basal_area'.✔ Processing 'live_tree_basal_area'. [56ms]
-#> ℹ Processing 'live_tree_density'.✔ Processing 'live_tree_density'. [23ms]
+#> ℹ Checking overall inputs✔ Checking overall inputs [143ms]
+#> ℹ Processing 'live_tree_basal_area'.ℹ Checking inputs for 'live_tree_density'.✔ Checking inputs for 'live_tree_density'. [13ms]
+#> ℹ Processing 'live_tree_basal_area'.✔ Processing 'live_tree_basal_area'. [54ms]
+#> ℹ Processing 'live_tree_density'.✔ Processing 'live_tree_density'. [20ms]
 ```
 
 The result of the estimation is the following:

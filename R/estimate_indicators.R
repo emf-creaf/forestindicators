@@ -26,11 +26,8 @@
 #' ## Use functions show_information() and available_indicators() to learn
 #' ## the requested inputs
 #'
-#' ## Named lists with additional parameters needed for each indicator
-#' add_params <- list(density_dead_wood = list(max_tree_dbh = 20))
-#'
 #' ## Call indicator estimation
-#' estimate_indicators(c("live_basal_area", "density_dead_wood"),
+#' estimate_indicators(c("live_tree_basal_area", "dead_tree_basal_area"),
 #'                     plant_dynamic_input = example_plant_dynamic_input,
 #'                     additional_params = add_params,
 #'                     verbose = TRUE)
@@ -46,8 +43,15 @@ estimate_indicators <- function(indicators,
                                 plant_biomass_function = NULL,
                                 additional_params = list(),
                                 verbose = TRUE) {
+
   # Check indicator string against available indicators
-  indicators <- match.arg(indicators, indicator_definition$indicator, several.ok = TRUE)
+  if(!is.character(indicators)) cli::cli_abort("'indicators' should be a character vector")
+  if(length(indicators)==0) cli::cli_abort("'indicators' should be a character vector with at least one item")
+  for(i in 1:length(indicators)) {
+    if(!(indicators[i] %in% indicator_definition$indicator)) {
+      cli::cli_abort(paste0("Indicator '", indicators[i], "' was not found in the set of available indicators."))
+    }
+  }
   if(verbose) cli::cli_progress_step("Checking overall inputs")
   .check_data_inputs(stand_static_input,
                      stand_dynamic_input,
@@ -59,7 +63,9 @@ estimate_indicators <- function(indicators,
   }
 
 
-  # For each indicator
+
+  # For each valid indicator
+  result <- NULL
   for(i in 1:length(indicators)) {
     indicator  <- indicators[i]
     .is_estimable(indicator,
@@ -85,13 +91,14 @@ estimate_indicators <- function(indicators,
     if(indicator %in% names(additional_params)) argList = c(argList, additional_params[[indicator]])
     indicator_table <- do.call(indicator_function, args=argList) |>
       tibble::as_tibble()
-    # browser()
-    if(i==1) {
+
+    if(is.null(result)) {
       result <- indicator_table
     } else {
       result <- result |>
         dplyr::full_join(indicator_table, by=c("id_stand", "date"))
     }
+
   }
   if(verbose) cli::cli_progress_done()
   return(result)
