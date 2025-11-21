@@ -328,11 +328,11 @@ res <- estimate_indicators(indicators = c("timber_harvest", "density_dead_wood")
 #> ℹ Checking inputs for 'timber_harvest'.
 #> ✔ Checking inputs for 'timber_harvest'. [4ms]
 #> 
-#> ℹ Checking overall inputs✔ Checking overall inputs [26ms]
+#> ℹ Checking overall inputs✔ Checking overall inputs [27ms]
 #> 
 #> ℹ Processing 'timber_harvest'.
 #> ℹ Checking inputs for 'density_dead_wood'.
-#> ✔ Checking inputs for 'density_dead_wood'. [9ms]
+#> ✔ Checking inputs for 'density_dead_wood'. [8ms]
 #> 
 #> ℹ Processing 'timber_harvest'.✔ Processing 'timber_harvest'. [129ms]
 #> 

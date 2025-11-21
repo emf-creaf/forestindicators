@@ -95,29 +95,34 @@ Additional details...
 ## Use functions show_information() and available_indicators() to learn
 ## the requested inputs
 
-## Named lists with additional parameters needed for each indicator
-add_params <- list(density_dead_wood = list(max_tree_dbh = 20))
-
 ## Call indicator estimation
-estimate_indicators(c("live_basal_area", "density_dead_wood"),
+estimate_indicators(c("live_tree_basal_area", "dead_tree_basal_area"),
                     plant_dynamic_input = example_plant_dynamic_input,
-                    additional_params = add_params,
                     verbose = TRUE)
 #> ℹ Checking overall inputs
-#> ℹ Checking inputs for 'density_dead_wood'.
-#> ✔ Checking inputs for 'density_dead_wood'. [6ms]
+#> ℹ Checking inputs for 'live_tree_basal_area'.
+#> ✔ Checking inputs for 'live_tree_basal_area'. [15ms]
 #> 
 #> ℹ Checking overall inputs
-#> ✔ Checking overall inputs [20ms]
+#> ✔ Checking overall inputs [33ms]
 #> 
-#> ℹ Processing 'density_dead_wood'.
-#> ✔ Processing 'density_dead_wood'. [24ms]
+#> ℹ Processing 'live_tree_basal_area'.
+#> ℹ Checking inputs for 'dead_tree_basal_area'.
+#> ✔ Checking inputs for 'dead_tree_basal_area'. [6ms]
 #> 
-#> # A tibble: 4 × 3
-#>   id_stand date       density_dead_wood
-#>   <chr>    <date>                 <dbl>
-#> 1 080001   2025-01-01               187
-#> 2 080001   2025-02-01                73
-#> 3 080005   2025-02-01                22
-#> 4 080005   2025-03-01                17
+#> ℹ Processing 'live_tree_basal_area'.
+#> ✔ Processing 'live_tree_basal_area'. [62ms]
+#> 
+#> ℹ Processing 'dead_tree_basal_area'.
+#> ✔ Processing 'dead_tree_basal_area'. [21ms]
+#> 
+#> # A tibble: 6 × 4
+#>   id_stand date       live_tree_basal_area dead_tree_basal_area
+#>   <chr>    <date>                    <dbl>                <dbl>
+#> 1 080001   2025-01-01                306.                 NA   
+#> 2 080001   2025-02-01                292.                 NA   
+#> 3 080001   2025-03-01                226.                 30.9 
+#> 4 080005   2025-01-01                 79.3                 4.61
+#> 5 080005   2025-02-01                171.                  3.25
+#> 6 080005   2025-03-01                151.                  7.16
 ```
