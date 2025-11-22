@@ -55,6 +55,7 @@ for(i in 1:length(indicator_definition$indicator)) {
                                                      "..."))]
   additional_data <- additional_parameters$parameter[additional_parameters$indicator==indicator]
   if(!all(additional_f %in% additional_data)) {
+    print(additional_f[!(additional_f %in% additional_data)])
     cli::cli_abort(paste0("Some additional parameters of '", indicator_function_name,"' not found in documentation"))
   }
   if(!all(additional_data %in% additional_f)) {

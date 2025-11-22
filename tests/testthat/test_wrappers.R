@@ -37,6 +37,12 @@ test_that("several indicators can be calculated from medfate/medfateland", {
                                      plant_dynamic_input = x,
                                      verbose = FALSE), "data.frame")
 
+  expect_s3_class(estimate_indicators(c("live_tree_volume_stock"),
+                                      plant_dynamic_input = x,
+                                      timber_volume_function = IFNallometry::IFNvolume_forestindicators,
+                                      additional_params = list(live_tree_volume_stock=list(province = 8)),
+                                      verbose = FALSE), "data.frame")
+
   # medfateland
   library(medfateland)
   data("example_ifn")
