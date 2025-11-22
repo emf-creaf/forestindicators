@@ -13,6 +13,7 @@ estimate_indicators(
   timber_volume_function = NULL,
   plant_biomass_function = NULL,
   additional_params = list(),
+  include_units = FALSE,
   verbose = TRUE
 )
 }
@@ -33,7 +34,9 @@ estimate_indicators(
 
 \item{additional_params}{Optional named list where each element is in turn a list of additional parameters required for internal indicator functions. The additional parameters of each indicator are found in table \code{\link{additional_parameters}}.}
 
-\item{verbose}{A logical flag to provide information on progress}
+\item{include_units}{A logical flag to include output units for indicators.}
+
+\item{verbose}{A logical flag to provide information on progress.}
 }
 \value{
 A data frame with the following columns:

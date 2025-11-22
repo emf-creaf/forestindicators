@@ -18,7 +18,8 @@ Imports:
     cli,
     sf,
     dplyr,
-    tibble
+    tibble,
+    units
 Suggests: 
     testthat (>= 3.0.0),
     knitr,

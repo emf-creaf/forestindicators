@@ -10,7 +10,8 @@
 #' @param timber_volume_function Optional function supplied for timber volume calculation.
 #' @param plant_biomass_function Optional function supplied for whole-plant biomass calculation.
 #' @param additional_params Optional named list where each element is in turn a list of additional parameters required for internal indicator functions. The additional parameters of each indicator are found in table \code{\link{additional_parameters}}.
-#' @param verbose A logical flag to provide information on progress
+#' @param include_units A logical flag to include output units for indicators.
+#' @param verbose A logical flag to provide information on progress.
 #'
 #' @returns A data frame with the following columns:
 #'   \itemize{
@@ -41,6 +42,7 @@ estimate_indicators <- function(indicators,
                                 timber_volume_function = NULL,
                                 plant_biomass_function = NULL,
                                 additional_params = list(),
+                                include_units = FALSE,
                                 verbose = TRUE) {
 
   # Check indicator string against available indicators
@@ -90,6 +92,13 @@ estimate_indicators <- function(indicators,
     if(indicator %in% names(additional_params)) argList = c(argList, additional_params[[indicator]])
     indicator_table <- do.call(indicator_function, args=argList) |>
       tibble::as_tibble()
+
+    if(include_units) {
+      ind_units <- .get_output_units(indicator)
+      v <- indicator_table[[indicator]]
+      units(v)  <- ind_units
+      indicator_table[[indicator]] <- v
+    }
 
     if(is.null(result)) {
       result <- indicator_table

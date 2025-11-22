@@ -103,6 +103,12 @@ available_indicators<-function(stand_static_input = NULL,
   return(TRUE)
 }
 
+.get_output_units<-function(indicator) {
+  row <- which(indicator_definition$indicator == indicator)
+  if(length(row)==1) return(indicator_definition$output_units[row])
+  cli::cli_abort("Indicator not found")
+}
+
 .is_estimable<-function(indicator,
                         stand_static_input = NULL,
                         stand_dynamic_input = NULL,

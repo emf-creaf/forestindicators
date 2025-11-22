@@ -32,6 +32,7 @@
 #' @importFrom stats sd
 #' @importFrom dplyr bind_rows left_join select summarise group_by mutate
 #' @importFrom tibble tibble as_tibble
+#' @importFrom units units
 ## usethis namespace: end
 NULL
 
