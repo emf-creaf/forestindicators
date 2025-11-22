@@ -64,11 +64,11 @@ show_information("timber_harvest")
 #>      max_tree_dbh          <NA>
 #>  targeted_species          <NA>
 #>  excluded_species          <NA>
-#>                                                                           description
-#>             Minimum  tree diameter to be included in the estimation of harvest volume
-#>  Maximum  tree diameter to be included in the estimation of density of harvest volume
-#>                          Tree species included in the calculation of harvested volume
-#>                      Tree species not included in the calculation of harvested volume
+#>                                                                description
+#>  Minimum  tree diameter to be included in the estimation of harvest volume
+#>  Maximum  tree diameter to be included in the estimation of harvest volume
+#>               Tree species included in the calculation of harvested volume
+#>           Tree species not included in the calculation of harvested volume
 #> 
 #> 
 ```

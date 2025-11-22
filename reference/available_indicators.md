@@ -60,6 +60,6 @@ available_indicators(plant_dynamic_input = example_plant_dynamic_input)
 #>  [7] "dominant_tree_height"         "hart_becking_index"          
 #>  [9] "live_tree_basal_area"         "live_tree_biomass_stock"     
 #> [11] "live_tree_carbon_stock"       "live_tree_density"           
-#> [13] "mean_tree_height"             "quadratic_mean_tree_diameter"
-#> [15] "timber_harvest"              
+#> [13] "live_tree_volume_stock"       "mean_tree_height"            
+#> [15] "quadratic_mean_tree_diameter" "timber_harvest"              
 ```

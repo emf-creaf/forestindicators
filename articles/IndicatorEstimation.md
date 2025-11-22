@@ -236,8 +236,8 @@ available_indicators(plant_dynamic_input = example_plant_dynamic_input)
 #>  [7] "dominant_tree_height"         "hart_becking_index"          
 #>  [9] "live_tree_basal_area"         "live_tree_biomass_stock"     
 #> [11] "live_tree_carbon_stock"       "live_tree_density"           
-#> [13] "mean_tree_height"             "quadratic_mean_tree_diameter"
-#> [15] "timber_harvest"
+#> [13] "live_tree_volume_stock"       "mean_tree_height"            
+#> [15] "quadratic_mean_tree_diameter" "timber_harvest"
 ```
 
 Say we decide to estimate the *timber harvest volume* (i.e. indicator
@@ -287,11 +287,11 @@ show_information("timber_harvest")
 #>      max_tree_dbh          <NA>
 #>  targeted_species          <NA>
 #>  excluded_species          <NA>
-#>                                                                           description
-#>             Minimum  tree diameter to be included in the estimation of harvest volume
-#>  Maximum  tree diameter to be included in the estimation of density of harvest volume
-#>                          Tree species included in the calculation of harvested volume
-#>                      Tree species not included in the calculation of harvested volume
+#>                                                                description
+#>  Minimum  tree diameter to be included in the estimation of harvest volume
+#>  Maximum  tree diameter to be included in the estimation of harvest volume
+#>               Tree species included in the calculation of harvested volume
+#>           Tree species not included in the calculation of harvested volume
 ```
 
 ### Step 2: Assemble inputs and define values for additional parameters
@@ -328,13 +328,13 @@ res <- estimate_indicators(indicators = c("timber_harvest", "density_dead_wood")
 #> ℹ Checking inputs for 'timber_harvest'.
 #> ✔ Checking inputs for 'timber_harvest'. [4ms]
 #> 
-#> ℹ Checking overall inputs✔ Checking overall inputs [27ms]
+#> ℹ Checking overall inputs✔ Checking overall inputs [26ms]
 #> 
 #> ℹ Processing 'timber_harvest'.
 #> ℹ Checking inputs for 'density_dead_wood'.
 #> ✔ Checking inputs for 'density_dead_wood'. [8ms]
 #> 
-#> ℹ Processing 'timber_harvest'.✔ Processing 'timber_harvest'. [129ms]
+#> ℹ Processing 'timber_harvest'.✔ Processing 'timber_harvest'. [120ms]
 #> 
 #> ℹ Processing 'density_dead_wood'.
 #> ✔ Processing 'density_dead_wood'. [20ms]
@@ -435,8 +435,8 @@ available_indicators(plant_dynamic_input = x)
 #>  [7] "dominant_tree_height"         "hart_becking_index"          
 #>  [9] "live_tree_basal_area"         "live_tree_biomass_stock"     
 #> [11] "live_tree_carbon_stock"       "live_tree_density"           
-#> [13] "mean_tree_height"             "quadratic_mean_tree_diameter"
-#> [15] "timber_harvest"
+#> [13] "live_tree_volume_stock"       "mean_tree_height"            
+#> [15] "quadratic_mean_tree_diameter" "timber_harvest"
 ```
 
 ``` r
