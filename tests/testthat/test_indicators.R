@@ -246,6 +246,23 @@ test_that("density dead wood calculation",{
 })
 
 
+# test_that("soil erosion calculation",{
+#   expect_error(estimate_indicators("soil_erosion_01", data.frame(id_stand = "stand 1"), verbose = FALSE))
+#   expect_s3_class(estimate_indicators("soil_erosion_01",
+#                                       stand_static_input = example_stand_static_input,
+#                                       stand_dynamic_input = example_stand_dynamic_input,
+#                                       verbose = FALSE), "data.frame")
+# })
+
+# test_that("recreational value calculation",{
+#   expect_s3_class(estimate_indicators("recreational_value_01",
+#                                       stand_static_input = example_stand_static_input,
+#                                       plant_static_input = example_plant_static_input,
+#                                       plant_dynamic_input = example_plant_dynamic_input,
+#                                       verbose = FALSE), "data.frame")
+# })
+#
+
 test_that("several indicators can be calculated",{
   testthat::skip_on_ci()
   testthat::skip_on_cran()
@@ -284,55 +301,5 @@ test_that("several indicators can be calculated",{
                                       verbose = FALSE, include_units = TRUE), "data.frame")
 })
 
-test_that("several indicators can be calculated from forestables", {
-  testthat::skip_on_ci()
-  testthat::skip_on_cran()
-  testthat::skip_if_not_installed("tidyr")
-  testthat::skip_if_not_installed("IFNallometry")
-  testthat::skip_if_not_installed("forestables")
-  ifn4_example <- forestables::ifn_output_example |>
-    dplyr::filter(version == "ifn4")
-  x <- ifn4_example |>
-    dplyr::select(id_unique_code, year, province_code, tree) |>
-    tidyr::unnest(cols = tree) |>
-    dplyr::select("id_unique_code", "year", "province_code", "sp_name", "density_factor", "dbh", "height", "tree_ifn4") |>
-    dplyr::mutate(province_code = as.numeric(province_code)) |>
-    dplyr::mutate(year = as.Date(paste0(year, "-01-01"))) |>
-    dplyr::rename(id_stand = id_unique_code,
-                  province = province_code,
-                  date = year,
-                  n = density_factor,
-                  h = height,
-                  plant_entity = sp_name) |>
-    dplyr::mutate(state = "live") |>
-    dplyr::filter(!is.na(n)) |>
-    dplyr::select(-tree_ifn4)
 
-  expect_s3_class(estimate_indicators(c("live_tree_density",
-                                        "live_tree_basal_area",
-                                        "mean_tree_height",
-                                        "dominant_tree_height",
-                                        "dominant_tree_diameter",
-                                        "quadratic_mean_tree_diameter",
-                                        "hart_becking_index"),
-                                      plant_dynamic_input = x,
-                                      plant_biomass_function = IFNallometry::IFNbiomass_forestindicators,
-                                      verbose = FALSE), "data.frame")
-})
 
-# test_that("soil erosion calculation",{
-#   expect_error(estimate_indicators("soil_erosion_01", data.frame(id_stand = "stand 1"), verbose = FALSE))
-#   expect_s3_class(estimate_indicators("soil_erosion_01",
-#                                       stand_static_input = example_stand_static_input,
-#                                       stand_dynamic_input = example_stand_dynamic_input,
-#                                       verbose = FALSE), "data.frame")
-# })
-
-# test_that("recreational value calculation",{
-#   expect_s3_class(estimate_indicators("recreational_value_01",
-#                                       stand_static_input = example_stand_static_input,
-#                                       plant_static_input = example_plant_static_input,
-#                                       plant_dynamic_input = example_plant_dynamic_input,
-#                                       verbose = FALSE), "data.frame")
-# })
-#

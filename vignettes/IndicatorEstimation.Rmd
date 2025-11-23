@@ -171,32 +171,14 @@ library(forestables)
 ifn_output_example
 ```
 
-```{r}
-ifn4_example <- ifn_output_example|>
-  dplyr::filter(version == "ifn4")
-```
 
 ```{r}
-x <- ifn4_example |>
-  dplyr::select(id_unique_code, year, province_code, tree) |>
-  tidyr::unnest(cols = tree) |>
-  dplyr::select("id_unique_code", "year", "province_code", "sp_name", "density_factor", "dbh", "height", "tree_ifn4") |>
-  dplyr::mutate(province_code = as.numeric(province_code)) |>
-  dplyr::mutate(year = as.Date(paste0(year, "-01-01"))) |>
-  dplyr::rename(id_stand = id_unique_code, 
-                province = province_code,
-                date = year,
-                n = density_factor, 
-                h = height, 
-                plant_entity = sp_name) |>
-  dplyr::mutate(state = "live") |>
-  dplyr::filter(!is.na(n)) |>
-  dplyr::select(-tree_ifn4)
+x <- forestables2forestindicators(ifn_output_example, version = "ifn2")
 ```
 
 
 ```{r}
-summary(x)
+x
 ```
 
 ```{r}

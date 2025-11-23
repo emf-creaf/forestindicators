@@ -1,3 +1,26 @@
+
+test_that("several indicators can be calculated from forestables", {
+  testthat::skip_on_ci()
+  testthat::skip_on_cran()
+  testthat::skip_if_not_installed("tidyr")
+  testthat::skip_if_not_installed("IFNallometry")
+  testthat::skip_if_not_installed("forestables")
+  library(forestables)
+  x <- forestables2forestindicators(ifn_output_example, version = "ifn4")
+
+  expect_s3_class(estimate_indicators(c("live_tree_density",
+                                        "live_tree_basal_area",
+                                        "mean_tree_height",
+                                        "dominant_tree_height",
+                                        "dominant_tree_diameter",
+                                        "quadratic_mean_tree_diameter",
+                                        "hart_becking_index"),
+                                      plant_dynamic_input = x,
+                                      plant_biomass_function = IFNallometry::IFNbiomass_forestindicators,
+                                      verbose = FALSE), "data.frame")
+})
+
+
 test_that("several indicators can be calculated from medfate/medfateland", {
   testthat::skip_on_ci()
   testthat::skip_on_cran()
@@ -106,3 +129,4 @@ test_that("several indicators can be calculated from medfate/medfateland", {
   #                                     verbose = FALSE), "data.frame")
 
 })
+

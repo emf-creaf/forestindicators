@@ -27,4 +27,5 @@ reference:
 - title: Data wrapper functions
   desc: Functions to adapt the data structures from other packages
 - contents:
+  - forestables2forestindicators
   - medfate2forestindicators

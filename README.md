@@ -65,10 +65,10 @@ show_information("live_tree_basal_area")
 #> B.3) Plant-level static data: <NONE>
 #> B.4) Plant-level dynamic data:
 #> 
-#>  variable      type   units
-#>       dbh   numeric      cm
-#>         n   numeric ind./ha
-#>     state character       -
+#>  variable      type units
+#>       dbh   numeric    cm
+#>         n   numeric  ha-1
+#>     state character  <NA>
 #>                                                   description
 #>                                     diameter at breast height
 #>                                                       density
