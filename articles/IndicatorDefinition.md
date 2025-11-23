@@ -122,7 +122,8 @@ forestindicators:::.dominant_tree_height
 #> 
 #>   ## Filter plant_dynamic_input by state
 #>   plant_input <- plant_dynamic_input |>
-#>     dplyr::filter(state == "live")
+#>     dplyr::filter(state == "live") |>
+#>     units::drop_units()
 #> 
 #>   df <- plant_input |>
 #>     dplyr::group_by(id_stand, date) |>
@@ -132,7 +133,7 @@ forestindicators:::.dominant_tree_height
 #>   res <- df |> dplyr::select(id_stand, date, dominant_tree_height)
 #>   return(res)
 #> }
-#> <bytecode: 0x56a900d45560>
+#> <bytecode: 0x5e98aa0ae9a0>
 #> <environment: namespace:forestindicators>
 ```
 

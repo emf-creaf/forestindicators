@@ -43,12 +43,12 @@ show_information("timber_harvest")
 #> B.3) Plant-level static data: <NONE>
 #> B.4) Plant-level dynamic data:
 #> 
-#>      variable      type   units
-#>           dbh   numeric      cm
-#>             h   numeric       m
-#>             n   numeric ind./ha
-#>  plant_entity character       -
-#>         state character       -
+#>      variable      type units
+#>           dbh   numeric    cm
+#>             h   numeric     m
+#>             n   numeric  ha-1
+#>  plant_entity character  <NA>
+#>         state character  <NA>
 #>                                                   description
 #>                                     diameter at breast height
 #>                                                        height

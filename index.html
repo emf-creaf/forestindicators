@@ -85,8 +85,8 @@
 <span><span class="co">#&gt;  [7] "dominant_tree_height"         "hart_becking_index"          </span></span>
 <span><span class="co">#&gt;  [9] "live_tree_basal_area"         "live_tree_biomass_stock"     </span></span>
 <span><span class="co">#&gt; [11] "live_tree_carbon_stock"       "live_tree_density"           </span></span>
-<span><span class="co">#&gt; [13] "mean_tree_height"             "quadratic_mean_tree_diameter"</span></span>
-<span><span class="co">#&gt; [15] "timber_harvest"</span></span></code></pre></div>
+<span><span class="co">#&gt; [13] "live_tree_volume_stock"       "mean_tree_height"            </span></span>
+<span><span class="co">#&gt; [15] "quadratic_mean_tree_diameter" "timber_harvest"</span></span></code></pre></div>
 <p>We may need to check which data inputs are required, their units, etc. for a particular indicator. We can find this information using function <code><a href="reference/show_information.html">show_information()</a></code>, for example:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/show_information.html">show_information</a></span><span class="op">(</span><span class="st">"live_tree_basal_area"</span><span class="op">)</span></span>
@@ -137,18 +137,15 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/estimate_indicators.html">estimate_indicators</a></span><span class="op">(</span>indicators <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"live_tree_basal_area"</span>, <span class="st">"live_tree_density"</span><span class="op">)</span>,</span>
 <span>                           plant_dynamic_input <span class="op">=</span> <span class="va">example_plant_dynamic_input</span>,</span>
-<span>                           additional_params <span class="op">=</span> <span class="va">params</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ℹ Checking overall inputsℹ Checking inputs for 'live_tree_basal_area'.✔ Checking inputs for 'live_tree_basal_area'. [5ms]</span></span>
-<span><span class="co">#&gt; ℹ Checking overall inputs✔ Checking overall inputs [143ms]</span></span>
-<span><span class="co">#&gt; ℹ Processing 'live_tree_basal_area'.ℹ Checking inputs for 'live_tree_density'.✔ Checking inputs for 'live_tree_density'. [13ms]</span></span>
-<span><span class="co">#&gt; ℹ Processing 'live_tree_basal_area'.✔ Processing 'live_tree_basal_area'. [54ms]</span></span>
-<span><span class="co">#&gt; ℹ Processing 'live_tree_density'.✔ Processing 'live_tree_density'. [20ms]</span></span></code></pre></div>
+<span>                           additional_params <span class="op">=</span> <span class="va">params</span>,</span>
+<span>                           include_units <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                           verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>The result of the estimation is the following:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 4</span></span>
 <span><span class="co">#&gt;   id_stand date       live_tree_basal_area live_tree_density</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;    &lt;date&gt;                    &lt;dbl&gt;             &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;    &lt;date&gt;                 [m^2/ha]            [1/ha]</span></span>
 <span><span class="co">#&gt; 1 080001   2025-01-01                306.               3282</span></span>
 <span><span class="co">#&gt; 2 080001   2025-02-01                292.               3000</span></span>
 <span><span class="co">#&gt; 3 080001   2025-03-01                226.               2285</span></span>

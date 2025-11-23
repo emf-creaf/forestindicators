@@ -76,9 +76,20 @@ estimate_indicators(
 
 ## Value
 
+A [`tibble`](https://tibble.tidyverse.org/reference/tibble.html) with
+the following columns:
+
+- `id_stand` - Stand identifier.
+
+- `date` - Date of indicator assessment.
+
+- `...` - Additional columns with names equal to strings given in
+  `indicators`.
+
 ## Details
 
-Additional details...
+If columns of the input data frames have defined units, the package will
+check those against the units of the required variables
 
 ## See also
 
@@ -97,20 +108,20 @@ estimate_indicators(c("live_tree_basal_area", "dead_tree_basal_area"),
                     verbose = TRUE)
 #> ℹ Checking overall inputs
 #> ℹ Checking inputs for 'live_tree_basal_area'.
-#> ✔ Checking inputs for 'live_tree_basal_area'. [6ms]
+#> ✔ Checking inputs for 'live_tree_basal_area'. [5ms]
 #> 
 #> ℹ Checking overall inputs
-#> ✔ Checking overall inputs [31ms]
+#> ✔ Checking overall inputs [19ms]
 #> 
 #> ℹ Processing 'live_tree_basal_area'.
 #> ℹ Checking inputs for 'dead_tree_basal_area'.
 #> ✔ Checking inputs for 'dead_tree_basal_area'. [5ms]
 #> 
 #> ℹ Processing 'live_tree_basal_area'.
-#> ✔ Processing 'live_tree_basal_area'. [43ms]
+#> ✔ Processing 'live_tree_basal_area'. [45ms]
 #> 
 #> ℹ Processing 'dead_tree_basal_area'.
-#> ✔ Processing 'dead_tree_basal_area'. [28ms]
+#> ✔ Processing 'dead_tree_basal_area'. [23ms]
 #> 
 #> # A tibble: 6 × 4
 #>   id_stand date       live_tree_basal_area dead_tree_basal_area

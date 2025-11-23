@@ -35,8 +35,8 @@ available_indicators(plant_dynamic_input = example_plant_dynamic_input)
 #>  [7] "dominant_tree_height"         "hart_becking_index"          
 #>  [9] "live_tree_basal_area"         "live_tree_biomass_stock"     
 #> [11] "live_tree_carbon_stock"       "live_tree_density"           
-#> [13] "mean_tree_height"             "quadratic_mean_tree_diameter"
-#> [15] "timber_harvest"
+#> [13] "live_tree_volume_stock"       "mean_tree_height"            
+#> [15] "quadratic_mean_tree_diameter" "timber_harvest"
 ```
 
 We may need to check which data inputs are required, their units, etc.
@@ -103,12 +103,9 @@ as follows:
 ``` r
 res <- estimate_indicators(indicators = c("live_tree_basal_area", "live_tree_density"),
                            plant_dynamic_input = example_plant_dynamic_input,
-                           additional_params = params)
-#> ℹ Checking overall inputsℹ Checking inputs for 'live_tree_basal_area'.✔ Checking inputs for 'live_tree_basal_area'. [5ms]
-#> ℹ Checking overall inputs✔ Checking overall inputs [143ms]
-#> ℹ Processing 'live_tree_basal_area'.ℹ Checking inputs for 'live_tree_density'.✔ Checking inputs for 'live_tree_density'. [13ms]
-#> ℹ Processing 'live_tree_basal_area'.✔ Processing 'live_tree_basal_area'. [54ms]
-#> ℹ Processing 'live_tree_density'.✔ Processing 'live_tree_density'. [20ms]
+                           additional_params = params,
+                           include_units = TRUE,
+                           verbose = FALSE)
 ```
 
 The result of the estimation is the following:
@@ -117,7 +114,7 @@ The result of the estimation is the following:
 res
 #> # A tibble: 6 × 4
 #>   id_stand date       live_tree_basal_area live_tree_density
-#>   <chr>    <date>                    <dbl>             <dbl>
+#>   <chr>    <date>                 [m^2/ha]            [1/ha]
 #> 1 080001   2025-01-01                306.               3282
 #> 2 080001   2025-02-01                292.               3000
 #> 3 080001   2025-03-01                226.               2285

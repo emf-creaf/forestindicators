@@ -266,12 +266,12 @@ show_information("timber_harvest")
 #> B.3) Plant-level static data: <NONE>
 #> B.4) Plant-level dynamic data:
 #> 
-#>      variable      type   units
-#>           dbh   numeric      cm
-#>             h   numeric       m
-#>             n   numeric ind./ha
-#>  plant_entity character       -
-#>         state character       -
+#>      variable      type units
+#>           dbh   numeric    cm
+#>             h   numeric     m
+#>             n   numeric  ha-1
+#>  plant_entity character  <NA>
+#>         state character  <NA>
 #>                                                   description
 #>                                     diameter at breast height
 #>                                                        height
@@ -326,15 +326,15 @@ res <- estimate_indicators(indicators = c("timber_harvest", "live_tree_basal_are
                            additional_params = params)
 #> ℹ Checking overall inputs
 #> ℹ Checking inputs for 'timber_harvest'.
-#> ✔ Checking inputs for 'timber_harvest'. [5ms]
+#> ✔ Checking inputs for 'timber_harvest'. [4ms]
 #> 
-#> ℹ Checking overall inputs✔ Checking overall inputs [30ms]
+#> ℹ Checking overall inputs✔ Checking overall inputs [26ms]
 #> 
 #> ℹ Processing 'timber_harvest'.
 #> ℹ Checking inputs for 'live_tree_basal_area'.
-#> ✔ Checking inputs for 'live_tree_basal_area'. [10ms]
+#> ✔ Checking inputs for 'live_tree_basal_area'. [8ms]
 #> 
-#> ℹ Processing 'timber_harvest'.✔ Processing 'timber_harvest'. [136ms]
+#> ℹ Processing 'timber_harvest'.✔ Processing 'timber_harvest'. [126ms]
 #> 
 #> ℹ Processing 'live_tree_basal_area'.
 #> ✔ Processing 'live_tree_basal_area'. [25ms]

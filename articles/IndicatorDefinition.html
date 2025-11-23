@@ -199,7 +199,8 @@ parameter:</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   ## Filter plant_dynamic_input by state</span></span>
 <span><span class="co">#&gt;   plant_input &lt;- plant_dynamic_input |&gt;</span></span>
-<span><span class="co">#&gt;     dplyr::filter(state == "live")</span></span>
+<span><span class="co">#&gt;     dplyr::filter(state == "live") |&gt;</span></span>
+<span><span class="co">#&gt;     units::drop_units()</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   df &lt;- plant_input |&gt;</span></span>
 <span><span class="co">#&gt;     dplyr::group_by(id_stand, date) |&gt;</span></span>
@@ -209,7 +210,7 @@ parameter:</p>
 <span><span class="co">#&gt;   res &lt;- df |&gt; dplyr::select(id_stand, date, dominant_tree_height)</span></span>
 <span><span class="co">#&gt;   return(res)</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x56a900d45560&gt;</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x5e98aa0ae9a0&gt;</span></span>
 <span><span class="co">#&gt; &lt;environment: namespace:forestindicators&gt;</span></span></code></pre></div>
 </div>
 <div class="section level3">
