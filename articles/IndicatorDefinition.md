@@ -59,8 +59,8 @@ last contribution.
 The new indicator needs to be described in data table
 `indicator_definition`, providing at minimum:
 
-- Name
-- Output units
+- Indicator name, using multiple words separated by `_`, if necessary.
+- Valid output units, if not unit less.
 - Person responsible of its implementation in the package, who is to be
   contacted in case of issues/doubts.
 - Variable names required for its estimation (see below).
@@ -132,7 +132,7 @@ forestindicators:::.dominant_tree_height
 #>   res <- df |> dplyr::select(id_stand, date, dominant_tree_height)
 #>   return(res)
 #> }
-#> <bytecode: 0x644cd0253be0>
+#> <bytecode: 0x56a900d45560>
 #> <environment: namespace:forestindicators>
 ```
 

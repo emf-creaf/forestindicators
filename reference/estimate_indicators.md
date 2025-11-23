@@ -15,6 +15,7 @@ estimate_indicators(
   timber_volume_function = NULL,
   plant_biomass_function = NULL,
   additional_params = list(),
+  include_units = FALSE,
   verbose = TRUE
 )
 ```
@@ -65,20 +66,15 @@ estimate_indicators(
   parameters of each indicator are found in table
   [`additional_parameters`](https://emf-creaf.github.io/forestindicators/reference/additional_parameters.md).
 
+- include_units:
+
+  A logical flag to include output units for indicators.
+
 - verbose:
 
-  A logical flag to provide information on progress
+  A logical flag to provide information on progress.
 
 ## Value
-
-A data frame with the following columns:
-
-- `id_stand` - Stand identifier.
-
-- `date` - Date of indicator assessment.
-
-- `...` - Additional columns with names equal to strings given in
-  `indicators`.
 
 ## Details
 
@@ -104,17 +100,17 @@ estimate_indicators(c("live_tree_basal_area", "dead_tree_basal_area"),
 #> ✔ Checking inputs for 'live_tree_basal_area'. [6ms]
 #> 
 #> ℹ Checking overall inputs
-#> ✔ Checking overall inputs [22ms]
+#> ✔ Checking overall inputs [31ms]
 #> 
 #> ℹ Processing 'live_tree_basal_area'.
 #> ℹ Checking inputs for 'dead_tree_basal_area'.
 #> ✔ Checking inputs for 'dead_tree_basal_area'. [5ms]
 #> 
 #> ℹ Processing 'live_tree_basal_area'.
-#> ✔ Processing 'live_tree_basal_area'. [78ms]
+#> ✔ Processing 'live_tree_basal_area'. [43ms]
 #> 
 #> ℹ Processing 'dead_tree_basal_area'.
-#> ✔ Processing 'dead_tree_basal_area'. [20ms]
+#> ✔ Processing 'dead_tree_basal_area'. [28ms]
 #> 
 #> # A tibble: 6 × 4
 #>   id_stand date       live_tree_basal_area dead_tree_basal_area

@@ -241,8 +241,8 @@ available_indicators(plant_dynamic_input = example_plant_dynamic_input)
 ```
 
 Say we decide to estimate the *timber harvest volume* (i.e. indicator
-`"timber_harvest"`) and the *density of dead wood* (i.e. indicator
-`"density_dead_wood"`).
+`"timber_harvest"`) and the *basal area of living trees* (i.e. indicator
+`"live_tree_basal_area"`).
 
 We may need to check which data inputs are required, their units, etc.
 We can find this information using function
@@ -309,7 +309,7 @@ a named list of parameters. In our case:
 
 ``` r
 params <- list(timber_harvest = list(province = 8),
-               density_dead_wood = list(max_tree_dbh = 20))
+               live_tree_basal_area = list(min_tree_dbh = 5))
 ```
 
 ### Step 3: Call general estimation function
@@ -320,24 +320,24 @@ function
 as follows:
 
 ``` r
-res <- estimate_indicators(indicators = c("timber_harvest", "density_dead_wood"),
+res <- estimate_indicators(indicators = c("timber_harvest", "live_tree_basal_area"),
                            plant_dynamic_input = example_plant_dynamic_input,
                            timber_volume_function = IFNallometry::IFNvolume_forestindicators,
                            additional_params = params)
 #> ℹ Checking overall inputs
 #> ℹ Checking inputs for 'timber_harvest'.
-#> ✔ Checking inputs for 'timber_harvest'. [4ms]
+#> ✔ Checking inputs for 'timber_harvest'. [5ms]
 #> 
-#> ℹ Checking overall inputs✔ Checking overall inputs [26ms]
+#> ℹ Checking overall inputs✔ Checking overall inputs [30ms]
 #> 
 #> ℹ Processing 'timber_harvest'.
-#> ℹ Checking inputs for 'density_dead_wood'.
-#> ✔ Checking inputs for 'density_dead_wood'. [8ms]
+#> ℹ Checking inputs for 'live_tree_basal_area'.
+#> ✔ Checking inputs for 'live_tree_basal_area'. [10ms]
 #> 
-#> ℹ Processing 'timber_harvest'.✔ Processing 'timber_harvest'. [120ms]
+#> ℹ Processing 'timber_harvest'.✔ Processing 'timber_harvest'. [136ms]
 #> 
-#> ℹ Processing 'density_dead_wood'.
-#> ✔ Processing 'density_dead_wood'. [20ms]
+#> ℹ Processing 'live_tree_basal_area'.
+#> ✔ Processing 'live_tree_basal_area'. [25ms]
 ```
 
 Note that `"timber_harvest"` requires specifying the function to be used
@@ -349,14 +349,35 @@ The result of the estimation is the following:
 ``` r
 res
 #> # A tibble: 6 × 4
-#>   id_stand date       timber_harvest density_dead_wood
-#>   <chr>    <date>              <dbl>             <dbl>
-#> 1 080001   2025-01-01          51.9                187
-#> 2 080001   2025-02-01          29.2                 73
-#> 3 080001   2025-03-01          25.6                 NA
-#> 4 080005   2025-01-01          34.4                 NA
-#> 5 080005   2025-02-01           6.98                22
-#> 6 080005   2025-03-01          11.3                 17
+#>   id_stand date       timber_harvest live_tree_basal_area
+#>   <chr>    <date>              <dbl>                <dbl>
+#> 1 080001   2025-01-01          51.9                 306. 
+#> 2 080001   2025-02-01          29.2                 292. 
+#> 3 080001   2025-03-01          25.6                 226. 
+#> 4 080005   2025-01-01          34.4                  79.3
+#> 5 080005   2025-02-01           6.98                171. 
+#> 6 080005   2025-03-01          11.3                 151.
+```
+
+When calling `estimate_indicators`, we can force the inclusion of
+indicator units in the output tibble:
+
+``` r
+estimate_indicators(indicators = c("timber_harvest", "live_tree_basal_area"),
+                    plant_dynamic_input = example_plant_dynamic_input,
+                    timber_volume_function = IFNallometry::IFNvolume_forestindicators,
+                    additional_params = params,
+                    include_units = TRUE,
+                    verbose = FALSE)
+#> # A tibble: 6 × 4
+#>   id_stand date       timber_harvest live_tree_basal_area
+#>   <chr>    <date>           [m^3/ha]             [m^2/ha]
+#> 1 080001   2025-01-01          51.9                 306. 
+#> 2 080001   2025-02-01          29.2                 292. 
+#> 3 080001   2025-03-01          25.6                 226. 
+#> 4 080005   2025-01-01          34.4                  79.3
+#> 5 080005   2025-02-01           6.98                171. 
+#> 6 080005   2025-03-01          11.3                 151.
 ```
 
 ## Example with data from forestables
@@ -448,10 +469,11 @@ estimate_indicators(c("live_tree_density",
                       "quadratic_mean_tree_diameter",
                       "hart_becking_index"), 
                     plant_dynamic_input = x, 
+                    include_units = TRUE,
                     verbose = FALSE)
 #> # A tibble: 1,568 × 9
 #>    id_stand   date       live_tree_density live_tree_basal_area mean_tree_height
-#>    <chr>      <date>                 <dbl>                <dbl>            <dbl>
+#>    <chr>      <date>                [1/ha]             [m^2/ha]              [m]
 #>  1 08_0001_N… 2015-01-01              638.                 30.5             9.99
 #>  2 08_0002_N… 2014-01-01              162.                 16.3            14.1 
 #>  3 08_0003_N… 2015-01-01              827.                 26.0             8.91
@@ -463,6 +485,6 @@ estimate_indicators(c("live_tree_density",
 #>  9 08_0016_x… 2014-01-01             1187.                 41.7            14.2 
 #> 10 08_0020_N… 2015-01-01             2088.                 61.6             9.95
 #> # ℹ 1,558 more rows
-#> # ℹ 4 more variables: dominant_tree_height <dbl>, dominant_tree_diameter <dbl>,
-#> #   quadratic_mean_tree_diameter <dbl>, hart_becking_index <dbl>
+#> # ℹ 4 more variables: dominant_tree_height [m], dominant_tree_diameter [cm],
+#> #   quadratic_mean_tree_diameter [cm], hart_becking_index [%]
 ```
