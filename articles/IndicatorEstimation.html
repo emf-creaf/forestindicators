@@ -394,18 +394,18 @@ calling function <code><a href="../reference/estimate_indicators.html">estimate_
 <span>                           additional_params <span class="op">=</span> <span class="va">params</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking overall inputs</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking inputs for 'timber_harvest'.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking inputs for 'timber_harvest'. <span style="color: #B2B2B2;">[4ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking inputs for 'timber_harvest'. <span style="color: #B2B2B2;">[5ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking overall inputs<span style="color: #00BB00;">✔</span> Checking overall inputs <span style="color: #B2B2B2;">[26ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking overall inputs<span style="color: #00BB00;">✔</span> Checking overall inputs <span style="color: #B2B2B2;">[31ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Processing 'timber_harvest'.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking inputs for 'live_tree_basal_area'.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking inputs for 'live_tree_basal_area'. <span style="color: #B2B2B2;">[8ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking inputs for 'live_tree_basal_area'. <span style="color: #B2B2B2;">[9ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Processing 'timber_harvest'.<span style="color: #00BB00;">✔</span> Processing 'timber_harvest'. <span style="color: #B2B2B2;">[126ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Processing 'timber_harvest'.<span style="color: #00BB00;">✔</span> Processing 'timber_harvest'. <span style="color: #B2B2B2;">[142ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Processing 'live_tree_basal_area'.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Processing 'live_tree_basal_area'. <span style="color: #B2B2B2;">[25ms]</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Processing 'live_tree_basal_area'. <span style="color: #B2B2B2;">[24ms]</span></span></span></code></pre></div>
 <p>Note that <code>"timber_harvest"</code> requires specifying the
 function to be used to calculate timber volumes,
 i.e. <code>timber_volume_function</code>, for which in our case we use a
@@ -469,41 +469,24 @@ inclusion of indicator units in the output tibble:</p>
 <span><span class="co">#&gt; <span style="color: #949494;">#   ca_name_original &lt;chr&gt;, sheet_ntm &lt;chr&gt;, huso &lt;dbl&gt;, slope_mean &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   type &lt;int&gt;, tree &lt;list&gt;, understory &lt;list&gt;, regen &lt;list&gt;</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ifn4_example</span> <span class="op">&lt;-</span> <span class="va">ifn_output_example</span><span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">version</span> <span class="op">==</span> <span class="st">"ifn4"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/forestables2forestindicators.html">forestables2forestindicators</a></span><span class="op">(</span><span class="va">ifn_output_example</span>, version <span class="op">=</span> <span class="st">"ifn2"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">ifn4_example</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">id_unique_code</span>, <span class="va">year</span>, <span class="va">province_code</span>, <span class="va">tree</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="va">tree</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="st">"id_unique_code"</span>, <span class="st">"year"</span>, <span class="st">"province_code"</span>, <span class="st">"sp_name"</span>, <span class="st">"density_factor"</span>, <span class="st">"dbh"</span>, <span class="st">"height"</span>, <span class="st">"tree_ifn4"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>province_code <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">province_code</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">year</span>, <span class="st">"-01-01"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>id_stand <span class="op">=</span> <span class="va">id_unique_code</span>, </span>
-<span>                province <span class="op">=</span> <span class="va">province_code</span>,</span>
-<span>                date <span class="op">=</span> <span class="va">year</span>,</span>
-<span>                n <span class="op">=</span> <span class="va">density_factor</span>, </span>
-<span>                h <span class="op">=</span> <span class="va">height</span>, </span>
-<span>                plant_entity <span class="op">=</span> <span class="va">sp_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"live"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">tree_ifn4</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">x</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 146,612 × 8</span></span></span>
+<span><span class="co">#&gt;    id_stand         date       province plant_entity       n   dbh     h state</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata  31.8  18.9   7.5 live </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata  14.1  29.2   7.5 live </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata  14.1  23.9   9.5 live </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata  14.1  23.7   7   live </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata  14.1  32.7   8   live </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata  31.8  13.7   8   live </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata  31.8  15.7   8   live </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata 127.    7.7   4.5 live </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata  14.1  26.1  10   live </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata  31.8  20.3   9   live </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 146,602 more rows</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span><span class="co">#&gt;    id_stand              date               province plant_entity      </span></span>
-<span><span class="co">#&gt;  Length:33682       Min.   :2014-01-01   Min.   :8   Length:33682      </span></span>
-<span><span class="co">#&gt;  Class :character   1st Qu.:2014-01-01   1st Qu.:8   Class :character  </span></span>
-<span><span class="co">#&gt;  Mode  :character   Median :2015-01-01   Median :8   Mode  :character  </span></span>
-<span><span class="co">#&gt;                     Mean   :2014-11-08   Mean   :8                     </span></span>
-<span><span class="co">#&gt;                     3rd Qu.:2015-01-01   3rd Qu.:8                     </span></span>
-<span><span class="co">#&gt;                     Max.   :2016-01-01   Max.   :8                     </span></span>
-<span><span class="co">#&gt;        n                dbh               h            state          </span></span>
-<span><span class="co">#&gt;  Min.   :  5.093   Min.   :  7.50   Min.   : 1.40   Length:33682      </span></span>
-<span><span class="co">#&gt;  1st Qu.: 14.147   1st Qu.: 14.20   1st Qu.: 7.80   Class :character  </span></span>
-<span><span class="co">#&gt;  Median : 31.831   Median : 20.40   Median :10.70   Mode  :character  </span></span>
-<span><span class="co">#&gt;  Mean   : 36.773   Mean   : 22.03   Mean   :11.24                     </span></span>
-<span><span class="co">#&gt;  3rd Qu.: 31.831   3rd Qu.: 27.45   3rd Qu.:13.90                     </span></span>
-<span><span class="co">#&gt;  Max.   :127.324   Max.   :106.60   Max.   :39.70</span></span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/available_indicators.html">available_indicators</a></span><span class="op">(</span>plant_dynamic_input <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "cut_tree_basal_area"          "cut_tree_density"            </span></span>
 <span><span class="co">#&gt;  [3] "dead_tree_basal_area"         "dead_tree_density"           </span></span>
@@ -513,7 +496,7 @@ inclusion of indicator units in the output tibble:</p>
 <span><span class="co">#&gt; [11] "live_tree_carbon_stock"       "live_tree_density"           </span></span>
 <span><span class="co">#&gt; [13] "live_tree_volume_stock"       "mean_tree_height"            </span></span>
 <span><span class="co">#&gt; [15] "quadratic_mean_tree_diameter" "timber_harvest"</span></span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/estimate_indicators.html">estimate_indicators</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"live_tree_density"</span>, </span>
 <span>                      <span class="st">"live_tree_basal_area"</span>,</span>
 <span>                      <span class="st">"mean_tree_height"</span>,</span>
@@ -524,20 +507,20 @@ inclusion of indicator units in the output tibble:</p>
 <span>                    plant_dynamic_input <span class="op">=</span> <span class="va">x</span>, </span>
 <span>                    include_units <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                    verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,568 × 9</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7,745 × 9</span></span></span>
 <span><span class="co">#&gt;    id_stand   date       live_tree_density live_tree_basal_area mean_tree_height</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                <span style="color: #949494;">[1/ha]</span>             <span style="color: #949494;">[m^2/ha]</span>              <span style="color: #949494;">[m]</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 08_0001_N… 2015-01-01              638.                 30.5             9.99</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 08_0002_N… 2014-01-01              162.                 16.3            14.1 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 08_0003_N… 2015-01-01              827.                 26.0             8.91</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 08_0004_N… 2014-01-01             <span style="text-decoration: underline;">1</span>924.                 18.5             7.41</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 08_0005_N… 2014-01-01              732.                 18.1             7.00</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 08_0006_N… 2014-01-01              387.                 33.2            11.8 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 08_0009_x… 2016-01-01             <span style="text-decoration: underline;">1</span>625.                 32.0             7.42</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 08_0014_N… 2015-01-01              679.                 21.1            13.2 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 08_0016_x… 2014-01-01             <span style="text-decoration: underline;">1</span>187.                 41.7            14.2 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 08_0020_N… 2015-01-01             <span style="text-decoration: underline;">2</span>088.                 61.6             9.95</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1,558 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 08_0001_N… 1990-01-01              460.                12.9              7.32</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 08_0001_N… 2001-01-01              637.                22.1              7.21</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 08_0001_N… 2015-01-01              638.                30.5              9.99</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 08_0002_N… 1990-01-01              230.                16.9             11.0 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 08_0002_N… 2001-01-01              208.                18.0             11.6 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 08_0002_N… 2014-01-01              162.                16.3             14.1 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 08_0003_N… 1990-01-01              221.                 5.82             6.33</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 08_0003_N… 2001-01-01              604.                14.7              7.37</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 08_0003_N… 2015-01-01              827.                26.0              8.91</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 08_0004_N… 1990-01-01              138.                 4.64             8.09</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7,735 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: dominant_tree_height [m], dominant_tree_diameter [cm],</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   quadratic_mean_tree_diameter [cm], hart_becking_index [%]</span></span></span></code></pre></div>
 </div>

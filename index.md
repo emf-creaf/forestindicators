@@ -61,10 +61,10 @@ show_information("live_tree_basal_area")
 #> B.3) Plant-level static data: <NONE>
 #> B.4) Plant-level dynamic data:
 #> 
-#>  variable      type   units
-#>       dbh   numeric      cm
-#>         n   numeric ind./ha
-#>     state character       -
+#>  variable      type units
+#>       dbh   numeric    cm
+#>         n   numeric  ha-1
+#>     state character  <NA>
 #>                                                   description
 #>                                     diameter at breast height
 #>                                                       density
@@ -127,8 +127,10 @@ res
 
 Two *vignettes* are included
 [here](https://emf-creaf.github.io/forestindicators/articles/)
-illustrate: (1) how to use the R package to estimate indicators; and (2)
-how to define new indicators.
+illustrate:
+
+1.  How to use the R package to estimate indicators
+2.  How to define new indicators.
 
 ## Volume/biomass allometric functions
 
