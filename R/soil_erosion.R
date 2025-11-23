@@ -15,7 +15,8 @@
   ## Build a single data frame with all the required inputs
   df = stand_dynamic_input |>
     dplyr::select("id_stand", "date", "mean_precipitation", "canopy_cover") |>
-    dplyr::left_join(select(stand_static_input, "id_stand", "slope"), by = "id_stand")
+    dplyr::left_join(select(stand_static_input, "id_stand", "slope"), by = "id_stand") |>
+    units::drop_units()
 
   ## Compute soil erosion as mean_precipation * slope * k * (canopy_cover / 100)
   df$soil_erosion_01 = df$mean_precipitation * df$slope * (df$canopy_cover / 100) * k

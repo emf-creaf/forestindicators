@@ -10,7 +10,8 @@
   if(!max_tree_dbh >= 0) cli::cli_abort("'max_tree_dbh' should be a numeric positive value")
 
   ## Filter plant_dynamic_input by state = "dead" and DBH >= min_tree_dbh
-  plant_input <- plant_dynamic_input |>
+  plant_input <- plant_dynamic_input  |>
+    units::drop_units() |>
     dplyr::filter(state == "cut", dbh > min_tree_dbh)
 
   ## Summarize at the plot-level

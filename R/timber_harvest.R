@@ -7,7 +7,8 @@
 
   ## Filter plant_dynamic_input by state = "cut"
   plant_input <- plant_dynamic_input |>
-    dplyr::filter(state == "cut")
+    dplyr::filter(state == "cut") |>
+    units::drop_units()
 
   if(!is.na(min_tree_dbh)) {
     plant_input <- plant_input |>

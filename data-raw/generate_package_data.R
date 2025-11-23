@@ -11,6 +11,19 @@ additional_parameters <-as.data.frame(readxl::read_xlsx("data-raw/forestindicato
                                                       sheet="additional_parameters"), stringsAsFactors=FALSE) |>
   dplyr::arrange(indicator)
 
+
+# Check variable definition -----------------------------------------------
+
+# Check variable units
+for(i in 1:length(variable_definition$units)) {
+  u  <- variable_definition$units[i]
+  if(!is.na(u)) {
+    units::as_units(u, check_is_valid = TRUE)
+  }
+}
+
+# Check indicator definition --------------------------------------------------------
+
 # Check that functions exist
 for(i in 1:length(indicator_definition$indicator)) {
   indicator  <- indicator_definition$indicator[i]
@@ -25,8 +38,6 @@ for(i in 1:length(indicator_definition$indicator)) {
     units::as_units(u, check_is_valid = TRUE)
   }
 }
-
-
 
 # Check that variables cited in indicator definition are actually defined in variable definition
 .check_var<-function(varname, input) {
@@ -53,7 +64,7 @@ for(i in 1:nrow(indicator_definition)) {
   }
 }
 
-# Check that function additional parameters match data of additional_parameters  --------
+# Check that function additional parameters match data of additional_parameters
 for(i in 1:length(indicator_definition$indicator)) {
   indicator  <- indicator_definition$indicator[i]
   indicator_function_name <- paste0(".", indicator)

@@ -6,7 +6,8 @@
                                     excluded_species = NA, ...){
 
   plant_input <- plant_dynamic_input |>
-    dplyr::filter(state == "live")
+    dplyr::filter(state == "live") |>
+    units::drop_units()
 
   if(!is.na(min_tree_dbh)) {
     plant_input <- plant_input |>

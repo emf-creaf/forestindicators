@@ -18,7 +18,8 @@
 
   # First, filter the tree list for the living trees
   df <- plant_dynamic_input |>
-    dplyr::filter(state == "live")
+    dplyr::filter(state == "live") |>
+    units::drop_units()
 
   # Second, join the plant-level static variables required to compute this indicator
   df <- df |> dplyr::left_join(select(plant_static_input, id_stand, plant_entity, beautiness), by = c("id_stand", "plant_entity"))

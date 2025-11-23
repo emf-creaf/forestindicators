@@ -39,13 +39,18 @@ estimate_indicators(
 \item{verbose}{A logical flag to provide information on progress.}
 }
 \value{
-
+A \code{\link[tibble]{tibble}} with the following columns:
+  \itemize{
+    \item{\code{id_stand} - Stand identifier.}
+    \item{\code{date} - Date of indicator assessment.}
+    \item{\code{...} - Additional columns with names equal to strings given in \code{indicators}.}
+  }
 }
 \description{
 Estimates forest indicators for a given set of forest stands during a given set of dates of evaluation.
 }
 \details{
-Additional details...
+If columns of the input data frames have defined units, the package will check those against the units of the required variables
 }
 \examples{
 ## Use functions show_information() and available_indicators() to learn

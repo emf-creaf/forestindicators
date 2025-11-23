@@ -26,7 +26,8 @@
 
   ## Filter plant_dynamic_input by state
   plant_input <- plant_dynamic_input |>
-    dplyr::filter(state == "live")
+    dplyr::filter(state == "live") |>
+    units::drop_units()
 
   df <- plant_input |>
     dplyr::group_by(id_stand, date) |>

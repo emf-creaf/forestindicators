@@ -5,7 +5,8 @@
 
   ## Filter plant_dynamic_input by state
   plant_input <- plant_dynamic_input |>
-    dplyr::filter(state == tree_state)
+    dplyr::filter(state == tree_state) |>
+    units::drop_units()
 
   ## Compute basal area at the tree-cohort level
   plant_input <- plant_input |>

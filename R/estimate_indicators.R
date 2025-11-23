@@ -13,7 +13,7 @@
 #' @param include_units A logical flag to include output units for indicators.
 #' @param verbose A logical flag to provide information on progress.
 #'
-#' @returns A \code{\link[tibble]{tibble} with the following columns:
+#' @returns A \code{\link[tibble]{tibble}} with the following columns:
 #'   \itemize{
 #'     \item{\code{id_stand} - Stand identifier.}
 #'     \item{\code{date} - Date of indicator assessment.}
@@ -21,7 +21,9 @@
 #'   }
 #'
 #' @details
-#' Additional details...
+#' If columns of the input data frames have defined units, the package will check those against the units of the required variables
+#'
+#'
 #' @seealso \code{\link{available_indicators}}, \code{\link{show_information}}
 #' @examples
 #' ## Use functions show_information() and available_indicators() to learn
@@ -63,8 +65,6 @@ estimate_indicators <- function(indicators,
     if(!inherits(additional_params, "list")) cli::cli_abort("'additional_params' should be a named list")
   }
 
-
-
   # For each valid indicator
   result <- NULL
   for(i in 1:length(indicators)) {
@@ -80,6 +80,7 @@ estimate_indicators <- function(indicators,
     indicator_function_name <- paste0(".", indicator)
     if(!exists(indicator_function_name)) cli::cli_abort(paste0("Function '", indicator_function_name," not found!"))
     indicator_function <- get(indicator_function_name)
+
 
     if(verbose) cli::cli_progress_step(paste0("Processing '", indicator,"'."))
     argList <- list(stand_static_input = stand_static_input,

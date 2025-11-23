@@ -96,10 +96,25 @@ available_indicators<-function(stand_static_input = NULL,
   if(type =="logical") if(!is.logical(vector)) {
     if(estimation) {
       cli::cli_abort(paste0("Variable '",varname,"' in ", input, " should be logical"))
-    }     else {
+    } else {
       return(FALSE)
     }
   }
+  var_units <- variable_definition$units[variable_definition$variable == varname]
+  if(!is.na(var_units)) {
+    if(inherits(vector, "units")) {
+      # print(paste(deparse_unit(vector), var_units))
+      if(units::deparse_unit(vector)!=var_units) {
+        if(estimation) {
+          cli::cli_abort(paste0("Variable '",varname,"' in ", input, " should have units: '", var_units, "'"))
+        } else {
+          return(FALSE)
+        }
+      }
+    }
+  }
+
+
   return(TRUE)
 }
 
