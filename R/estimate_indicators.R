@@ -13,7 +13,7 @@
 #' @param include_units A logical flag to include output units for indicators.
 #' @param verbose A logical flag to provide information on progress.
 #'
-#' @returns A data frame with the following columns:
+#' @returns A \code{\link[tibble]{tibble} with the following columns:
 #'   \itemize{
 #'     \item{\code{id_stand} - Stand identifier.}
 #'     \item{\code{date} - Date of indicator assessment.}
@@ -95,9 +95,9 @@ estimate_indicators <- function(indicators,
 
     if(include_units) {
       ind_units <- .get_output_units(indicator)
-      v <- indicator_table[[indicator]]
-      units(v)  <- ind_units
-      indicator_table[[indicator]] <- v
+      if(!is.na(ind_units)) {
+        indicator_table[[indicator]] <- units::set_units(indicator_table[[indicator]], ind_units, mode = "standard")
+      }
     }
 
     if(is.null(result)) {

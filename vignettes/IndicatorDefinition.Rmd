@@ -52,8 +52,8 @@ In order to define new indicators, you need to *fork* the GitHub repository to y
 
 The new indicator needs to be described in data table `indicator_definition`, providing at minimum:
 
- + Name
- + Output units
+ + Indicator name, using multiple words separated by `_`, if necessary.
+ + Valid output units, if not unit less.
  + Person responsible of its implementation in the package, who is to be contacted in case of issues/doubts.
  + Variable names required for its estimation (see below).
 

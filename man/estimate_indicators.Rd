@@ -39,12 +39,7 @@ estimate_indicators(
 \item{verbose}{A logical flag to provide information on progress.}
 }
 \value{
-A data frame with the following columns:
-  \itemize{
-    \item{\code{id_stand} - Stand identifier.}
-    \item{\code{date} - Date of indicator assessment.}
-    \item{\code{...} - Additional columns with names equal to strings given in \code{indicators}.}
-  }
+
 }
 \description{
 Estimates forest indicators for a given set of forest stands during a given set of dates of evaluation.

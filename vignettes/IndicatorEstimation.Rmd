@@ -114,7 +114,7 @@ The first step is to decide which indicators are to be estimated. The list of al
 available_indicators(plant_dynamic_input = example_plant_dynamic_input)
 ```
 
-Say we decide to estimate the *timber harvest volume* (i.e. indicator `"timber_harvest"`) and the *density of dead wood* (i.e. indicator `"density_dead_wood"`).
+Say we decide to estimate the *timber harvest volume* (i.e. indicator `"timber_harvest"`) and the *basal area of living trees* (i.e. indicator `"live_tree_basal_area"`).
 
 We may need to check which data inputs are required, their units, etc. We can find this information using function `show_information()`, for example:
 
@@ -131,7 +131,7 @@ We will normally need to define additional parameters to fine-tune the estimatio
 
 ```{r}
 params <- list(timber_harvest = list(province = 8),
-               density_dead_wood = list(max_tree_dbh = 20))
+               live_tree_basal_area = list(min_tree_dbh = 5))
 ```
 
 ### Step 3: Call general estimation function
@@ -139,7 +139,7 @@ params <- list(timber_harvest = list(province = 8),
 Once we have our inputs ready, the indicators are estimated by calling function `estimate_indicators()` as follows:
 
 ```{r}
-res <- estimate_indicators(indicators = c("timber_harvest", "density_dead_wood"),
+res <- estimate_indicators(indicators = c("timber_harvest", "live_tree_basal_area"),
                            plant_dynamic_input = example_plant_dynamic_input,
                            timber_volume_function = IFNallometry::IFNvolume_forestindicators,
                            additional_params = params)
@@ -151,6 +151,18 @@ The result of the estimation is the following:
 ```{r}
 res
 ```
+
+When calling `estimate_indicators`, we can force the inclusion of indicator units in the output tibble:
+
+```{r}
+estimate_indicators(indicators = c("timber_harvest", "live_tree_basal_area"),
+                    plant_dynamic_input = example_plant_dynamic_input,
+                    timber_volume_function = IFNallometry::IFNvolume_forestindicators,
+                    additional_params = params,
+                    include_units = TRUE,
+                    verbose = FALSE)
+```
+
 
 ## Example with data from forestables
 
@@ -200,6 +212,7 @@ estimate_indicators(c("live_tree_density",
                       "quadratic_mean_tree_diameter",
                       "hart_becking_index"), 
                     plant_dynamic_input = x, 
+                    include_units = TRUE,
                     verbose = FALSE)
 ```
 

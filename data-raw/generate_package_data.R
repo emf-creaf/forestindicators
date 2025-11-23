@@ -18,6 +18,16 @@ for(i in 1:length(indicator_definition$indicator)) {
   if(!exists(indicator_function_name, envir = getNamespace("forestindicators"))) cli::cli_abort(paste0("Function '", indicator_function_name," not found!"))
 }
 
+# Check that units are correct
+for(i in 1:length(indicator_definition$indicator)) {
+  u  <- indicator_definition$output_units[i]
+  if(!is.na(u)) {
+    units::as_units(u, check_is_valid = TRUE)
+  }
+}
+
+
+
 # Check that variables cited in indicator definition are actually defined in variable definition
 .check_var<-function(varname, input) {
   if(!(varname %in% variable_definition$variable)) cli::cli_abort(paste0("Variable '",varname,"' of ", input ," not found in variable definition!"))
