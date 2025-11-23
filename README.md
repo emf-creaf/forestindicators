@@ -129,8 +129,10 @@ res
 
 Two *vignettes* are included
 [here](https://emf-creaf.github.io/forestindicators/articles/)
-illustrate: (1) how to use the R package to estimate indicators; and (2)
-how to define new indicators.
+illustrate:
+
+1.  How to use the R package to estimate indicators
+2.  How to define new indicators.
 
 ## Volume/biomass allometric functions
 
