@@ -127,13 +127,14 @@ forestindicators:::.dominant_tree_height
 #> 
 #>   df <- plant_input |>
 #>     dplyr::group_by(id_stand, date) |>
+#>     dplyr::filter(!is.na(n), !is.na(dbh), !is.na(h)) |>
 #>     dplyr::summarise(dominant_tree_height = .dth(n, h, dbh, min_tree_dbh = min_tree_dbh))
 #> 
 #>   ## Return the output data frame
 #>   res <- df |> dplyr::select(id_stand, date, dominant_tree_height)
 #>   return(res)
 #> }
-#> <bytecode: 0x637c655635b0>
+#> <bytecode: 0x5a74ecea6120>
 #> <environment: namespace:forestindicators>
 ```
 

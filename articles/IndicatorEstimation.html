@@ -405,12 +405,12 @@ calling function <code><a href="../reference/estimate_indicators.html">estimate_
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Processing 'timber_harvest'.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking inputs for 'live_tree_basal_area'.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking inputs for 'live_tree_basal_area'. <span style="color: #B2B2B2;">[9ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking inputs for 'live_tree_basal_area'. <span style="color: #B2B2B2;">[10ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Processing 'timber_harvest'.<span style="color: #00BB00;">✔</span> Processing 'timber_harvest'. <span style="color: #B2B2B2;">[142ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Processing 'timber_harvest'.<span style="color: #00BB00;">✔</span> Processing 'timber_harvest'. <span style="color: #B2B2B2;">[133ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Processing 'live_tree_basal_area'.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Processing 'live_tree_basal_area'. <span style="color: #B2B2B2;">[24ms]</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Processing 'live_tree_basal_area'. <span style="color: #B2B2B2;">[25ms]</span></span></span></code></pre></div>
 <p>Note that <code>"timber_harvest"</code> requires specifying the
 function to be used to calculate timber volumes,
 i.e. <code>timber_volume_function</code>, for which in our case we use a
@@ -482,20 +482,21 @@ suitable for <strong>forestindicators</strong>:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/forestables2forestindicators.html">forestables2forestindicators</a></span><span class="op">(</span><span class="va">ifn_output_example</span>, version <span class="op">=</span> <span class="st">"ifn2"</span><span class="op">)</span></span>
 <span><span class="va">x</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 146,612 × 8</span></span></span>
-<span><span class="co">#&gt;    id_stand         date       province plant_entity       n   dbh     h state</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata  31.8  18.9   7.5 live </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata  14.1  29.2   7.5 live </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata  14.1  23.9   9.5 live </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata  14.1  23.7   7   live </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata  14.1  32.7   8   live </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata  31.8  13.7   8   live </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata  31.8  15.7   8   live </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata 127.    7.7   4.5 live </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata  14.1  26.1  10   live </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata  31.8  20.3   9   live </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 146,602 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 47,480 × 10</span></span></span>
+<span><span class="co">#&gt;    id_stand       date       province plant_entity     n   dbh     h cubing_form</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 08_0001_NN_A1… 1990-01-01        8 Pinus uncin…  31.8  18.9   7.5 2          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 08_0001_NN_A1… 1990-01-01        8 Pinus uncin…  14.1  29.2   7.5 2          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 08_0001_NN_A1… 1990-01-01        8 Pinus uncin…  14.1  23.9   9.5 2          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 08_0001_NN_A1… 1990-01-01        8 Pinus uncin…  14.1  23.7   7   5          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 08_0001_NN_A1… 1990-01-01        8 Pinus uncin…  14.1  32.7   8   2          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 08_0001_NN_A1… 1990-01-01        8 Pinus uncin…  31.8  13.7   8   2          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 08_0001_NN_A1… 1990-01-01        8 Pinus uncin…  31.8  15.7   8   2          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 08_0001_NN_A1… 1990-01-01        8 Pinus uncin… 127.    7.7   4.5 3          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 08_0001_NN_A1… 1990-01-01        8 Pinus uncin…  14.1  26.1  10   2          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 08_0001_NN_A1… 1990-01-01        8 Pinus uncin…  31.8  20.3   9   2          </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 47,470 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: quality_wood &lt;chr&gt;, state &lt;chr&gt;</span></span></span></code></pre></div>
 <p>We now determine the indicators that can be evaluated with this data
 set:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
@@ -521,20 +522,20 @@ the desired indicators:</p>
 <span>                    plant_dynamic_input <span class="op">=</span> <span class="va">x</span>, </span>
 <span>                    include_units <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                    verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7,745 × 9</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2,972 × 9</span></span></span>
 <span><span class="co">#&gt;    id_stand   date       live_tree_density live_tree_basal_area mean_tree_height</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                <span style="color: #949494;">[1/ha]</span>             <span style="color: #949494;">[m^2/ha]</span>              <span style="color: #949494;">[m]</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 08_0001_N… 1990-01-01              460.                12.9              7.32</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 08_0001_N… 2001-01-01              637.                22.1              7.21</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 08_0001_N… 2015-01-01              638.                30.5              9.99</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 08_0002_N… 1990-01-01              230.                16.9             11.0 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 08_0002_N… 2001-01-01              208.                18.0             11.6 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 08_0002_N… 2014-01-01              162.                16.3             14.1 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 08_0003_N… 1990-01-01              221.                 5.82             6.33</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 08_0003_N… 2001-01-01              604.                14.7              7.37</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 08_0003_N… 2015-01-01              827.                26.0              8.91</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 08_0004_N… 1990-01-01              138.                 4.64             8.09</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7,735 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 08_0002_N… 1990-01-01              230.                16.9             11.0 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 08_0003_N… 1990-01-01              221.                 5.82             6.33</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 08_0004_N… 1990-01-01              138.                 4.64             8.09</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 08_0005_N… 1990-01-01              391.                12.1              8.11</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 08_0006_N… 1990-01-01              351.                25.2             10.3 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 08_0007_N… 1990-01-01              807.                34.4              9.81</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 08_0008_N… 1990-01-01              446.                 6.27             5.04</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 08_0009_N… 1990-01-01             <span style="text-decoration: underline;">1</span>107.                15.0              5.78</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 08_0010_N… 1990-01-01              532.                15.7              8.95</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2,962 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: dominant_tree_height [m], dominant_tree_diameter [cm],</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   quadratic_mean_tree_diameter [cm], hart_becking_index [%]</span></span></span></code></pre></div>
 </div>

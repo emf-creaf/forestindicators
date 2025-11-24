@@ -204,13 +204,14 @@ parameter:</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   df &lt;- plant_input |&gt;</span></span>
 <span><span class="co">#&gt;     dplyr::group_by(id_stand, date) |&gt;</span></span>
+<span><span class="co">#&gt;     dplyr::filter(!is.na(n), !is.na(dbh), !is.na(h)) |&gt;</span></span>
 <span><span class="co">#&gt;     dplyr::summarise(dominant_tree_height = .dth(n, h, dbh, min_tree_dbh = min_tree_dbh))</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   ## Return the output data frame</span></span>
 <span><span class="co">#&gt;   res &lt;- df |&gt; dplyr::select(id_stand, date, dominant_tree_height)</span></span>
 <span><span class="co">#&gt;   return(res)</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x637c655635b0&gt;</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x5a74ecea6120&gt;</span></span>
 <span><span class="co">#&gt; &lt;environment: namespace:forestindicators&gt;</span></span></code></pre></div>
 </div>
 <div class="section level3">

@@ -337,12 +337,12 @@ res <- estimate_indicators(indicators = c("timber_harvest", "live_tree_basal_are
 #> 
 #> ℹ Processing 'timber_harvest'.
 #> ℹ Checking inputs for 'live_tree_basal_area'.
-#> ✔ Checking inputs for 'live_tree_basal_area'. [9ms]
+#> ✔ Checking inputs for 'live_tree_basal_area'. [10ms]
 #> 
-#> ℹ Processing 'timber_harvest'.✔ Processing 'timber_harvest'. [142ms]
+#> ℹ Processing 'timber_harvest'.✔ Processing 'timber_harvest'. [133ms]
 #> 
 #> ℹ Processing 'live_tree_basal_area'.
-#> ✔ Processing 'live_tree_basal_area'. [24ms]
+#> ✔ Processing 'live_tree_basal_area'. [25ms]
 ```
 
 Note that `"timber_harvest"` requires specifying the function to be used
@@ -425,20 +425,21 @@ frames suitable for **forestindicators**:
 ``` r
 x <- forestables2forestindicators(ifn_output_example, version = "ifn2")
 x
-#> # A tibble: 146,612 × 8
-#>    id_stand         date       province plant_entity       n   dbh     h state
-#>    <chr>            <date>        <dbl> <chr>          <dbl> <dbl> <dbl> <chr>
-#>  1 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata  31.8  18.9   7.5 live 
-#>  2 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata  14.1  29.2   7.5 live 
-#>  3 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata  14.1  23.9   9.5 live 
-#>  4 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata  14.1  23.7   7   live 
-#>  5 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata  14.1  32.7   8   live 
-#>  6 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata  31.8  13.7   8   live 
-#>  7 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata  31.8  15.7   8   live 
-#>  8 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata 127.    7.7   4.5 live 
-#>  9 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata  14.1  26.1  10   live 
-#> 10 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata  31.8  20.3   9   live 
-#> # ℹ 146,602 more rows
+#> # A tibble: 47,480 × 10
+#>    id_stand       date       province plant_entity     n   dbh     h cubing_form
+#>    <chr>          <date>        <dbl> <chr>        <dbl> <dbl> <dbl> <chr>      
+#>  1 08_0001_NN_A1… 1990-01-01        8 Pinus uncin…  31.8  18.9   7.5 2          
+#>  2 08_0001_NN_A1… 1990-01-01        8 Pinus uncin…  14.1  29.2   7.5 2          
+#>  3 08_0001_NN_A1… 1990-01-01        8 Pinus uncin…  14.1  23.9   9.5 2          
+#>  4 08_0001_NN_A1… 1990-01-01        8 Pinus uncin…  14.1  23.7   7   5          
+#>  5 08_0001_NN_A1… 1990-01-01        8 Pinus uncin…  14.1  32.7   8   2          
+#>  6 08_0001_NN_A1… 1990-01-01        8 Pinus uncin…  31.8  13.7   8   2          
+#>  7 08_0001_NN_A1… 1990-01-01        8 Pinus uncin…  31.8  15.7   8   2          
+#>  8 08_0001_NN_A1… 1990-01-01        8 Pinus uncin… 127.    7.7   4.5 3          
+#>  9 08_0001_NN_A1… 1990-01-01        8 Pinus uncin…  14.1  26.1  10   2          
+#> 10 08_0001_NN_A1… 1990-01-01        8 Pinus uncin…  31.8  20.3   9   2          
+#> # ℹ 47,470 more rows
+#> # ℹ 2 more variables: quality_wood <chr>, state <chr>
 ```
 
 We now determine the indicators that can be evaluated with this data
@@ -471,20 +472,20 @@ estimate_indicators(c("live_tree_density",
                     plant_dynamic_input = x, 
                     include_units = TRUE,
                     verbose = FALSE)
-#> # A tibble: 7,745 × 9
+#> # A tibble: 2,972 × 9
 #>    id_stand   date       live_tree_density live_tree_basal_area mean_tree_height
 #>    <chr>      <date>                [1/ha]             [m^2/ha]              [m]
 #>  1 08_0001_N… 1990-01-01              460.                12.9              7.32
-#>  2 08_0001_N… 2001-01-01              637.                22.1              7.21
-#>  3 08_0001_N… 2015-01-01              638.                30.5              9.99
-#>  4 08_0002_N… 1990-01-01              230.                16.9             11.0 
-#>  5 08_0002_N… 2001-01-01              208.                18.0             11.6 
-#>  6 08_0002_N… 2014-01-01              162.                16.3             14.1 
-#>  7 08_0003_N… 1990-01-01              221.                 5.82             6.33
-#>  8 08_0003_N… 2001-01-01              604.                14.7              7.37
-#>  9 08_0003_N… 2015-01-01              827.                26.0              8.91
-#> 10 08_0004_N… 1990-01-01              138.                 4.64             8.09
-#> # ℹ 7,735 more rows
+#>  2 08_0002_N… 1990-01-01              230.                16.9             11.0 
+#>  3 08_0003_N… 1990-01-01              221.                 5.82             6.33
+#>  4 08_0004_N… 1990-01-01              138.                 4.64             8.09
+#>  5 08_0005_N… 1990-01-01              391.                12.1              8.11
+#>  6 08_0006_N… 1990-01-01              351.                25.2             10.3 
+#>  7 08_0007_N… 1990-01-01              807.                34.4              9.81
+#>  8 08_0008_N… 1990-01-01              446.                 6.27             5.04
+#>  9 08_0009_N… 1990-01-01             1107.                15.0              5.78
+#> 10 08_0010_N… 1990-01-01              532.                15.7              8.95
+#> # ℹ 2,962 more rows
 #> # ℹ 4 more variables: dominant_tree_height [m], dominant_tree_diameter [cm],
 #> #   quadratic_mean_tree_diameter [cm], hart_becking_index [%]
 ```
