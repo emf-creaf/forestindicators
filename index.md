@@ -83,10 +83,15 @@ show_information("live_tree_basal_area")
 
 Once the requested format and content of inputs is know, it is the
 responsibility of the user to build the necessary data frames to be used
-as inputs. We will normally need to define additional parameters to
-fine-tune the estimation of indicators, For that, we define a **named
-list** where each element corresponds to a different indicator and, in
-turn, contains a named list of parameters:
+as inputs. Variable names and types should follow the guidelines of
+[`show_information()`](https://emf-creaf.github.io/forestindicators/reference/show_information.md).
+Variable units can be specified using package **units** (and in this
+case unit correspondence will be checked), but they are not compulsory.
+
+We will sometimes need to define additional parameters to fine-tune the
+estimation of indicators. For that, users should define a **named list**
+where each element corresponds to a different indicator and, in turn,
+contains a named list of parameters, e.g.:
 
 ``` r
 params <- list(live_tree_basal_area = list(min_dbh = 8),
@@ -122,6 +127,9 @@ res
 #> 5 080005   2025-02-01                171.               2249
 #> 6 080005   2025-03-01                151.               1885
 ```
+
+Parameter `include_units` was set to `TRUE` to include indicator output
+units in the resulting `tibble`.
 
 ## Documentation and training
 

@@ -60,7 +60,7 @@
                         <h4 data-toc-skip class="author">Miquel De
 Cáceres / Núria Aquilué</h4>
             
-            <h4 data-toc-skip class="date">2025-11-23</h4>
+            <h4 data-toc-skip class="date">2025-11-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/emf-creaf/forestindicators/blob/HEAD/vignettes/IndicatorEstimation.Rmd" class="external-link"><code>vignettes/IndicatorEstimation.Rmd</code></a></small>
       <div class="d-none name"><code>IndicatorEstimation.Rmd</code></div>
@@ -314,12 +314,14 @@ data by calling function <code><a href="../reference/available_indicators.html">
 <span><span class="co">#&gt; [11] "live_tree_carbon_stock"       "live_tree_density"           </span></span>
 <span><span class="co">#&gt; [13] "live_tree_volume_stock"       "mean_tree_height"            </span></span>
 <span><span class="co">#&gt; [15] "quadratic_mean_tree_diameter" "timber_harvest"</span></span></code></pre></div>
+<p>Note that if variable names (or variable units) are incorrectly
+specified, then the available indicator list may be shorter than
+expected.</p>
 <p>Say we decide to estimate the <em>timber harvest volume</em>
 (i.e. indicator <code>"timber_harvest"</code>) and the <em>basal area of
-living trees</em> (i.e. indicator
-<code>"live_tree_basal_area"</code>).</p>
-<p>We may need to check which data inputs are required, their units,
-etc. We can find this information using function
+living trees</em> (i.e. indicator <code>"live_tree_basal_area"</code>).
+We may need to check which data inputs are required, their units, etc.
+We can find this information using function
 <code><a href="../reference/show_information.html">show_information()</a></code>, for example:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/show_information.html">show_information</a></span><span class="op">(</span><span class="st">"timber_harvest"</span><span class="op">)</span></span>
@@ -371,7 +373,10 @@ parameters<a class="anchor" aria-label="anchor" href="#step-2-assemble-inputs-an
 </h3>
 <p>Once the requested format and content of inputs is know, it is the
 responsibility of the user to build the necessary data frames to be used
-as inputs. In our case, we will use
+as inputs. Variable names and types should follow the guidelines of
+<code><a href="../reference/show_information.html">show_information()</a></code>. Variable units can be specified using
+package <strong>units</strong> (and in this case unit correspondence
+will be checked), but they are not compulsory. In our case, we will use
 <code>example_plant_dynamic_input</code> that already contains the
 necessary data for the estimation of the two indicators.</p>
 <p>We will normally need to define additional parameters to fine-tune
@@ -396,7 +401,7 @@ calling function <code><a href="../reference/estimate_indicators.html">estimate_
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking inputs for 'timber_harvest'.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking inputs for 'timber_harvest'. <span style="color: #B2B2B2;">[5ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking overall inputs<span style="color: #00BB00;">✔</span> Checking overall inputs <span style="color: #B2B2B2;">[31ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking overall inputs<span style="color: #00BB00;">✔</span> Checking overall inputs <span style="color: #B2B2B2;">[28ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Processing 'timber_harvest'.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Checking inputs for 'live_tree_basal_area'.</span></span>
@@ -409,7 +414,7 @@ calling function <code><a href="../reference/estimate_indicators.html">estimate_
 <p>Note that <code>"timber_harvest"</code> requires specifying the
 function to be used to calculate timber volumes,
 i.e. <code>timber_volume_function</code>, for which in our case we use a
-predefined package function.</p>
+predefined function from package <a href="https://emf-creaf.github.io/IFNallometry/" class="external-link"><strong>IFNallometry</strong></a>.</p>
 <p>The result of the estimation is the following:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res</span></span>
@@ -445,6 +450,8 @@ inclusion of indicator units in the output tibble:</p>
 <div class="section level2">
 <h2 id="example-with-data-from-forestables">Example with data from forestables<a class="anchor" aria-label="anchor" href="#example-with-data-from-forestables"></a>
 </h2>
+<p>Let us now present a more real example case. We will use forest
+inventory data generated from package <a href="https://emf-creaf.github.io/forestables/" class="external-link"><strong>forestables</strong></a>:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://emf-creaf.github.io/forestables/" class="external-link">forestables</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Loading required package: data.table</span></span>
@@ -468,10 +475,13 @@ inclusion of indicator units in the output tibble:</p>
 <span><span class="co">#&gt; <span style="color: #949494;">#   subclass &lt;chr&gt;, province_code &lt;chr&gt;, province_name_original &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   ca_name_original &lt;chr&gt;, sheet_ntm &lt;chr&gt;, huso &lt;dbl&gt;, slope_mean &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   type &lt;int&gt;, tree &lt;list&gt;, understory &lt;list&gt;, regen &lt;list&gt;</span></span></span></code></pre></div>
+<p>A wrapper function, called
+<code><a href="../reference/forestables2forestindicators.html">forestables2forestindicators()</a></code> has been included to
+transform <strong>forestables</strong> output objects into data frames
+suitable for <strong>forestindicators</strong>:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/forestables2forestindicators.html">forestables2forestindicators</a></span><span class="op">(</span><span class="va">ifn_output_example</span>, version <span class="op">=</span> <span class="st">"ifn2"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x</span></span>
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/forestables2forestindicators.html">forestables2forestindicators</a></span><span class="op">(</span><span class="va">ifn_output_example</span>, version <span class="op">=</span> <span class="st">"ifn2"</span><span class="op">)</span></span>
+<span><span class="va">x</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 146,612 × 8</span></span></span>
 <span><span class="co">#&gt;    id_stand         date       province plant_entity       n   dbh     h state</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
@@ -486,7 +496,9 @@ inclusion of indicator units in the output tibble:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata  14.1  26.1  10   live </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 08_0001_NN_A1_A1 1990-01-01        8 Pinus uncinata  31.8  20.3   9   live </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 146,602 more rows</span></span></span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<p>We now determine the indicators that can be evaluated with this data
+set:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/available_indicators.html">available_indicators</a></span><span class="op">(</span>plant_dynamic_input <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "cut_tree_basal_area"          "cut_tree_density"            </span></span>
 <span><span class="co">#&gt;  [3] "dead_tree_basal_area"         "dead_tree_density"           </span></span>
@@ -496,7 +508,9 @@ inclusion of indicator units in the output tibble:</p>
 <span><span class="co">#&gt; [11] "live_tree_carbon_stock"       "live_tree_density"           </span></span>
 <span><span class="co">#&gt; [13] "live_tree_volume_stock"       "mean_tree_height"            </span></span>
 <span><span class="co">#&gt; [15] "quadratic_mean_tree_diameter" "timber_harvest"</span></span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<p>And finally make a call to <code><a href="../reference/estimate_indicators.html">estimate_indicators()</a></code> with
+the desired indicators:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/estimate_indicators.html">estimate_indicators</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"live_tree_density"</span>, </span>
 <span>                      <span class="st">"live_tree_basal_area"</span>,</span>
 <span>                      <span class="st">"mean_tree_height"</span>,</span>

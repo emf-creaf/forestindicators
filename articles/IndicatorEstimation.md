@@ -240,12 +240,14 @@ available_indicators(plant_dynamic_input = example_plant_dynamic_input)
 #> [15] "quadratic_mean_tree_diameter" "timber_harvest"
 ```
 
+Note that if variable names (or variable units) are incorrectly
+specified, then the available indicator list may be shorter than
+expected.
+
 Say we decide to estimate the *timber harvest volume* (i.e. indicator
 `"timber_harvest"`) and the *basal area of living trees* (i.e. indicator
-`"live_tree_basal_area"`).
-
-We may need to check which data inputs are required, their units, etc.
-We can find this information using function
+`"live_tree_basal_area"`). We may need to check which data inputs are
+required, their units, etc. We can find this information using function
 [`show_information()`](https://emf-creaf.github.io/forestindicators/reference/show_information.md),
 for example:
 
@@ -298,9 +300,12 @@ show_information("timber_harvest")
 
 Once the requested format and content of inputs is know, it is the
 responsibility of the user to build the necessary data frames to be used
-as inputs. In our case, we will use `example_plant_dynamic_input` that
-already contains the necessary data for the estimation of the two
-indicators.
+as inputs. Variable names and types should follow the guidelines of
+[`show_information()`](https://emf-creaf.github.io/forestindicators/reference/show_information.md).
+Variable units can be specified using package **units** (and in this
+case unit correspondence will be checked), but they are not compulsory.
+In our case, we will use `example_plant_dynamic_input` that already
+contains the necessary data for the estimation of the two indicators.
 
 We will normally need to define additional parameters to fine-tune the
 estimation of indicators, For that, we define a **named list** where
@@ -328,7 +333,7 @@ res <- estimate_indicators(indicators = c("timber_harvest", "live_tree_basal_are
 #> ℹ Checking inputs for 'timber_harvest'.
 #> ✔ Checking inputs for 'timber_harvest'. [5ms]
 #> 
-#> ℹ Checking overall inputs✔ Checking overall inputs [31ms]
+#> ℹ Checking overall inputs✔ Checking overall inputs [28ms]
 #> 
 #> ℹ Processing 'timber_harvest'.
 #> ℹ Checking inputs for 'live_tree_basal_area'.
@@ -342,7 +347,8 @@ res <- estimate_indicators(indicators = c("timber_harvest", "live_tree_basal_are
 
 Note that `"timber_harvest"` requires specifying the function to be used
 to calculate timber volumes, i.e. `timber_volume_function`, for which in
-our case we use a predefined package function.
+our case we use a predefined function from package
+[**IFNallometry**](https://emf-creaf.github.io/IFNallometry/).
 
 The result of the estimation is the following:
 
@@ -382,6 +388,10 @@ estimate_indicators(indicators = c("timber_harvest", "live_tree_basal_area"),
 
 ## Example with data from forestables
 
+Let us now present a more real example case. We will use forest
+inventory data generated from package
+[**forestables**](https://emf-creaf.github.io/forestables/):
+
 ``` r
 library(forestables)
 #> Loading required package: data.table
@@ -407,11 +417,13 @@ ifn_output_example
 #> #   type <int>, tree <list>, understory <list>, regen <list>
 ```
 
-``` r
-x <- forestables2forestindicators(ifn_output_example, version = "ifn2")
-```
+A wrapper function, called
+[`forestables2forestindicators()`](https://emf-creaf.github.io/forestindicators/reference/forestables2forestindicators.md)
+has been included to transform **forestables** output objects into data
+frames suitable for **forestindicators**:
 
 ``` r
+x <- forestables2forestindicators(ifn_output_example, version = "ifn2")
 x
 #> # A tibble: 146,612 × 8
 #>    id_stand         date       province plant_entity       n   dbh     h state
@@ -429,6 +441,9 @@ x
 #> # ℹ 146,602 more rows
 ```
 
+We now determine the indicators that can be evaluated with this data
+set:
+
 ``` r
 available_indicators(plant_dynamic_input = x)
 #>  [1] "cut_tree_basal_area"          "cut_tree_density"            
@@ -440,6 +455,10 @@ available_indicators(plant_dynamic_input = x)
 #> [13] "live_tree_volume_stock"       "mean_tree_height"            
 #> [15] "quadratic_mean_tree_diameter" "timber_harvest"
 ```
+
+And finally make a call to
+[`estimate_indicators()`](https://emf-creaf.github.io/forestindicators/reference/estimate_indicators.md)
+with the desired indicators:
 
 ``` r
 estimate_indicators(c("live_tree_density", 

@@ -125,7 +125,8 @@
 <div class="section level3">
 <h3 id="step-2-assemble-inputs-and-define-values-for-additional-parameters">Step 2: Assemble inputs and define values for additional parameters<a class="anchor" aria-label="anchor" href="#step-2-assemble-inputs-and-define-values-for-additional-parameters"></a>
 </h3>
-<p>Once the requested format and content of inputs is know, it is the responsibility of the user to build the necessary data frames to be used as inputs. We will normally need to define additional parameters to fine-tune the estimation of indicators, For that, we define a <strong>named list</strong> where each element corresponds to a different indicator and, in turn, contains a named list of parameters:</p>
+<p>Once the requested format and content of inputs is know, it is the responsibility of the user to build the necessary data frames to be used as inputs. Variable names and types should follow the guidelines of <code><a href="reference/show_information.html">show_information()</a></code>. Variable units can be specified using package <strong>units</strong> (and in this case unit correspondence will be checked), but they are not compulsory.</p>
+<p>We will sometimes need to define additional parameters to fine-tune the estimation of indicators. For that, users should define a <strong>named list</strong> where each element corresponds to a different indicator and, in turn, contains a named list of parameters, e.g.:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>live_tree_basal_area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>min_dbh <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>,</span>
 <span>               live_tree_density <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>min_dbh <span class="op">=</span> <span class="fl">8</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -152,6 +153,7 @@
 <span><span class="co">#&gt; 4 080005   2025-01-01                 79.3              1489</span></span>
 <span><span class="co">#&gt; 5 080005   2025-02-01                171.               2249</span></span>
 <span><span class="co">#&gt; 6 080005   2025-03-01                151.               1885</span></span></code></pre></div>
+<p>Parameter <code>include_units</code> was set to <code>TRUE</code> to include indicator output units in the resulting <code>tibble</code>.</p>
 </div>
 </div>
 <div class="section level2">
