@@ -116,10 +116,10 @@ available_indicators(plant_dynamic_input = example_plant_dynamic_input)
 
 Note that if variable names (or variable units) are incorrectly specified, then the available indicator list may be shorter than expected. 
 
-Say we decide to estimate the *timber harvest volume* (i.e. indicator `"timber_harvest"`) and the *basal area of living trees* (i.e. indicator `"live_tree_basal_area"`). We may need to check which data inputs are required, their units, etc. We can find this information using function `show_information()`, for example:
+Say we decide to estimate the *timber harvest volume* (i.e. indicator `"timber_harvest_volume"`) and the *basal area of living trees* (i.e. indicator `"live_tree_basal_area"`). We may need to check which data inputs are required, their units, etc. We can find this information using function `show_information()`, for example:
 
 ```{r}
-show_information("timber_harvest")
+show_information("timber_harvest_volume")
 ```
 
 
@@ -130,7 +130,7 @@ Once the requested format and content of inputs is know, it is the responsibilit
 We will normally need to define additional parameters to fine-tune the estimation of indicators, For that, we define a **named list** where each element corresponds to a different indicator and, in turn, contains a named list of parameters. In our case:
 
 ```{r}
-params <- list(timber_harvest = list(province = 8),
+params <- list(timber_harvest_volume = list(province = 8),
                live_tree_basal_area = list(min_tree_dbh = 5))
 ```
 
@@ -139,29 +139,45 @@ params <- list(timber_harvest = list(province = 8),
 Once we have our inputs ready, the indicators are estimated by calling function `estimate_indicators()` as follows:
 
 ```{r}
-res <- estimate_indicators(indicators = c("timber_harvest", "live_tree_basal_area"),
+res <- estimate_indicators(indicators = c("timber_harvest_volume", "live_tree_basal_area"),
                            plant_dynamic_input = example_plant_dynamic_input,
                            timber_volume_function = IFNallometry::IFNvolume_forestindicators,
                            additional_params = params)
 ```
 
-Note that `"timber_harvest"` requires specifying the function to be used to calculate timber volumes, i.e. `timber_volume_function`, for which in our case we use a predefined  function from package [**IFNallometry**](https://emf-creaf.github.io/IFNallometry/).
+Note that `"timber_harvest_volume"` requires specifying the function to be used to calculate timber volumes, i.e. `timber_volume_function`, for which in our case we use a predefined  function from package [**IFNallometry**](https://emf-creaf.github.io/IFNallometry/).
 
 The result of the estimation is the following:
 ```{r}
 res
 ```
 
+#### Including output units
+
 When calling `estimate_indicators`, we can force the inclusion of indicator units in the output tibble:
 
 ```{r}
-estimate_indicators(indicators = c("timber_harvest", "live_tree_basal_area"),
+estimate_indicators(indicators = c("timber_harvest_volume", "live_tree_basal_area"),
                     plant_dynamic_input = example_plant_dynamic_input,
                     timber_volume_function = IFNallometry::IFNvolume_forestindicators,
                     additional_params = params,
                     include_units = TRUE)
 ```
 
+#### Indicator state vs. indicator rates
+
+Some indicators refer to a quantity assessed at some point in time. For example, `timber_harvest_volume` is the volume of harvested trees assessed from `state == "cut"` in the input data. We may be more interested in (annual) rates, which are estimated by dividing a change in a given quantity (or harvest) by the difference in time since the previous date with data. For example, we calculate here `timber_harvest_volume_rate`, which returns values as per year:
+
+```{r}
+params <- list(timber_harvest_volume = list(province = 8),
+               timber_harvest_volume_rate = list(province = 8))
+estimate_indicators(indicators = c("timber_harvest_volume", "timber_harvest_volume_rate"),
+                    plant_dynamic_input = example_plant_dynamic_input,
+                    timber_volume_function = IFNallometry::IFNvolume_forestindicators,
+                    additional_params = params,
+                    include_units = TRUE)
+```
+Note that volume rates for the first survey are missing, because we cannot know how much time passed since the previous survey. Moreover, the remaining values are not exactly the same, because the rate is calculated by assessing the number of days elapsed and transforming them into years using a factor of 365.25.
 
 ## Real example with data from package forestables
 
@@ -223,5 +239,6 @@ estimate_indicators(c("live_tree_carbon_stock",
                       "live_tree_carbon_change_rate"), 
                     plant_dynamic_input = x_ifn23, 
                     plant_biomass_function = IFNallometry::IFNbiomass_forestindicators,
+                    timber_volume_function = IFNallometry::IFNvolume_forestindicators,
                     include_units = TRUE)
 ```
