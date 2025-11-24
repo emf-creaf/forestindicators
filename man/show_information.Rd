@@ -17,7 +17,7 @@ Prompts information in to the console regarding the definition, units and data r
 forest indicator.
 }
 \examples{
-show_information("timber_harvest")
+show_information("timber_harvest_volume")
 }
 \seealso{
 \code{\link{available_indicators}}, \code{\link{estimate_indicators}}

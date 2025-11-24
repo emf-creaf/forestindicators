@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @examples
-#' show_information("timber_harvest")
+#' show_information("timber_harvest_volume")
 show_information <- function(indicator) {
   indicator <- match.arg(indicator, indicator_definition$indicator)
   row <- which(indicator_definition$indicator == indicator)

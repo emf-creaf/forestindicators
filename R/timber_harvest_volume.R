@@ -1,4 +1,4 @@
-.timber_harvest <- function(plant_dynamic_input = NULL,
+.timber_harvest_volume <- function(plant_dynamic_input = NULL,
                             timber_volume_function = NULL,
                             min_tree_dbh = 7.5,
                             max_tree_dbh = NA,
@@ -34,9 +34,9 @@
   ## Summarize at the plot-level
   df <- plant_input |>
     dplyr::group_by(id_stand, date) |>
-    dplyr::summarise(timber_harvest = sum(vol))
+    dplyr::summarise(timber_harvest_volume = sum(vol))
 
   ## Return the output data frame
-  res <- df |> dplyr::select(id_stand, date, timber_harvest)
+  res <- df |> dplyr::select(id_stand, date, timber_harvest_volume)
   return(res)
 }

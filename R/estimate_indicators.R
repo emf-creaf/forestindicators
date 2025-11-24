@@ -63,6 +63,11 @@ estimate_indicators <- function(indicators,
 
   if(!is.null(additional_params)) {
     if(!inherits(additional_params, "list")) cli::cli_abort("'additional_params' should be a named list")
+    for(n in names(additional_params)) {
+      if(!(n %in% indicator_definition$indicator)) {
+        cli::cli_abort(paste0("Named element '", n, "' of 'additional_params' was not found in the set of available indicators."))
+      }
+    }
   }
 
   # For each valid indicator
