@@ -35,16 +35,16 @@ stands. An example of stand-level static data frame is the following:
 
 ``` r
 example_stand_static_input
-#>   id_stand  area slope
-#> 1   080001  14.3   5.1
-#> 2   080002 362.6   3.1
-#> 3   080003 319.6   8.9
-#> 4   080004 635.2   4.4
-#> 5   080005 774.8   8.9
-#> 6   080006 166.6   5.3
-#> 7   080007 368.0   4.7
-#> 8   080008 945.9   4.3
-#> 9   080009 548.9   1.4
+#>   id_stand  area slope_degree
+#> 1   080001 662.3          3.5
+#> 2   080002 329.3          0.9
+#> 3   080003 565.7          3.2
+#> 4   080004 161.2          7.4
+#> 5   080005 589.7          7.9
+#> 6   080006 461.2          7.3
+#> 7   080007 589.5          1.6
+#> 8   080008 428.3          1.6
+#> 9   080009 580.2          3.1
 ```
 
 ### Stand-level dynamic data
@@ -61,33 +61,33 @@ stand-level dynamic data frame is the following:
 ``` r
 example_stand_dynamic_input
 #>    id_stand       date mean_precipitation canopy_cover
-#> 1    080001 2025-01-01              353.2          8.4
-#> 2    080002 2025-01-01              355.1         63.2
-#> 3    080003 2025-01-01              377.0         68.9
-#> 4    080004 2025-01-01              836.6         24.8
-#> 5    080005 2025-01-01              742.4         45.4
-#> 6    080006 2025-01-01              405.7         12.7
-#> 7    080007 2025-01-01              103.3         96.3
-#> 8    080008 2025-01-01              561.8          1.6
-#> 9    080009 2025-01-01              522.1         10.6
-#> 10   080001 2025-02-01              383.2         22.5
-#> 11   080002 2025-02-01              511.2         85.9
-#> 12   080003 2025-02-01              552.0         61.7
-#> 13   080004 2025-02-01              813.3         32.9
-#> 14   080005 2025-02-01              368.0         50.7
-#> 15   080006 2025-02-01              436.1         30.2
-#> 16   080007 2025-02-01              867.9         51.0
-#> 17   080008 2025-02-01              304.6         85.8
-#> 18   080009 2025-02-01              349.1         67.8
-#> 19   080001 2025-03-01               46.3         44.1
-#> 20   080002 2025-03-01              335.6         33.1
-#> 21   080003 2025-03-01              509.6         96.3
-#> 22   080004 2025-03-01              824.6         59.1
-#> 23   080005 2025-03-01              607.5         76.7
-#> 24   080006 2025-03-01              554.8         57.4
-#> 25   080007 2025-03-01              710.4         43.8
-#> 26   080008 2025-03-01              111.7         17.6
-#> 27   080009 2025-03-01              623.2         12.1
+#> 1    080001 2025-01-01              541.0         62.8
+#> 2    080002 2025-01-01              750.6          0.9
+#> 3    080003 2025-01-01              173.5         21.0
+#> 4    080004 2025-01-01               71.7         62.5
+#> 5    080005 2025-01-01              755.7          2.5
+#> 6    080006 2025-01-01              464.0         12.1
+#> 7    080007 2025-01-01              219.7         51.9
+#> 8    080008 2025-01-01              649.8         37.2
+#> 9    080009 2025-01-01              351.4         50.8
+#> 10   080001 2025-02-01              134.2         17.3
+#> 11   080002 2025-02-01              870.5         69.2
+#> 12   080003 2025-02-01               30.2         78.0
+#> 13   080004 2025-02-01              417.5         41.3
+#> 14   080005 2025-02-01               13.5          1.2
+#> 15   080006 2025-02-01              655.9         19.8
+#> 16   080007 2025-02-01              231.4         83.0
+#> 17   080008 2025-02-01                9.3         16.8
+#> 18   080009 2025-02-01              113.0         61.2
+#> 19   080001 2025-03-01              547.0         66.5
+#> 20   080002 2025-03-01              252.4         74.7
+#> 21   080003 2025-03-01              635.1         19.0
+#> 22   080004 2025-03-01              429.0         10.1
+#> 23   080005 2025-03-01              547.3         11.8
+#> 24   080006 2025-03-01              353.1         56.1
+#> 25   080007 2025-03-01              362.2         44.4
+#> 26   080008 2025-03-01              442.3         84.2
+#> 27   080009 2025-03-01              373.7         14.3
 ```
 
 ### Plant-level static data
@@ -103,19 +103,19 @@ example of plant-level static data frame is the following:
 ``` r
 example_plant_static_input
 #>    id_stand     plant_entity beautiness
-#> 1    080001 Pinus halepensis       0.26
-#> 2    080002 Pinus halepensis       0.03
-#> 3    080003 Pinus sylvestris       0.28
-#> 4    080004 Pinus sylvestris       0.02
-#> 5    080005     Quercus ilex       0.52
-#> 6    080006     Quercus ilex       0.36
-#> 7    080007     Quercus ilex       0.51
-#> 8    080008    Quercus suber       0.08
-#> 9    080009    Quercus suber       0.98
-#> 10   080001      Pinus nigra       0.62
-#> 11   080002      Pinus nigra       0.42
-#> 12   080005 Pinus halepensis       0.72
-#> 13   080006 Pinus halepensis       0.43
+#> 1    080001 Pinus halepensis       0.00
+#> 2    080002 Pinus halepensis       0.22
+#> 3    080003 Pinus sylvestris       0.13
+#> 4    080004 Pinus sylvestris       0.07
+#> 5    080005     Quercus ilex       0.18
+#> 6    080006     Quercus ilex       0.14
+#> 7    080007     Quercus ilex       0.01
+#> 8    080008    Quercus suber       0.47
+#> 9    080009    Quercus suber       0.54
+#> 10   080001      Pinus nigra       0.43
+#> 11   080002      Pinus nigra       0.05
+#> 12   080005 Pinus halepensis       0.53
+#> 13   080006 Pinus halepensis       0.09
 ```
 
 ### Plant-level dynamic data
@@ -132,50 +132,50 @@ following:
 ``` r
 example_plant_dynamic_input
 #>    id_stand     plant_entity       date state  dbh    h   n
-#> 1    080001 Pinus halepensis 2025-01-01  live 18.3 22.3 352
-#> 2    080001 Pinus halepensis 2025-01-01  live 36.5 18.8 891
-#> 3    080001      Pinus nigra 2025-01-01  live 51.1  5.3 644
-#> 4    080001      Pinus nigra 2025-01-01  live 36.9 18.4 543
-#> 5    080001      Pinus nigra 2025-01-01  live 13.9 13.3 852
-#> 6    080001 Pinus halepensis 2025-02-01  live 49.1 17.1 698
-#> 7    080001 Pinus halepensis 2025-02-01  live 24.4  3.2 885
-#> 8    080001      Pinus nigra 2025-02-01  live 12.0 10.1 454
-#> 9    080001      Pinus nigra 2025-02-01  live 45.3 20.6 312
-#> 10   080001      Pinus nigra 2025-02-01  live 35.1 22.5 651
-#> 11   080001 Pinus halepensis 2025-03-01  live 49.8 13.6 424
-#> 12   080001 Pinus halepensis 2025-03-01  live 22.7  4.6 506
-#> 13   080001      Pinus nigra 2025-03-01  live 36.9  6.4  59
-#> 14   080001      Pinus nigra 2025-03-01  live  9.1 15.5 445
-#> 15   080001      Pinus nigra 2025-03-01  live 41.2  9.6 851
-#> 16   080005     Quercus ilex 2025-01-01  live 22.4 18.1 491
-#> 17   080005     Quercus ilex 2025-01-01  live  8.3  5.8 565
-#> 18   080005 Pinus halepensis 2025-01-01  live 40.9 11.7 433
-#> 19   080005     Quercus ilex 2025-02-01  live 44.8 22.7 576
-#> 20   080005     Quercus ilex 2025-02-01  live 33.1 13.1 769
-#> 21   080005 Pinus halepensis 2025-02-01  live 13.9 21.3 904
-#> 22   080005     Quercus ilex 2025-03-01  live 27.4 22.5 118
-#> 23   080005     Quercus ilex 2025-03-01  live 19.5 18.6 818
-#> 24   080005 Pinus halepensis 2025-03-01  live 50.0 12.0 592
-#> 25   080005 Pinus halepensis 2025-03-01  live 11.2 12.5 357
-#> 26   080001 Pinus halepensis 2025-01-01   cut 43.9 18.3  21
-#> 27   080001 Pinus halepensis 2025-01-01   cut 41.4  3.5 166
-#> 28   080001      Pinus nigra 2025-01-01   cut 29.1 18.9   0
-#> 29   080001 Pinus halepensis 2025-02-01   cut 49.4  5.8  73
-#> 30   080001      Pinus nigra 2025-03-01   cut 13.0 20.0 194
-#> 31   080005     Quercus ilex 2025-01-01   cut 17.2 20.6 147
-#> 32   080005 Pinus halepensis 2025-01-01   cut 10.0  4.3 200
-#> 33   080005     Quercus ilex 2025-02-01   cut 44.1  7.1  22
-#> 34   080005 Pinus halepensis 2025-03-01   cut 45.7 11.8  17
-#> 35   080001 Pinus halepensis 2025-03-01  dead 26.1 13.3  81
-#> 36   080001      Pinus nigra 2025-03-01  dead 36.2 11.0  82
-#> 37   080001      Pinus nigra 2025-03-01  dead 49.6  6.9  72
-#> 38   080001      Pinus nigra 2025-03-01  dead 40.5 10.9  33
-#> 39   080005     Quercus ilex 2025-01-01  dead 25.9  7.7   8
-#> 40   080005     Quercus ilex 2025-01-01  dead 18.7 13.4  75
-#> 41   080005 Pinus halepensis 2025-01-01  dead 16.7 18.0  97
-#> 42   080005 Pinus halepensis 2025-02-01  dead 31.0  4.6  43
-#> 43   080005     Quercus ilex 2025-03-01  dead 35.1  2.5  74
-#> 44   080005     Quercus ilex 2025-03-01  dead  7.1  7.6  69
+#> 1    080001 Pinus halepensis 2023-01-01  live 52.0 17.9  62
+#> 2    080001 Pinus halepensis 2023-01-01  live  9.1 16.5 604
+#> 3    080001      Pinus nigra 2023-01-01  live 39.8  5.9 654
+#> 4    080001      Pinus nigra 2023-01-01  live  7.0  8.2 334
+#> 5    080001      Pinus nigra 2023-01-01  live 25.0 20.9 168
+#> 6    080001 Pinus halepensis 2024-01-01  live 19.6  4.5 529
+#> 7    080001 Pinus halepensis 2024-01-01  live 40.1 21.2 634
+#> 8    080001      Pinus nigra 2024-01-01  live 12.9  6.9 313
+#> 9    080001      Pinus nigra 2024-01-01  live 19.6  4.0 372
+#> 10   080001      Pinus nigra 2024-01-01  live 46.8 13.1  43
+#> 11   080001 Pinus halepensis 2025-01-01  live 33.1  4.7 327
+#> 12   080001 Pinus halepensis 2025-01-01  live 25.0 19.0 793
+#> 13   080001      Pinus nigra 2025-01-01  live 41.2 14.8  42
+#> 14   080001      Pinus nigra 2025-01-01  live 51.9  7.7 189
+#> 15   080001      Pinus nigra 2025-01-01  live 35.8 14.0 558
+#> 16   080005     Quercus ilex 2023-01-01  live 51.2 13.6 655
+#> 17   080005     Quercus ilex 2023-01-01  live 32.5 11.2 303
+#> 18   080005 Pinus halepensis 2023-01-01  live  9.5  3.3 353
+#> 19   080005     Quercus ilex 2024-01-01  live 12.4 22.1 241
+#> 20   080005     Quercus ilex 2024-01-01  live 21.8 11.4 322
+#> 21   080005 Pinus halepensis 2024-01-01  live 36.4 15.5  90
+#> 22   080005     Quercus ilex 2025-01-01  live 33.6  8.6 257
+#> 23   080005     Quercus ilex 2025-01-01  live 21.8 11.9 224
+#> 24   080005 Pinus halepensis 2025-01-01  live 49.2 21.6 841
+#> 25   080005 Pinus halepensis 2025-01-01  live 31.5 17.7 627
+#> 26   080001 Pinus halepensis 2023-01-01   cut 43.6  3.6 112
+#> 27   080001 Pinus halepensis 2023-01-01   cut 54.6 17.0  96
+#> 28   080001      Pinus nigra 2023-01-01   cut 25.7  4.7  17
+#> 29   080001 Pinus halepensis 2024-01-01   cut 40.9 12.1  37
+#> 30   080001      Pinus nigra 2025-01-01   cut 36.0 14.4 193
+#> 31   080005     Quercus ilex 2023-01-01   cut 36.0 15.4 118
+#> 32   080005 Pinus halepensis 2023-01-01   cut 38.6 11.6 178
+#> 33   080005     Quercus ilex 2024-01-01   cut  9.7  4.9  47
+#> 34   080005 Pinus halepensis 2025-01-01   cut 50.4 15.5 143
+#> 35   080001 Pinus halepensis 2025-01-01  dead 47.1 13.3   8
+#> 36   080001      Pinus nigra 2025-01-01  dead 48.6  0.2  90
+#> 37   080001      Pinus nigra 2025-01-01  dead 37.5 17.8  45
+#> 38   080001      Pinus nigra 2025-01-01  dead 21.6 13.7  57
+#> 39   080005     Quercus ilex 2023-01-01  dead 42.2  1.8  47
+#> 40   080005     Quercus ilex 2023-01-01  dead  6.4 17.6  96
+#> 41   080005 Pinus halepensis 2023-01-01  dead 15.6  7.4  19
+#> 42   080005 Pinus halepensis 2024-01-01  dead 24.6 10.2  71
+#> 43   080005     Quercus ilex 2025-03-01  dead 19.8 16.9  89
+#> 44   080005     Quercus ilex 2025-01-01  dead 10.3 13.1  95
 ```
 
 ## Indicators
@@ -235,9 +235,10 @@ available_indicators(plant_dynamic_input = example_plant_dynamic_input)
 #>  [5] "density_dead_wood"            "dominant_tree_diameter"      
 #>  [7] "dominant_tree_height"         "hart_becking_index"          
 #>  [9] "live_tree_basal_area"         "live_tree_biomass_stock"     
-#> [11] "live_tree_carbon_stock"       "live_tree_density"           
-#> [13] "live_tree_volume_stock"       "mean_tree_height"            
-#> [15] "quadratic_mean_tree_diameter" "timber_harvest"
+#> [11] "live_tree_carbon_change_rate" "live_tree_carbon_stock"      
+#> [13] "live_tree_density"            "live_tree_volume_stock"      
+#> [15] "mean_tree_height"             "quadratic_mean_tree_diameter"
+#> [17] "timber_harvest"
 ```
 
 Note that if variable names (or variable units) are incorrectly
@@ -343,12 +344,12 @@ res
 #> # A tibble: 6 × 4
 #>   id_stand date       timber_harvest live_tree_basal_area
 #>   <chr>    <date>              <dbl>                <dbl>
-#> 1 080001   2025-01-01          51.9                 306. 
-#> 2 080001   2025-02-01          29.2                 292. 
-#> 3 080001   2025-03-01          25.6                 226. 
-#> 4 080005   2025-01-01          34.4                  79.3
-#> 5 080005   2025-02-01           6.98                171. 
-#> 6 080005   2025-03-01          11.3                 151.
+#> 1 080001   2023-01-01         153.                  108. 
+#> 2 080001   2024-01-01          20.5                 119. 
+#> 3 080001   2025-01-01         126.                  169. 
+#> 4 080005   2023-01-01         138.                  162. 
+#> 5 080005   2024-01-01           2.04                 24.3
+#> 6 080005   2025-01-01         148.                  240.
 ```
 
 When calling `estimate_indicators`, we can force the inclusion of
@@ -363,19 +364,21 @@ estimate_indicators(indicators = c("timber_harvest", "live_tree_basal_area"),
 #> # A tibble: 6 × 4
 #>   id_stand date       timber_harvest live_tree_basal_area
 #>   <chr>    <date>           [m^3/ha]             [m^2/ha]
-#> 1 080001   2025-01-01          51.9                 306. 
-#> 2 080001   2025-02-01          29.2                 292. 
-#> 3 080001   2025-03-01          25.6                 226. 
-#> 4 080005   2025-01-01          34.4                  79.3
-#> 5 080005   2025-02-01           6.98                171. 
-#> 6 080005   2025-03-01          11.3                 151.
+#> 1 080001   2023-01-01         153.                  108. 
+#> 2 080001   2024-01-01          20.5                 119. 
+#> 3 080001   2025-01-01         126.                  169. 
+#> 4 080005   2023-01-01         138.                  162. 
+#> 5 080005   2024-01-01           2.04                 24.3
+#> 6 080005   2025-01-01         148.                  240.
 ```
 
-## Example with data from forestables
+## Real example with data from package forestables
 
 Let us now present a more real example case. We will use forest
-inventory data generated from package
-[**forestables**](https://emf-creaf.github.io/forestables/):
+inventory example data generated from package
+[**forestables**](https://emf-creaf.github.io/forestables/). This data
+set includes data for forest plots in Barcelona province in three
+Spanish forest inventory surveys (IFN2, IFN3 and IFN4):
 
 ``` r
 library(forestables)
@@ -402,14 +405,17 @@ ifn_output_example
 #> #   type <int>, tree <list>, understory <list>, regen <list>
 ```
 
+### Reshaping data for forestindicators
+
 A wrapper function, called
 [`forestables2forestindicators()`](https://emf-creaf.github.io/forestindicators/reference/forestables2forestindicators.md)
 has been included to transform **forestables** output objects into data
-frames suitable for **forestindicators**:
+frames suitable for **forestindicators**. We start by reshaping data
+from IFN2:
 
 ``` r
-x <- forestables2forestindicators(ifn_output_example, version = "ifn2")
-x
+x_ifn2 <- forestables2forestindicators(ifn_output_example, version = "ifn2")
+x_ifn2
 #> # A tibble: 47,480 × 10
 #>    id_stand       date       province plant_entity     n   dbh     h cubing_form
 #>    <chr>          <date>        <dbl> <chr>        <dbl> <dbl> <dbl> <chr>      
@@ -427,19 +433,22 @@ x
 #> # ℹ 2 more variables: quality_wood <chr>, state <chr>
 ```
 
+### Estimating indicators for a single inventory survey
+
 We now determine the indicators that can be evaluated with this data
 set:
 
 ``` r
-available_indicators(plant_dynamic_input = x)
+available_indicators(plant_dynamic_input = x_ifn2)
 #>  [1] "cut_tree_basal_area"          "cut_tree_density"            
 #>  [3] "dead_tree_basal_area"         "dead_tree_density"           
 #>  [5] "density_dead_wood"            "dominant_tree_diameter"      
 #>  [7] "dominant_tree_height"         "hart_becking_index"          
 #>  [9] "live_tree_basal_area"         "live_tree_biomass_stock"     
-#> [11] "live_tree_carbon_stock"       "live_tree_density"           
-#> [13] "live_tree_volume_stock"       "mean_tree_height"            
-#> [15] "quadratic_mean_tree_diameter" "timber_harvest"
+#> [11] "live_tree_carbon_change_rate" "live_tree_carbon_stock"      
+#> [13] "live_tree_density"            "live_tree_volume_stock"      
+#> [15] "mean_tree_height"             "quadratic_mean_tree_diameter"
+#> [17] "timber_harvest"
 ```
 
 And finally make a call to
@@ -454,7 +463,7 @@ estimate_indicators(c("live_tree_density",
                       "dominant_tree_diameter",
                       "quadratic_mean_tree_diameter",
                       "hart_becking_index"), 
-                    plant_dynamic_input = x, 
+                    plant_dynamic_input = x_ifn2, 
                     include_units = TRUE)
 #> # A tibble: 2,972 × 9
 #>    id_stand   date       live_tree_density live_tree_basal_area mean_tree_height
@@ -472,4 +481,56 @@ estimate_indicators(c("live_tree_density",
 #> # ℹ 2,962 more rows
 #> # ℹ 4 more variables: dominant_tree_height [m], dominant_tree_diameter [cm],
 #> #   quadratic_mean_tree_diameter [cm], hart_becking_index [%]
+```
+
+### Estimating change rates between inventory surveys
+
+Here we illustrate the calculation of rates in carbon stock of living
+trees, between two consecutive forest inventories: IFN2-IFN3. We first
+reshape IFN3 as we did with IFN2:
+
+``` r
+x_ifn3 <- forestables2forestindicators(ifn_output_example, version = "ifn3")
+```
+
+We then filter common forest plots and merge the result into a single
+data frame:
+
+``` r
+x_ifn2_filt <- x_ifn2 |>
+  dplyr::filter(id_stand %in% x_ifn3$id_stand)
+x_ifn3_filt <- x_ifn3 |>
+  dplyr::filter(id_stand %in% x_ifn2$id_stand)
+x_ifn23 <- dplyr::bind_rows(x_ifn2_filt, x_ifn3_filt)
+```
+
+Finally, we can use
+[`estimate_indicators()`](https://emf-creaf.github.io/forestindicators/reference/estimate_indicators.md)
+to estimate carbon stocks in IFN2 and IFN3, as well as the rate of
+change:
+
+``` r
+estimate_indicators(c("live_tree_carbon_stock","live_tree_carbon_change_rate"), 
+                    plant_dynamic_input = x_ifn23, 
+                    plant_biomass_function = IFNallometry::IFNbiomass_forestindicators,
+                    include_units = TRUE)
+#> ! 48 negative stem biomass values truncated to zero for taxon 41 with model 1.
+#> ! 3 negative stem biomass values truncated to zero for taxon 41 with model 1.
+#> ! 48 negative stem biomass values truncated to zero for taxon 41 with model 1.
+#> ! 3 negative stem biomass values truncated to zero for taxon 41 with model 1.
+#> # A tibble: 5,249 × 4
+#>    id_stand         date       live_tree_carbon_stock live_tree_carbon_change_…¹
+#>    <chr>            <date>                     [t/ha]                [t/(ha*yr)]
+#>  1 08_0001_NN_A1_A1 1990-01-01                  148.                      NA    
+#>  2 08_0001_NN_A1_A1 2001-01-01                  245.                       8.83 
+#>  3 08_0002_NN_A1_A1 1990-01-01                  187.                      NA    
+#>  4 08_0002_NN_A1_A1 2001-01-01                  193.                       0.553
+#>  5 08_0003_NN_A1_A1 1990-01-01                   64.4                     NA    
+#>  6 08_0003_NN_A1_A1 2001-01-01                  155.                       8.20 
+#>  7 08_0004_NN_A1_A1 1990-01-01                   43.2                     NA    
+#>  8 08_0004_NN_A1_A1 2001-01-01                   25.3                     -1.63 
+#>  9 08_0005_NN_A1_A1 1990-01-01                  177.                      NA    
+#> 10 08_0005_NN_A1_A1 2001-01-01                  225.                       4.35 
+#> # ℹ 5,239 more rows
+#> # ℹ abbreviated name: ¹​live_tree_carbon_change_rate
 ```

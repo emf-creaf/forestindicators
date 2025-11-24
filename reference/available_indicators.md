@@ -59,7 +59,8 @@ available_indicators(plant_dynamic_input = example_plant_dynamic_input)
 #>  [5] "density_dead_wood"            "dominant_tree_diameter"      
 #>  [7] "dominant_tree_height"         "hart_becking_index"          
 #>  [9] "live_tree_basal_area"         "live_tree_biomass_stock"     
-#> [11] "live_tree_carbon_stock"       "live_tree_density"           
-#> [13] "live_tree_volume_stock"       "mean_tree_height"            
-#> [15] "quadratic_mean_tree_diameter" "timber_harvest"              
+#> [11] "live_tree_carbon_change_rate" "live_tree_carbon_stock"      
+#> [13] "live_tree_density"            "live_tree_volume_stock"      
+#> [15] "mean_tree_height"             "quadratic_mean_tree_diameter"
+#> [17] "timber_harvest"              
 ```

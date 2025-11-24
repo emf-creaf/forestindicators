@@ -111,25 +111,26 @@ estimate_indicators(c("live_tree_basal_area", "dead_tree_basal_area"),
 #> ✔ Checking inputs for 'live_tree_basal_area'. [5ms]
 #> 
 #> ℹ Checking overall inputs
-#> ✔ Checking overall inputs [18ms]
+#> ✔ Checking overall inputs [17ms]
 #> 
 #> ℹ Processing 'live_tree_basal_area'.
 #> ℹ Checking inputs for 'dead_tree_basal_area'.
 #> ✔ Checking inputs for 'dead_tree_basal_area'. [5ms]
 #> 
 #> ℹ Processing 'live_tree_basal_area'.
-#> ✔ Processing 'live_tree_basal_area'. [44ms]
+#> ✔ Processing 'live_tree_basal_area'. [37ms]
 #> 
 #> ℹ Processing 'dead_tree_basal_area'.
-#> ✔ Processing 'dead_tree_basal_area'. [20ms]
+#> ✔ Processing 'dead_tree_basal_area'. [21ms]
 #> 
-#> # A tibble: 6 × 4
+#> # A tibble: 7 × 4
 #>   id_stand date       live_tree_basal_area dead_tree_basal_area
 #>   <chr>    <date>                    <dbl>                <dbl>
-#> 1 080001   2025-01-01                306.                 NA   
-#> 2 080001   2025-02-01                292.                 NA   
-#> 3 080001   2025-03-01                226.                 30.9 
-#> 4 080005   2025-01-01                 79.3                 4.61
-#> 5 080005   2025-02-01                171.                  3.25
-#> 6 080005   2025-03-01                151.                  7.16
+#> 1 080001   2023-01-01                107.                NA    
+#> 2 080001   2024-01-01                119.                NA    
+#> 3 080001   2025-01-01                169.                25.1  
+#> 4 080005   2023-01-01                162.                 6.94 
+#> 5 080005   2024-01-01                 24.3                3.37 
+#> 6 080005   2025-01-01                240.                 0.792
+#> 7 080005   2025-03-01                 NA                  2.74 
 ```
