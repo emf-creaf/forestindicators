@@ -27,10 +27,10 @@ The function returns console output only.
 ## Examples
 
 ``` r
-show_information("timber_harvest")
+show_information("timber_harvest_volume")
 #> A) DEFINITION
 #> 
-#>    Name:  timber_harvest 
+#>    Name:  timber_harvest_volume 
 #>    Estimation:  Allometric volume relationships 
 #>    Interpretation:  Volume over bark of harvested wood 
 #>    Output units:  m3/ha 

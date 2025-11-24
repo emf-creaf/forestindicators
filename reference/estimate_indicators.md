@@ -111,17 +111,17 @@ estimate_indicators(c("live_tree_basal_area", "dead_tree_basal_area"),
 #> ✔ Checking inputs for 'live_tree_basal_area'. [6ms]
 #> 
 #> ℹ Checking overall inputs
-#> ✔ Checking overall inputs [20ms]
+#> ✔ Checking overall inputs [21ms]
 #> 
 #> ℹ Processing 'live_tree_basal_area'.
 #> ℹ Checking inputs for 'dead_tree_basal_area'.
-#> ✔ Checking inputs for 'dead_tree_basal_area'. [5ms]
+#> ✔ Checking inputs for 'dead_tree_basal_area'. [8ms]
 #> 
 #> ℹ Processing 'live_tree_basal_area'.
-#> ✔ Processing 'live_tree_basal_area'. [43ms]
+#> ✔ Processing 'live_tree_basal_area'. [77ms]
 #> 
 #> ℹ Processing 'dead_tree_basal_area'.
-#> ✔ Processing 'dead_tree_basal_area'. [20ms]
+#> ✔ Processing 'dead_tree_basal_area'. [22ms]
 #> 
 #> # A tibble: 7 × 4
 #>   id_stand date       live_tree_basal_area dead_tree_basal_area

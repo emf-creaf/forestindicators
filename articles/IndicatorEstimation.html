@@ -314,21 +314,22 @@ data by calling function <code><a href="../reference/available_indicators.html">
 <span><span class="co">#&gt; [11] "live_tree_carbon_change_rate" "live_tree_carbon_stock"      </span></span>
 <span><span class="co">#&gt; [13] "live_tree_density"            "live_tree_volume_stock"      </span></span>
 <span><span class="co">#&gt; [15] "mean_tree_height"             "quadratic_mean_tree_diameter"</span></span>
-<span><span class="co">#&gt; [17] "timber_harvest"               "timber_harvest_carbon_rate"</span></span></code></pre></div>
+<span><span class="co">#&gt; [17] "timber_harvest_carbon_rate"   "timber_harvest_volume"       </span></span>
+<span><span class="co">#&gt; [19] "timber_harvest_volume_rate"</span></span></code></pre></div>
 <p>Note that if variable names (or variable units) are incorrectly
 specified, then the available indicator list may be shorter than
 expected.</p>
 <p>Say we decide to estimate the <em>timber harvest volume</em>
-(i.e. indicator <code>"timber_harvest"</code>) and the <em>basal area of
-living trees</em> (i.e. indicator <code>"live_tree_basal_area"</code>).
-We may need to check which data inputs are required, their units, etc.
-We can find this information using function
-<code><a href="../reference/show_information.html">show_information()</a></code>, for example:</p>
+(i.e. indicator <code>"timber_harvest_volume"</code>) and the <em>basal
+area of living trees</em> (i.e. indicator
+<code>"live_tree_basal_area"</code>). We may need to check which data
+inputs are required, their units, etc. We can find this information
+using function <code><a href="../reference/show_information.html">show_information()</a></code>, for example:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/show_information.html">show_information</a></span><span class="op">(</span><span class="st">"timber_harvest"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/show_information.html">show_information</a></span><span class="op">(</span><span class="st">"timber_harvest_volume"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; A) DEFINITION</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;    Name:  timber_harvest </span></span>
+<span><span class="co">#&gt;    Name:  timber_harvest_volume </span></span>
 <span><span class="co">#&gt;    Estimation:  Allometric volume relationships </span></span>
 <span><span class="co">#&gt;    Interpretation:  Volume over bark of harvested wood </span></span>
 <span><span class="co">#&gt;    Output units:  m3/ha </span></span>
@@ -385,7 +386,7 @@ the estimation of indicators, For that, we define a <strong>named
 list</strong> where each element corresponds to a different indicator
 and, in turn, contains a named list of parameters. In our case:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>timber_harvest <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>province <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>,</span>
+<code class="sourceCode R"><span><span class="va">params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>timber_harvest_volume <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>province <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>,</span>
 <span>               live_tree_basal_area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>min_tree_dbh <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -394,43 +395,81 @@ and, in turn, contains a named list of parameters. In our case:</p>
 <p>Once we have our inputs ready, the indicators are estimated by
 calling function <code><a href="../reference/estimate_indicators.html">estimate_indicators()</a></code> as follows:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimate_indicators.html">estimate_indicators</a></span><span class="op">(</span>indicators <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"timber_harvest"</span>, <span class="st">"live_tree_basal_area"</span><span class="op">)</span>,</span>
+<code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimate_indicators.html">estimate_indicators</a></span><span class="op">(</span>indicators <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"timber_harvest_volume"</span>, <span class="st">"live_tree_basal_area"</span><span class="op">)</span>,</span>
 <span>                           plant_dynamic_input <span class="op">=</span> <span class="va">example_plant_dynamic_input</span>,</span>
 <span>                           timber_volume_function <span class="op">=</span> <span class="fu">IFNallometry</span><span class="fu">::</span><span class="va"><a href="https://emf-creaf.github.io/IFNallometry/reference/IFNvolume_forestindicators.html" class="external-link">IFNvolume_forestindicators</a></span>,</span>
 <span>                           additional_params <span class="op">=</span> <span class="va">params</span><span class="op">)</span></span></code></pre></div>
-<p>Note that <code>"timber_harvest"</code> requires specifying the
-function to be used to calculate timber volumes,
+<p>Note that <code>"timber_harvest_volume"</code> requires specifying
+the function to be used to calculate timber volumes,
 i.e. <code>timber_volume_function</code>, for which in our case we use a
 predefined function from package <a href="https://emf-creaf.github.io/IFNallometry/" class="external-link"><strong>IFNallometry</strong></a>.</p>
 <p>The result of the estimation is the following:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 4</span></span></span>
-<span><span class="co">#&gt;   id_stand date       timber_harvest live_tree_basal_area</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 080001   2023-01-01         153.                  108. </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 080001   2024-01-01          20.5                 119. </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 080001   2025-01-01         126.                  169. </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 080005   2023-01-01         138.                  162. </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 080005   2024-01-01           2.04                 24.3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 080005   2025-01-01         148.                  240.</span></span></code></pre></div>
+<span><span class="co">#&gt;   id_stand date       timber_harvest_volume live_tree_basal_area</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 080001   2023-01-01                153.                  108. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 080001   2024-01-01                 20.5                 119. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 080001   2025-01-01                126.                  169. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 080005   2023-01-01                138.                  162. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 080005   2024-01-01                  2.04                 24.3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 080005   2025-01-01                148.                  240.</span></span></code></pre></div>
+<div class="section level4">
+<h4 id="including-output-units">Including output units<a class="anchor" aria-label="anchor" href="#including-output-units"></a>
+</h4>
 <p>When calling <code>estimate_indicators</code>, we can force the
 inclusion of indicator units in the output tibble:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/estimate_indicators.html">estimate_indicators</a></span><span class="op">(</span>indicators <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"timber_harvest"</span>, <span class="st">"live_tree_basal_area"</span><span class="op">)</span>,</span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/estimate_indicators.html">estimate_indicators</a></span><span class="op">(</span>indicators <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"timber_harvest_volume"</span>, <span class="st">"live_tree_basal_area"</span><span class="op">)</span>,</span>
 <span>                    plant_dynamic_input <span class="op">=</span> <span class="va">example_plant_dynamic_input</span>,</span>
 <span>                    timber_volume_function <span class="op">=</span> <span class="fu">IFNallometry</span><span class="fu">::</span><span class="va"><a href="https://emf-creaf.github.io/IFNallometry/reference/IFNvolume_forestindicators.html" class="external-link">IFNvolume_forestindicators</a></span>,</span>
 <span>                    additional_params <span class="op">=</span> <span class="va">params</span>,</span>
 <span>                    include_units <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 4</span></span></span>
-<span><span class="co">#&gt;   id_stand date       timber_harvest live_tree_basal_area</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494;">[m^3/ha]</span>             <span style="color: #949494;">[m^2/ha]</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 080001   2023-01-01         153.                  108. </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 080001   2024-01-01          20.5                 119. </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 080001   2025-01-01         126.                  169. </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 080005   2023-01-01         138.                  162. </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 080005   2024-01-01           2.04                 24.3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 080005   2025-01-01         148.                  240.</span></span></code></pre></div>
+<span><span class="co">#&gt;   id_stand date       timber_harvest_volume live_tree_basal_area</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                  <span style="color: #949494;">[m^3/ha]</span>             <span style="color: #949494;">[m^2/ha]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 080001   2023-01-01                153.                  108. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 080001   2024-01-01                 20.5                 119. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 080001   2025-01-01                126.                  169. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 080005   2023-01-01                138.                  162. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 080005   2024-01-01                  2.04                 24.3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 080005   2025-01-01                148.                  240.</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="indicator-state-vs--indicator-rates">Indicator state vs. indicator rates<a class="anchor" aria-label="anchor" href="#indicator-state-vs--indicator-rates"></a>
+</h4>
+<p>Some indicators refer to a quantity assessed at some point in time.
+For example, <code>timber_harvest_volume</code> is the volume of
+harvested trees assessed from <code>state == "cut"</code> in the input
+data. We may be more interested in (annual) rates, which are estimated
+by dividing a change in a given quantity (or harvest) by the difference
+in time since the previous date with data. For example, we calculate
+here <code>timber_harvest_volume_rate</code>, which returns values as
+per year:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>timber_harvest_volume <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>province <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>,</span>
+<span>               timber_harvest_volume_rate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>province <span class="op">=</span> <span class="fl">8</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/estimate_indicators.html">estimate_indicators</a></span><span class="op">(</span>indicators <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"timber_harvest_volume"</span>, <span class="st">"timber_harvest_volume_rate"</span><span class="op">)</span>,</span>
+<span>                    plant_dynamic_input <span class="op">=</span> <span class="va">example_plant_dynamic_input</span>,</span>
+<span>                    timber_volume_function <span class="op">=</span> <span class="fu">IFNallometry</span><span class="fu">::</span><span class="va"><a href="https://emf-creaf.github.io/IFNallometry/reference/IFNvolume_forestindicators.html" class="external-link">IFNvolume_forestindicators</a></span>,</span>
+<span>                    additional_params <span class="op">=</span> <span class="va">params</span>,</span>
+<span>                    include_units <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 4</span></span></span>
+<span><span class="co">#&gt;   id_stand date       timber_harvest_volume timber_harvest_volume_rate</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                  <span style="color: #949494;">[m^3/ha]</span>              <span style="color: #949494;">[m^3/(ha*yr)]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 080001   2023-01-01                153.                        <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 080001   2024-01-01                 20.5                       20.5 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 080001   2025-01-01                126.                       126.  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 080005   2023-01-01                138.                        <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 080005   2024-01-01                  2.04                       2.04</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 080005   2025-01-01                148.                       148.</span></span></code></pre></div>
+<p>Note that volume rates for the first survey are missing, because we
+cannot know how much time passed since the previous survey. Moreover,
+the remaining values are not exactly the same, because the rate is
+calculated by assessing the number of days elapsed and transforming them
+into years using a factor of 365.25.</p>
+</div>
 </div>
 </div>
 <div class="section level2">
@@ -440,7 +479,7 @@ inclusion of indicator units in the output tibble:</p>
 inventory example data generated from package <a href="https://emf-creaf.github.io/forestables/" class="external-link"><strong>forestables</strong></a>.
 This data set includes data for forest plots in Barcelona province in
 three Spanish forest inventory surveys (IFN2, IFN3 and IFN4):</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://emf-creaf.github.io/forestables/" class="external-link">forestables</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Loading required package: data.table</span></span>
 <span><span class="co">#&gt; Loading required package: dtplyr</span></span>
@@ -471,7 +510,7 @@ three Spanish forest inventory surveys (IFN2, IFN3 and IFN4):</p>
 transform <strong>forestables</strong> output objects into data frames
 suitable for <strong>forestindicators</strong>. We start by reshaping
 data from IFN2:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x_ifn2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/forestables2forestindicators.html">forestables2forestindicators</a></span><span class="op">(</span><span class="va">ifn_output_example</span>, version <span class="op">=</span> <span class="st">"ifn2"</span><span class="op">)</span></span>
 <span><span class="va">x_ifn2</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 47,480 × 10</span></span></span>
@@ -495,7 +534,7 @@ data from IFN2:</p>
 </h3>
 <p>We now determine the indicators that can be evaluated with this data
 set:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/available_indicators.html">available_indicators</a></span><span class="op">(</span>plant_dynamic_input <span class="op">=</span> <span class="va">x_ifn2</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "cut_tree_basal_area"          "cut_tree_density"            </span></span>
 <span><span class="co">#&gt;  [3] "dead_tree_basal_area"         "dead_tree_density"           </span></span>
@@ -505,10 +544,11 @@ set:</p>
 <span><span class="co">#&gt; [11] "live_tree_carbon_change_rate" "live_tree_carbon_stock"      </span></span>
 <span><span class="co">#&gt; [13] "live_tree_density"            "live_tree_volume_stock"      </span></span>
 <span><span class="co">#&gt; [15] "mean_tree_height"             "quadratic_mean_tree_diameter"</span></span>
-<span><span class="co">#&gt; [17] "timber_harvest"               "timber_harvest_carbon_rate"</span></span></code></pre></div>
+<span><span class="co">#&gt; [17] "timber_harvest_carbon_rate"   "timber_harvest_volume"       </span></span>
+<span><span class="co">#&gt; [19] "timber_harvest_volume_rate"</span></span></code></pre></div>
 <p>And finally make a call to <code><a href="../reference/estimate_indicators.html">estimate_indicators()</a></code> with
 the desired indicators:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/estimate_indicators.html">estimate_indicators</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"live_tree_density"</span>, </span>
 <span>                      <span class="st">"live_tree_basal_area"</span>,</span>
 <span>                      <span class="st">"mean_tree_height"</span>,</span>
@@ -541,11 +581,11 @@ the desired indicators:</p>
 <p>Here we illustrate the calculation of rates in carbon stock of living
 trees, between two consecutive forest inventories: IFN2-IFN3. We first
 reshape IFN3 as we did with IFN2:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x_ifn3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/forestables2forestindicators.html">forestables2forestindicators</a></span><span class="op">(</span><span class="va">ifn_output_example</span>, version <span class="op">=</span> <span class="st">"ifn3"</span><span class="op">)</span></span></code></pre></div>
 <p>We then filter common forest plots and merge the result into a single
 data frame:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x_ifn2_filt</span> <span class="op">&lt;-</span> <span class="va">x_ifn2</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">id_stand</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">x_ifn3</span><span class="op">$</span><span class="va">id_stand</span><span class="op">)</span></span>
 <span><span class="va">x_ifn3_filt</span> <span class="op">&lt;-</span> <span class="va">x_ifn3</span> <span class="op">|&gt;</span></span>
@@ -554,11 +594,12 @@ data frame:</p>
 <p>Finally, we can use <code><a href="../reference/estimate_indicators.html">estimate_indicators()</a></code> to estimate
 carbon stocks in IFN2 and IFN3, as well as the rates of biomass change
 due to changes in living stock:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/estimate_indicators.html">estimate_indicators</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"live_tree_carbon_stock"</span>,</span>
 <span>                      <span class="st">"live_tree_carbon_change_rate"</span><span class="op">)</span>, </span>
 <span>                    plant_dynamic_input <span class="op">=</span> <span class="va">x_ifn23</span>, </span>
 <span>                    plant_biomass_function <span class="op">=</span> <span class="fu">IFNallometry</span><span class="fu">::</span><span class="va"><a href="https://emf-creaf.github.io/IFNallometry/reference/IFNbiomass_forestindicators.html" class="external-link">IFNbiomass_forestindicators</a></span>,</span>
+<span>                    timber_volume_function <span class="op">=</span> <span class="fu">IFNallometry</span><span class="fu">::</span><span class="va"><a href="https://emf-creaf.github.io/IFNallometry/reference/IFNvolume_forestindicators.html" class="external-link">IFNvolume_forestindicators</a></span>,</span>
 <span>                    include_units <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> 48 negative stem biomass values truncated to zero for taxon 41 with model 1.</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> 3 negative stem biomass values truncated to zero for taxon 41 with model 1.</span></span>
