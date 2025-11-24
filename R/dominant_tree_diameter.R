@@ -31,6 +31,7 @@
 
   df <- plant_input |>
     dplyr::group_by(id_stand, date) |>
+    dplyr::filter(!is.na(n), !is.na(dbh), !is.na(h)) |>
     dplyr::summarise(dominant_tree_diameter = .dtd(n, dbh, min_tree_dbh = min_tree_dbh))
 
   ## Return the output data frame

@@ -4,14 +4,21 @@
 \alias{forestables2forestindicators}
 \title{Wrapper function for structures obtained with forestables}
 \usage{
-forestables2forestindicators(x, version = NULL, type = "plant_dynamic_input")
+forestables2forestindicators(
+  x,
+  country = "ES",
+  version = "ifn2",
+  type = "plant_dynamic_input"
+)
 }
 \arguments{
 \item{x}{A data frame obtained with package forestables}
 
-\item{version}{Spanish National Forest Inventory version ("ifn2", "ifn3" or "ifn4")}
+\item{country}{Country of the forest inventory (i.e. "ES", "FR" or "US")}
 
-\item{type}{A string describing the input data frame for forestindicators.}
+\item{version}{Spanish National Forest Inventory version (i.e. "ifn2", "ifn3" or "ifn4")}
+
+\item{type}{A string of the input data frame required for forestindicators.}
 }
 \value{
 A data frame with data structure suitable for forestindicators

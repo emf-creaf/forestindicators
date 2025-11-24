@@ -8,16 +8,19 @@ test_that("several indicators can be calculated from forestables", {
   library(forestables)
   x <- forestables2forestindicators(ifn_output_example, version = "ifn4")
 
-  expect_s3_class(estimate_indicators(c("live_tree_density",
-                                        "live_tree_basal_area",
-                                        "mean_tree_height",
-                                        "dominant_tree_height",
-                                        "dominant_tree_diameter",
-                                        "quadratic_mean_tree_diameter",
-                                        "hart_becking_index"),
-                                      plant_dynamic_input = x,
-                                      plant_biomass_function = IFNallometry::IFNbiomass_forestindicators,
-                                      verbose = FALSE), "data.frame")
+  for(version in c("ifn2", "ifn3", "ifn4")) {
+    expect_s3_class(x <- forestables2forestindicators(ifn_output_example, version = version), "data.frame")
+    expect_s3_class(estimate_indicators(c("live_tree_density",
+                                          "live_tree_basal_area",
+                                          "mean_tree_height",
+                                          "dominant_tree_height",
+                                          "dominant_tree_diameter",
+                                          "quadratic_mean_tree_diameter",
+                                          "hart_becking_index"),
+                                        plant_dynamic_input = x,
+                                        plant_biomass_function = IFNallometry::IFNbiomass_forestindicators,
+                                        verbose = FALSE), "data.frame")
+  }
 })
 
 
