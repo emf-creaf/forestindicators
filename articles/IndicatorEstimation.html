@@ -314,7 +314,7 @@ data by calling function <code><a href="../reference/available_indicators.html">
 <span><span class="co">#&gt; [11] "live_tree_carbon_change_rate" "live_tree_carbon_stock"      </span></span>
 <span><span class="co">#&gt; [13] "live_tree_density"            "live_tree_volume_stock"      </span></span>
 <span><span class="co">#&gt; [15] "mean_tree_height"             "quadratic_mean_tree_diameter"</span></span>
-<span><span class="co">#&gt; [17] "timber_harvest"</span></span></code></pre></div>
+<span><span class="co">#&gt; [17] "timber_harvest"               "timber_harvest_carbon_rate"</span></span></code></pre></div>
 <p>Note that if variable names (or variable units) are incorrectly
 specified, then the available indicator list may be shorter than
 expected.</p>
@@ -505,7 +505,7 @@ set:</p>
 <span><span class="co">#&gt; [11] "live_tree_carbon_change_rate" "live_tree_carbon_stock"      </span></span>
 <span><span class="co">#&gt; [13] "live_tree_density"            "live_tree_volume_stock"      </span></span>
 <span><span class="co">#&gt; [15] "mean_tree_height"             "quadratic_mean_tree_diameter"</span></span>
-<span><span class="co">#&gt; [17] "timber_harvest"</span></span></code></pre></div>
+<span><span class="co">#&gt; [17] "timber_harvest"               "timber_harvest_carbon_rate"</span></span></code></pre></div>
 <p>And finally make a call to <code><a href="../reference/estimate_indicators.html">estimate_indicators()</a></code> with
 the desired indicators:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
@@ -552,9 +552,11 @@ data frame:</p>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">id_stand</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">x_ifn2</span><span class="op">$</span><span class="va">id_stand</span><span class="op">)</span></span>
 <span><span class="va">x_ifn23</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">x_ifn2_filt</span>, <span class="va">x_ifn3_filt</span><span class="op">)</span></span></code></pre></div>
 <p>Finally, we can use <code><a href="../reference/estimate_indicators.html">estimate_indicators()</a></code> to estimate
-carbon stocks in IFN2 and IFN3, as well as the rate of change:</p>
+carbon stocks in IFN2 and IFN3, as well as the rates of biomass change
+due to changes in living stock:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/estimate_indicators.html">estimate_indicators</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"live_tree_carbon_stock"</span>,<span class="st">"live_tree_carbon_change_rate"</span><span class="op">)</span>, </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/estimate_indicators.html">estimate_indicators</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"live_tree_carbon_stock"</span>,</span>
+<span>                      <span class="st">"live_tree_carbon_change_rate"</span><span class="op">)</span>, </span>
 <span>                    plant_dynamic_input <span class="op">=</span> <span class="va">x_ifn23</span>, </span>
 <span>                    plant_biomass_function <span class="op">=</span> <span class="fu">IFNallometry</span><span class="fu">::</span><span class="va"><a href="https://emf-creaf.github.io/IFNallometry/reference/IFNbiomass_forestindicators.html" class="external-link">IFNbiomass_forestindicators</a></span>,</span>
 <span>                    include_units <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>

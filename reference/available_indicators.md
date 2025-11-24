@@ -62,5 +62,5 @@ available_indicators(plant_dynamic_input = example_plant_dynamic_input)
 #> [11] "live_tree_carbon_change_rate" "live_tree_carbon_stock"      
 #> [13] "live_tree_density"            "live_tree_volume_stock"      
 #> [15] "mean_tree_height"             "quadratic_mean_tree_diameter"
-#> [17] "timber_harvest"              
+#> [17] "timber_harvest"               "timber_harvest_carbon_rate"  
 ```

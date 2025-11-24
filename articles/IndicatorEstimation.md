@@ -238,7 +238,7 @@ available_indicators(plant_dynamic_input = example_plant_dynamic_input)
 #> [11] "live_tree_carbon_change_rate" "live_tree_carbon_stock"      
 #> [13] "live_tree_density"            "live_tree_volume_stock"      
 #> [15] "mean_tree_height"             "quadratic_mean_tree_diameter"
-#> [17] "timber_harvest"
+#> [17] "timber_harvest"               "timber_harvest_carbon_rate"
 ```
 
 Note that if variable names (or variable units) are incorrectly
@@ -448,7 +448,7 @@ available_indicators(plant_dynamic_input = x_ifn2)
 #> [11] "live_tree_carbon_change_rate" "live_tree_carbon_stock"      
 #> [13] "live_tree_density"            "live_tree_volume_stock"      
 #> [15] "mean_tree_height"             "quadratic_mean_tree_diameter"
-#> [17] "timber_harvest"
+#> [17] "timber_harvest"               "timber_harvest_carbon_rate"
 ```
 
 And finally make a call to
@@ -506,11 +506,12 @@ x_ifn23 <- dplyr::bind_rows(x_ifn2_filt, x_ifn3_filt)
 
 Finally, we can use
 [`estimate_indicators()`](https://emf-creaf.github.io/forestindicators/reference/estimate_indicators.md)
-to estimate carbon stocks in IFN2 and IFN3, as well as the rate of
-change:
+to estimate carbon stocks in IFN2 and IFN3, as well as the rates of
+biomass change due to changes in living stock:
 
 ``` r
-estimate_indicators(c("live_tree_carbon_stock","live_tree_carbon_change_rate"), 
+estimate_indicators(c("live_tree_carbon_stock",
+                      "live_tree_carbon_change_rate"), 
                     plant_dynamic_input = x_ifn23, 
                     plant_biomass_function = IFNallometry::IFNbiomass_forestindicators,
                     include_units = TRUE)
