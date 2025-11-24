@@ -114,9 +114,9 @@ The first step is to decide which indicators are to be estimated. The list of al
 available_indicators(plant_dynamic_input = example_plant_dynamic_input)
 ```
 
-Say we decide to estimate the *timber harvest volume* (i.e. indicator `"timber_harvest"`) and the *basal area of living trees* (i.e. indicator `"live_tree_basal_area"`).
+Note that if variable names (or variable units) are incorrectly specified, then the available indicator list may be shorter than expected. 
 
-We may need to check which data inputs are required, their units, etc. We can find this information using function `show_information()`, for example:
+Say we decide to estimate the *timber harvest volume* (i.e. indicator `"timber_harvest"`) and the *basal area of living trees* (i.e. indicator `"live_tree_basal_area"`). We may need to check which data inputs are required, their units, etc. We can find this information using function `show_information()`, for example:
 
 ```{r}
 show_information("timber_harvest")
@@ -125,7 +125,7 @@ show_information("timber_harvest")
 
 ### Step 2: Assemble inputs and define values for additional parameters
 
-Once the requested format and content of inputs is know, it is the responsibility of the user to build the necessary data frames to be used as inputs. In our case, we will use `example_plant_dynamic_input` that already contains the necessary data for the estimation of the two indicators.
+Once the requested format and content of inputs is know, it is the responsibility of the user to build the necessary data frames to be used as inputs. Variable names and types should follow the guidelines of `show_information()`. Variable units can be specified using package **units** (and in this case unit correspondence will be checked), but they are not compulsory. In our case, we will use `example_plant_dynamic_input` that already contains the necessary data for the estimation of the two indicators.
 
 We will normally need to define additional parameters to fine-tune the estimation of indicators, For that, we define a **named list** where each element corresponds to a different indicator and, in turn, contains a named list of parameters. In our case:
 
@@ -145,7 +145,7 @@ res <- estimate_indicators(indicators = c("timber_harvest", "live_tree_basal_are
                            additional_params = params)
 ```
 
-Note that `"timber_harvest"` requires specifying the function to be used to calculate timber volumes, i.e. `timber_volume_function`, for which in our case we use a predefined package function.
+Note that `"timber_harvest"` requires specifying the function to be used to calculate timber volumes, i.e. `timber_volume_function`, for which in our case we use a predefined  function from package [**IFNallometry**](https://emf-creaf.github.io/IFNallometry/).
 
 The result of the estimation is the following:
 ```{r}
@@ -166,25 +166,25 @@ estimate_indicators(indicators = c("timber_harvest", "live_tree_basal_area"),
 
 ## Example with data from forestables
 
+Let us now present a more real example case. We will use forest inventory data generated from package [**forestables**](https://emf-creaf.github.io/forestables/):
+
 ```{r}
 library(forestables)
 ifn_output_example
 ```
 
-
+A wrapper function, called `forestables2forestindicators()` has been included to transform **forestables** output objects into data frames suitable for **forestindicators**:
 ```{r}
 x <- forestables2forestindicators(ifn_output_example, version = "ifn2")
-```
-
-
-```{r}
 x
 ```
 
+We now determine the indicators that can be evaluated with this data set:
 ```{r}
 available_indicators(plant_dynamic_input = x)
 ```
 
+And finally make a call to `estimate_indicators()` with the desired indicators:
 ```{r}
 estimate_indicators(c("live_tree_density", 
                       "live_tree_basal_area",

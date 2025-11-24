@@ -44,7 +44,9 @@ show_information("live_tree_basal_area")
 
 ### Step 2: Assemble inputs and define values for additional parameters
 
-Once the requested format and content of inputs is know, it is the responsibility of the user to build the necessary data frames to be used as inputs. We will normally need to define additional parameters to fine-tune the estimation of indicators, For that, we define a **named list** where each element corresponds to a different indicator and, in turn, contains a named list of parameters:
+Once the requested format and content of inputs is know, it is the responsibility of the user to build the necessary data frames to be used as inputs. Variable names and types should follow the guidelines of `show_information()`. Variable units can be specified using package **units** (and in this case unit correspondence will be checked), but they are not compulsory.
+
+We will sometimes need to define additional parameters to fine-tune the estimation of indicators. For that, users should define a **named list** where each element corresponds to a different indicator and, in turn, contains a named list of parameters, e.g.:
 
 ```{r}
 params <- list(live_tree_basal_area = list(min_dbh = 8),
@@ -67,6 +69,8 @@ The result of the estimation is the following:
 ```{r}
 res
 ```
+
+Parameter `include_units` was set to `TRUE` to include indicator output units in the resulting `tibble`.
 
 ## Documentation and training
 
