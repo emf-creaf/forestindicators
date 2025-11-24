@@ -29,7 +29,7 @@ available_indicators<-function(stand_static_input = NULL,
                                 stand_dynamic_input,
                                 plant_static_input,
                                 plant_dynamic_input,
-                                verbose = FALSE,
+                                progress = FALSE,
                                 estimation = FALSE)
   }
   return(indicators[allowed])
@@ -129,13 +129,13 @@ available_indicators<-function(stand_static_input = NULL,
                         stand_dynamic_input = NULL,
                         plant_static_input = NULL,
                         plant_dynamic_input = NULL,
-                        verbose = FALSE,
+                        progress = FALSE,
                         estimation = TRUE) {
 
   row <- which(indicator_definition$indicator == indicator)
 
   # Check structure of indicators
-  if(verbose) cli::cli_progress_step(paste0("Checking inputs for '", indicator,"'."))
+  if(progress) cli::cli_progress_step(paste0("Checking inputs for '", indicator,"'."))
   stand_static_variable_string <- indicator_definition$stand_static_variables[row]
   if(!is.na(stand_static_variable_string)) {
     if(is.null(stand_static_input)) {

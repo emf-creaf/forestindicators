@@ -14,7 +14,7 @@ estimate_indicators(
   plant_biomass_function = NULL,
   additional_params = list(),
   include_units = FALSE,
-  verbose = TRUE
+  progress = FALSE
 )
 }
 \arguments{
@@ -36,7 +36,7 @@ estimate_indicators(
 
 \item{include_units}{A logical flag to include output units for indicators.}
 
-\item{verbose}{A logical flag to provide information on progress.}
+\item{progress}{A logical flag to provide information on progress.}
 }
 \value{
 A \code{\link[tibble]{tibble}} with the following columns:
@@ -59,7 +59,7 @@ If columns of the input data frames have defined units, the package will check t
 ## Call indicator estimation
 estimate_indicators(c("live_tree_basal_area", "dead_tree_basal_area"),
                     plant_dynamic_input = example_plant_dynamic_input,
-                    verbose = TRUE)
+                    progress = TRUE)
 
 }
 \seealso{

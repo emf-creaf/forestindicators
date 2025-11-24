@@ -11,7 +11,7 @@
 #' @param plant_biomass_function Optional function supplied for whole-plant biomass calculation.
 #' @param additional_params Optional named list where each element is in turn a list of additional parameters required for internal indicator functions. The additional parameters of each indicator are found in table \code{\link{additional_parameters}}.
 #' @param include_units A logical flag to include output units for indicators.
-#' @param verbose A logical flag to provide information on progress.
+#' @param progress A logical flag to provide information on progress.
 #'
 #' @returns A \code{\link[tibble]{tibble}} with the following columns:
 #'   \itemize{
@@ -32,7 +32,7 @@
 #' ## Call indicator estimation
 #' estimate_indicators(c("live_tree_basal_area", "dead_tree_basal_area"),
 #'                     plant_dynamic_input = example_plant_dynamic_input,
-#'                     verbose = TRUE)
+#'                     progress = TRUE)
 #'
 #' @export
 #'
@@ -45,7 +45,7 @@ estimate_indicators <- function(indicators,
                                 plant_biomass_function = NULL,
                                 additional_params = list(),
                                 include_units = FALSE,
-                                verbose = TRUE) {
+                                progress = FALSE) {
 
   # Check indicator string against available indicators
   if(!is.character(indicators)) cli::cli_abort("'indicators' should be a character vector")
@@ -55,7 +55,7 @@ estimate_indicators <- function(indicators,
       cli::cli_abort(paste0("Indicator '", indicators[i], "' was not found in the set of available indicators."))
     }
   }
-  if(verbose) cli::cli_progress_step("Checking overall inputs")
+  if(progress) cli::cli_progress_step("Checking overall inputs")
   .check_data_inputs(stand_static_input,
                      stand_dynamic_input,
                      plant_static_input,
@@ -74,7 +74,7 @@ estimate_indicators <- function(indicators,
                   stand_dynamic_input,
                   plant_static_input,
                   plant_dynamic_input,
-                  verbose = verbose,
+                  progress = progress,
                   estimation = TRUE)
 
     indicator_function_name <- paste0(".", indicator)
@@ -82,7 +82,7 @@ estimate_indicators <- function(indicators,
     indicator_function <- get(indicator_function_name)
 
 
-    if(verbose) cli::cli_progress_step(paste0("Processing '", indicator,"'."))
+    if(progress) cli::cli_progress_step(paste0("Processing '", indicator,"'."))
     argList <- list(stand_static_input = stand_static_input,
                     stand_dynamic_input = stand_dynamic_input,
                     plant_static_input = plant_static_input,
@@ -109,6 +109,6 @@ estimate_indicators <- function(indicators,
     }
 
   }
-  if(verbose) cli::cli_progress_done()
+  if(progress) cli::cli_progress_done()
   return(result)
 }

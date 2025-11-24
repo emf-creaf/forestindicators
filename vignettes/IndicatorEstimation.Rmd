@@ -159,8 +159,7 @@ estimate_indicators(indicators = c("timber_harvest", "live_tree_basal_area"),
                     plant_dynamic_input = example_plant_dynamic_input,
                     timber_volume_function = IFNallometry::IFNvolume_forestindicators,
                     additional_params = params,
-                    include_units = TRUE,
-                    verbose = FALSE)
+                    include_units = TRUE)
 ```
 
 
@@ -194,8 +193,7 @@ estimate_indicators(c("live_tree_density",
                       "quadratic_mean_tree_diameter",
                       "hart_becking_index"), 
                     plant_dynamic_input = x, 
-                    include_units = TRUE,
-                    verbose = FALSE)
+                    include_units = TRUE)
 ```
 
 

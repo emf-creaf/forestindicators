@@ -19,7 +19,7 @@ test_that("several indicators can be calculated from forestables", {
                                           "hart_becking_index"),
                                         plant_dynamic_input = x,
                                         plant_biomass_function = IFNallometry::IFNbiomass_forestindicators,
-                                        verbose = FALSE), "data.frame")
+                                        progress = FALSE), "data.frame")
   }
 })
 
@@ -44,7 +44,7 @@ test_that("several indicators can be calculated from medfate/medfateland", {
   meteo_01_02 <- rbind(meteo2001, meteo2002)
   #Initialize control parameters
   control <- defaultControl("Granier")
-  control$verbose <- FALSE
+  control$progress <- FALSE
   #Define soil with default soil params (4 layers)
   examplesoil <- defaultSoilParams(4)
   #Call simulation function
@@ -61,13 +61,13 @@ test_that("several indicators can be calculated from medfate/medfateland", {
                                        "quadratic_mean_tree_diameter",
                                        "hart_becking_index"),
                                      plant_dynamic_input = x,
-                                     verbose = FALSE), "data.frame")
+                                     progress = FALSE), "data.frame")
 
   expect_s3_class(estimate_indicators(c("live_tree_volume_stock"),
                                       plant_dynamic_input = x,
                                       timber_volume_function = IFNallometry::IFNvolume_forestindicators,
                                       additional_params = list(live_tree_volume_stock=list(province = 8)),
-                                      verbose = FALSE), "data.frame")
+                                      progress = FALSE), "data.frame")
 
   # medfateland
   library(medfateland)
@@ -84,7 +84,7 @@ test_that("several indicators can be calculated from medfate/medfateland", {
                                         "quadratic_mean_tree_diameter",
                                         "hart_becking_index"),
                                       plant_dynamic_input = x,
-                                      verbose = FALSE), "data.frame")
+                                      progress = FALSE), "data.frame")
 
   # Creates scenario with one management unit and annual demand for P. nigra
   scen <- medfateland::create_management_scenario(1, c("Pinus nigra/Pinus sylvestris" = 2300))
@@ -105,7 +105,7 @@ test_that("several indicators can be calculated from medfate/medfateland", {
                                         "quadratic_mean_tree_diameter",
                                         "hart_becking_index"),
                                       plant_dynamic_input = x,
-                                      verbose = FALSE), "data.frame")
+                                      progress = FALSE), "data.frame")
 
   ## TOO LONG to run
   # data("example_watershed")
@@ -129,7 +129,7 @@ test_that("several indicators can be calculated from medfate/medfateland", {
   #                                       "quadratic_mean_tree_diameter",
   #                                       "hart_becking_index"),
   #                                     plant_dynamic_input = x,
-  #                                     verbose = FALSE), "data.frame")
+  #                                     progress = FALSE), "data.frame")
 
 })
 
