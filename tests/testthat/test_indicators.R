@@ -209,6 +209,27 @@ test_that("live tree biomass stock calculation",{
                                    progress = FALSE))
 })
 
+test_that("live tree carbon change rate calculation",{
+  testthat::skip_on_ci()
+  testthat::skip_on_cran()
+  testthat::skip_if_not_installed("IFNallometry")
+  expect_error(estimate_indicators("live_tree_carbon_change_rate", data.frame(id_stand = "stand 1"), progress = FALSE))
+  expect_error(estimate_indicators("live_tree_carbon_change_rate",
+                                   plant_dynamic_input = example_plant_dynamic_input,
+                                   progress = FALSE))
+  expect_s3_class(estimate_indicators("live_tree_carbon_change_rate",
+                                      plant_dynamic_input = example_plant_dynamic_input,
+                                      plant_biomass_function = IFNallometry::IFNbiomass_forestindicators,
+                                      progress = FALSE), "data.frame")
+  expect_s3_class(estimate_indicators("live_tree_carbon_change_rate",
+                                      plant_dynamic_input = example_plant_dynamic_input_units,
+                                      plant_biomass_function = IFNallometry::IFNbiomass_forestindicators,
+                                      progress = FALSE), "data.frame")
+  expect_error(estimate_indicators("live_tree_carbon_change_rate",
+                                   plant_dynamic_input = example_plant_dynamic_input_wrong_units,
+                                   plant_biomass_function = IFNallometry::IFNbiomass_forestindicators,
+                                   progress = FALSE))
+})
 test_that("timber harvest calculation",{
   testthat::skip_on_ci()
   testthat::skip_on_cran()
