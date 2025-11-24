@@ -163,24 +163,28 @@ estimate_indicators(indicators = c("timber_harvest", "live_tree_basal_area"),
 ```
 
 
-## Example with data from forestables
+## Real example with data from package forestables
 
-Let us now present a more real example case. We will use forest inventory data generated from package [**forestables**](https://emf-creaf.github.io/forestables/):
+Let us now present a more real example case. We will use forest inventory example data generated from package [**forestables**](https://emf-creaf.github.io/forestables/). This data set includes data for forest plots in Barcelona province in three Spanish forest inventory surveys (IFN2, IFN3 and IFN4):
 
 ```{r}
 library(forestables)
 ifn_output_example
 ```
 
-A wrapper function, called `forestables2forestindicators()` has been included to transform **forestables** output objects into data frames suitable for **forestindicators**:
+### Reshaping data for forestindicators
+
+A wrapper function, called `forestables2forestindicators()` has been included to transform **forestables** output objects into data frames suitable for **forestindicators**. We start by reshaping data from IFN2:
 ```{r}
-x <- forestables2forestindicators(ifn_output_example, version = "ifn2")
-x
+x_ifn2 <- forestables2forestindicators(ifn_output_example, version = "ifn2")
+x_ifn2
 ```
+
+### Estimating indicators for a single inventory survey
 
 We now determine the indicators that can be evaluated with this data set:
 ```{r}
-available_indicators(plant_dynamic_input = x)
+available_indicators(plant_dynamic_input = x_ifn2)
 ```
 
 And finally make a call to `estimate_indicators()` with the desired indicators:
@@ -192,8 +196,31 @@ estimate_indicators(c("live_tree_density",
                       "dominant_tree_diameter",
                       "quadratic_mean_tree_diameter",
                       "hart_becking_index"), 
-                    plant_dynamic_input = x, 
+                    plant_dynamic_input = x_ifn2, 
                     include_units = TRUE)
 ```
 
+### Estimating change rates between inventory surveys
 
+Here we illustrate the calculation of rates in carbon stock of living trees, between two consecutive forest inventories: IFN2-IFN3. We first reshape IFN3 as we did with IFN2:
+
+```{r}
+x_ifn3 <- forestables2forestindicators(ifn_output_example, version = "ifn3")
+```
+
+We then filter common forest plots and merge the result into a single data frame:
+```{r}
+x_ifn2_filt <- x_ifn2 |>
+  dplyr::filter(id_stand %in% x_ifn3$id_stand)
+x_ifn3_filt <- x_ifn3 |>
+  dplyr::filter(id_stand %in% x_ifn2$id_stand)
+x_ifn23 <- dplyr::bind_rows(x_ifn2_filt, x_ifn3_filt)
+```
+
+Finally, we can use `estimate_indicators()` to estimate carbon stocks in IFN2 and IFN3, as well as the rate of change:
+```{r}
+estimate_indicators(c("live_tree_carbon_stock","live_tree_carbon_change_rate"), 
+                    plant_dynamic_input = x_ifn23, 
+                    plant_biomass_function = IFNallometry::IFNbiomass_forestindicators,
+                    include_units = TRUE)
+```
