@@ -109,8 +109,7 @@ as follows:
 res <- estimate_indicators(indicators = c("live_tree_basal_area", "live_tree_density"),
                            plant_dynamic_input = example_plant_dynamic_input,
                            additional_params = params,
-                           include_units = TRUE,
-                           verbose = FALSE)
+                           include_units = TRUE)
 ```
 
 The result of the estimation is the following:

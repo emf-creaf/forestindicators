@@ -16,7 +16,7 @@ estimate_indicators(
   plant_biomass_function = NULL,
   additional_params = list(),
   include_units = FALSE,
-  verbose = TRUE
+  progress = FALSE
 )
 ```
 
@@ -70,7 +70,7 @@ estimate_indicators(
 
   A logical flag to include output units for indicators.
 
-- verbose:
+- progress:
 
   A logical flag to provide information on progress.
 
@@ -105,20 +105,20 @@ check those against the units of the required variables
 ## Call indicator estimation
 estimate_indicators(c("live_tree_basal_area", "dead_tree_basal_area"),
                     plant_dynamic_input = example_plant_dynamic_input,
-                    verbose = TRUE)
+                    progress = TRUE)
 #> ℹ Checking overall inputs
 #> ℹ Checking inputs for 'live_tree_basal_area'.
-#> ✔ Checking inputs for 'live_tree_basal_area'. [9ms]
+#> ✔ Checking inputs for 'live_tree_basal_area'. [5ms]
 #> 
 #> ℹ Checking overall inputs
-#> ✔ Checking overall inputs [42ms]
+#> ✔ Checking overall inputs [18ms]
 #> 
 #> ℹ Processing 'live_tree_basal_area'.
 #> ℹ Checking inputs for 'dead_tree_basal_area'.
-#> ✔ Checking inputs for 'dead_tree_basal_area'. [6ms]
+#> ✔ Checking inputs for 'dead_tree_basal_area'. [5ms]
 #> 
 #> ℹ Processing 'live_tree_basal_area'.
-#> ✔ Processing 'live_tree_basal_area'. [43ms]
+#> ✔ Processing 'live_tree_basal_area'. [44ms]
 #> 
 #> ℹ Processing 'dead_tree_basal_area'.
 #> ✔ Processing 'dead_tree_basal_area'. [20ms]

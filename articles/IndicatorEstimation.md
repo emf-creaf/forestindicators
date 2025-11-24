@@ -329,20 +329,6 @@ res <- estimate_indicators(indicators = c("timber_harvest", "live_tree_basal_are
                            plant_dynamic_input = example_plant_dynamic_input,
                            timber_volume_function = IFNallometry::IFNvolume_forestindicators,
                            additional_params = params)
-#> ℹ Checking overall inputs
-#> ℹ Checking inputs for 'timber_harvest'.
-#> ✔ Checking inputs for 'timber_harvest'. [5ms]
-#> 
-#> ℹ Checking overall inputs✔ Checking overall inputs [28ms]
-#> 
-#> ℹ Processing 'timber_harvest'.
-#> ℹ Checking inputs for 'live_tree_basal_area'.
-#> ✔ Checking inputs for 'live_tree_basal_area'. [10ms]
-#> 
-#> ℹ Processing 'timber_harvest'.✔ Processing 'timber_harvest'. [133ms]
-#> 
-#> ℹ Processing 'live_tree_basal_area'.
-#> ✔ Processing 'live_tree_basal_area'. [25ms]
 ```
 
 Note that `"timber_harvest"` requires specifying the function to be used
@@ -373,8 +359,7 @@ estimate_indicators(indicators = c("timber_harvest", "live_tree_basal_area"),
                     plant_dynamic_input = example_plant_dynamic_input,
                     timber_volume_function = IFNallometry::IFNvolume_forestindicators,
                     additional_params = params,
-                    include_units = TRUE,
-                    verbose = FALSE)
+                    include_units = TRUE)
 #> # A tibble: 6 × 4
 #>   id_stand date       timber_harvest live_tree_basal_area
 #>   <chr>    <date>           [m^3/ha]             [m^2/ha]
@@ -470,8 +455,7 @@ estimate_indicators(c("live_tree_density",
                       "quadratic_mean_tree_diameter",
                       "hart_becking_index"), 
                     plant_dynamic_input = x, 
-                    include_units = TRUE,
-                    verbose = FALSE)
+                    include_units = TRUE)
 #> # A tibble: 2,972 × 9
 #>    id_stand   date       live_tree_density live_tree_basal_area mean_tree_height
 #>    <chr>      <date>                [1/ha]             [m^2/ha]              [m]

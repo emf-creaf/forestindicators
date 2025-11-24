@@ -134,7 +134,7 @@ forestindicators:::.dominant_tree_height
 #>   res <- df |> dplyr::select(id_stand, date, dominant_tree_height)
 #>   return(res)
 #> }
-#> <bytecode: 0x5a74ecea6120>
+#> <bytecode: 0x60cf48bfa130>
 #> <environment: namespace:forestindicators>
 ```
 
