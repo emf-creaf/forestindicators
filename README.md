@@ -39,9 +39,10 @@ available_indicators(plant_dynamic_input = example_plant_dynamic_input)
 #>  [5] "density_dead_wood"            "dominant_tree_diameter"      
 #>  [7] "dominant_tree_height"         "hart_becking_index"          
 #>  [9] "live_tree_basal_area"         "live_tree_biomass_stock"     
-#> [11] "live_tree_carbon_stock"       "live_tree_density"           
-#> [13] "live_tree_volume_stock"       "mean_tree_height"            
-#> [15] "quadratic_mean_tree_diameter" "timber_harvest"
+#> [11] "live_tree_carbon_change_rate" "live_tree_carbon_stock"      
+#> [13] "live_tree_density"            "live_tree_volume_stock"      
+#> [15] "mean_tree_height"             "quadratic_mean_tree_diameter"
+#> [17] "timber_harvest"               "timber_harvest_carbon_rate"
 ```
 
 We may need to check which data inputs are required, their units, etc.
@@ -121,12 +122,12 @@ res
 #> # A tibble: 6 × 4
 #>   id_stand date       live_tree_basal_area live_tree_density
 #>   <chr>    <date>                 [m^2/ha]            [1/ha]
-#> 1 080001   2025-01-01                306.               3282
-#> 2 080001   2025-02-01                292.               3000
-#> 3 080001   2025-03-01                226.               2285
-#> 4 080005   2025-01-01                 79.3              1489
-#> 5 080005   2025-02-01                171.               2249
-#> 6 080005   2025-03-01                151.               1885
+#> 1 080001   2023-01-01                107.               1488
+#> 2 080001   2024-01-01                119.               1891
+#> 3 080001   2025-01-01                169.               1909
+#> 4 080005   2023-01-01                162.               1311
+#> 5 080005   2024-01-01                 24.3               653
+#> 6 080005   2025-01-01                240.               1949
 ```
 
 Parameter `include_units` was set to `TRUE` to include indicator output

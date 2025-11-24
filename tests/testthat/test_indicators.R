@@ -253,6 +253,27 @@ test_that("timber harvest calculation",{
                                       progress = FALSE), "data.frame")
 })
 
+test_that("timber harvest carbon rate calculation",{
+  testthat::skip_on_ci()
+  testthat::skip_on_cran()
+  testthat::skip_if_not_installed("IFNallometry")
+  expect_error(estimate_indicators("timber_harvest_carbon_rate", data.frame(id_stand = "stand 1"), progress = FALSE))
+  expect_error(estimate_indicators("timber_harvest_carbon_rate",
+                                   plant_dynamic_input = example_plant_dynamic_input,
+                                   progress = FALSE))
+  expect_s3_class(estimate_indicators("timber_harvest_carbon_rate",
+                                      plant_dynamic_input = example_plant_dynamic_input,
+                                      plant_biomass_function = IFNallometry::IFNbiomass_forestindicators,
+                                      progress = FALSE), "data.frame")
+  expect_s3_class(estimate_indicators("timber_harvest_carbon_rate",
+                                      plant_dynamic_input = example_plant_dynamic_input_units,
+                                      plant_biomass_function = IFNallometry::IFNbiomass_forestindicators,
+                                      progress = FALSE), "data.frame")
+  expect_error(estimate_indicators("timber_harvest_carbon_rate",
+                                   plant_dynamic_input = example_plant_dynamic_input_wrong_units,
+                                   plant_biomass_function = IFNallometry::IFNbiomass_forestindicators,
+                                   progress = FALSE))
+})
 
 test_that("density dead wood calculation",{
   additional_params <- list(density_dead_wood = list(max_tree_dbh = 10))
