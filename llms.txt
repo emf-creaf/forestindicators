@@ -179,6 +179,10 @@ Modelling Group* at [*CTFC*](https://www.ctfc.cat/) (in Spain).
   e Innovación (PID2023-152644NB-I00). **Duration from**: 01/09/2024
   **to**: 31/08/2025. **PI**: Miquel De Cáceres/Josep Mª Espelta.
 
+- **Research project**: Bosques del siglo XXI, empoderados, innovadores
+  y con emprendimiento (PRISMA). **Financial Entity**: Fundación
+  Biodiversidad. **Duration from**: 01/01/2024 **to**: 31/12/2025.
+
 # Package index
 
 ## Indicator estimation
@@ -222,6 +226,8 @@ Functions to adapt the data structures from other packages
 
 - [`forestables2forestindicators()`](https://emf-creaf.github.io/forestindicators/reference/forestables2forestindicators.md)
   : Wrapper function for structures obtained with forestables
+- [`formes2forestindicators()`](https://emf-creaf.github.io/forestindicators/reference/formes2forestindicators.md)
+  : Wrapper function for simulations with package FORMES
 - [`medfate2forestindicators()`](https://emf-creaf.github.io/forestindicators/reference/medfate2forestindicators.md)
   : Wrapper function for simulations with package medfate or medfateland
 

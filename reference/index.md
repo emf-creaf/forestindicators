@@ -41,5 +41,7 @@ Functions to adapt the data structures from other packages
 
 - [`forestables2forestindicators()`](https://emf-creaf.github.io/forestindicators/reference/forestables2forestindicators.md)
   : Wrapper function for structures obtained with forestables
+- [`formes2forestindicators()`](https://emf-creaf.github.io/forestindicators/reference/formes2forestindicators.md)
+  : Wrapper function for simulations with package FORMES
 - [`medfate2forestindicators()`](https://emf-creaf.github.io/forestindicators/reference/medfate2forestindicators.md)
   : Wrapper function for simulations with package medfate or medfateland
