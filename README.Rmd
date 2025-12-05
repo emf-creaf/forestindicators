@@ -30,14 +30,14 @@ remotes::install_github("emf-creaf/forestindicators")
 
 The first step is to decide which indicators are to be estimated. You can examine the names of the indicators in the package that could be estimated with your data by calling function `available_indicators()`:
 
-```{r}
+```{r load}
 library(forestindicators)
 available_indicators(plant_dynamic_input = example_plant_dynamic_input)
 ```
 
 We may need to check which data inputs are required, their units, etc. for a particular indicator. We can find this information using function `show_information()`, for example:
 
-```{r}
+```{r show_info}
 show_information("live_tree_basal_area")
 ```
 
@@ -48,7 +48,7 @@ Once the requested format and content of inputs is know, it is the responsibilit
 
 We will sometimes need to define additional parameters to fine-tune the estimation of indicators. For that, users should define a **named list** where each element corresponds to a different indicator and, in turn, contains a named list of parameters, e.g.:
 
-```{r}
+```{r params}
 params <- list(live_tree_basal_area = list(min_dbh = 8),
                live_tree_density = list(min_dbh = 8))
 ```
@@ -99,3 +99,4 @@ knitr::include_graphics("man/figures/institution_logos.png")
 + **Research project**: Improving the modelling of key forest dynamic
 processes to forecast long-term changes in Mediterranean forests under climate change (IMPROMED). **Financial Entity**: Ministerio de Ciencia e Innovación (PID2023-152644NB-I00). **Duration from**: 01/09/2024 **to**: 31/08/2025. **PI**: Miquel De Cáceres/Josep Mª Espelta.
 
++ **Research project**: Bosques del siglo XXI, empoderados, innovadores y con emprendimiento (PRISMA). **Financial Entity**: Fundación Biodiversidad. **Duration from**: 01/01/2024 **to**: 31/12/2025. 
