@@ -178,3 +178,8 @@ Modelling Group* at [*CTFC*](https://www.ctfc.cat/) (in Spain).
   climate change (IMPROMED). **Financial Entity**: Ministerio de Ciencia
   e Innovación (PID2023-152644NB-I00). **Duration from**: 01/09/2024
   **to**: 31/08/2025. **PI**: Miquel De Cáceres/Josep Mª Espelta.
+
+- **Research project**: Bosques del siglo XXI, empoderados, innovadores
+  y con emprendimiento (PRISMA). **Financial Entity**: Fundación
+  Biodiversidad. **Duration from**: 01/01/2024 **to**: 31/12/2025.
+  **Beneficiary**: Núria Aquilué (CTFC).
