@@ -182,3 +182,4 @@ Modelling Group* at [*CTFC*](https://www.ctfc.cat/) (in Spain).
 - **Research project**: Bosques del siglo XXI, empoderados, innovadores
   y con emprendimiento (PRISMA). **Financial Entity**: Fundación
   Biodiversidad. **Duration from**: 01/01/2024 **to**: 31/12/2025.
+  **Beneficiary**: Núria Aquilué (CTFC).

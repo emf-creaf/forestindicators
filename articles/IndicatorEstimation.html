@@ -60,7 +60,7 @@
                         <h4 data-toc-skip class="author">Miquel De
 Cáceres / Núria Aquilué</h4>
             
-            <h4 data-toc-skip class="date">2025-12-05</h4>
+            <h4 data-toc-skip class="date">2025-12-06</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/emf-creaf/forestindicators/blob/HEAD/vignettes/IndicatorEstimation.Rmd" class="external-link"><code>vignettes/IndicatorEstimation.Rmd</code></a></small>
       <div class="d-none name"><code>IndicatorEstimation.Rmd</code></div>
@@ -397,7 +397,7 @@ calling function <code><a href="../reference/estimate_indicators.html">estimate_
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimate_indicators.html">estimate_indicators</a></span><span class="op">(</span>indicators <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"timber_harvest_volume"</span>, <span class="st">"live_tree_basal_area"</span><span class="op">)</span>,</span>
 <span>                           plant_dynamic_input <span class="op">=</span> <span class="va">example_plant_dynamic_input</span>,</span>
-<span>                           timber_volume_function <span class="op">=</span> <span class="fu">IFNallometry</span><span class="fu">::</span><span class="va"><a href="https://emf-creaf.github.io/IFNallometry/reference/IFNvolume_forestindicators.html" class="external-link">IFNvolume_forestindicators</a></span>,</span>
+<span>                           timber_volume_function <span class="op">=</span> <span class="fu">IFNallometry</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/IFNallometry/man/IFNvolume_forestindicators.html" class="external-link">IFNvolume_forestindicators</a></span>,</span>
 <span>                           additional_params <span class="op">=</span> <span class="va">params</span><span class="op">)</span></span></code></pre></div>
 <p>Note that <code>"timber_harvest_volume"</code> requires specifying
 the function to be used to calculate timber volumes,
@@ -423,7 +423,7 @@ inclusion of indicator units in the output tibble:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/estimate_indicators.html">estimate_indicators</a></span><span class="op">(</span>indicators <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"timber_harvest_volume"</span>, <span class="st">"live_tree_basal_area"</span><span class="op">)</span>,</span>
 <span>                    plant_dynamic_input <span class="op">=</span> <span class="va">example_plant_dynamic_input</span>,</span>
-<span>                    timber_volume_function <span class="op">=</span> <span class="fu">IFNallometry</span><span class="fu">::</span><span class="va"><a href="https://emf-creaf.github.io/IFNallometry/reference/IFNvolume_forestindicators.html" class="external-link">IFNvolume_forestindicators</a></span>,</span>
+<span>                    timber_volume_function <span class="op">=</span> <span class="fu">IFNallometry</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/IFNallometry/man/IFNvolume_forestindicators.html" class="external-link">IFNvolume_forestindicators</a></span>,</span>
 <span>                    additional_params <span class="op">=</span> <span class="va">params</span>,</span>
 <span>                    include_units <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 4</span></span></span>
@@ -452,7 +452,7 @@ per year:</p>
 <span>               timber_harvest_volume_rate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>province <span class="op">=</span> <span class="fl">8</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/estimate_indicators.html">estimate_indicators</a></span><span class="op">(</span>indicators <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"timber_harvest_volume"</span>, <span class="st">"timber_harvest_volume_rate"</span><span class="op">)</span>,</span>
 <span>                    plant_dynamic_input <span class="op">=</span> <span class="va">example_plant_dynamic_input</span>,</span>
-<span>                    timber_volume_function <span class="op">=</span> <span class="fu">IFNallometry</span><span class="fu">::</span><span class="va"><a href="https://emf-creaf.github.io/IFNallometry/reference/IFNvolume_forestindicators.html" class="external-link">IFNvolume_forestindicators</a></span>,</span>
+<span>                    timber_volume_function <span class="op">=</span> <span class="fu">IFNallometry</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/IFNallometry/man/IFNvolume_forestindicators.html" class="external-link">IFNvolume_forestindicators</a></span>,</span>
 <span>                    additional_params <span class="op">=</span> <span class="va">params</span>,</span>
 <span>                    include_units <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 4</span></span></span>
@@ -598,8 +598,8 @@ due to changes in living stock:</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/estimate_indicators.html">estimate_indicators</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"live_tree_carbon_stock"</span>,</span>
 <span>                      <span class="st">"live_tree_carbon_change_rate"</span><span class="op">)</span>, </span>
 <span>                    plant_dynamic_input <span class="op">=</span> <span class="va">x_ifn23</span>, </span>
-<span>                    plant_biomass_function <span class="op">=</span> <span class="fu">IFNallometry</span><span class="fu">::</span><span class="va"><a href="https://emf-creaf.github.io/IFNallometry/reference/IFNbiomass_forestindicators.html" class="external-link">IFNbiomass_forestindicators</a></span>,</span>
-<span>                    timber_volume_function <span class="op">=</span> <span class="fu">IFNallometry</span><span class="fu">::</span><span class="va"><a href="https://emf-creaf.github.io/IFNallometry/reference/IFNvolume_forestindicators.html" class="external-link">IFNvolume_forestindicators</a></span>,</span>
+<span>                    plant_biomass_function <span class="op">=</span> <span class="fu">IFNallometry</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/IFNallometry/man/IFNbiomass_forestindicators.html" class="external-link">IFNbiomass_forestindicators</a></span>,</span>
+<span>                    timber_volume_function <span class="op">=</span> <span class="fu">IFNallometry</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/IFNallometry/man/IFNvolume_forestindicators.html" class="external-link">IFNvolume_forestindicators</a></span>,</span>
 <span>                    include_units <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> 48 negative stem biomass values truncated to zero for taxon 41 with model 1.</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> 3 negative stem biomass values truncated to zero for taxon 41 with model 1.</span></span>
