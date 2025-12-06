@@ -3,6 +3,7 @@
 export(available_indicators)
 export(estimate_indicators)
 export(forestables2forestindicators)
+export(formes2forestindicators)
 export(medfate2forestindicators)
 export(show_information)
 import(cli)
