@@ -28,4 +28,5 @@ reference:
   desc: Functions to adapt the data structures from other packages
 - contents:
   - forestables2forestindicators
+  - formes2forestindicators
   - medfate2forestindicators
