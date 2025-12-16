@@ -1,6 +1,7 @@
 id: 'forestindicators'
+title: forestindicators
 emf_type: softwork
-emf_public: false
+emf_public: true
 emf_automatized: true
 emf_reproducible: false
 emf_draft: true
@@ -11,10 +12,12 @@ nodes: ''
 authors:
 - mcaceres
 - naquilue
+resource_link: softworks/forestindicators
 tags:
 - vegetation
 - statistics
 - R
+- "forest dynamics"
 links:
   url_pdf: ''
   url_doi: ''
@@ -22,6 +25,6 @@ links:
   url_source: 'https://github.com/emf-creaf/forestindicators'
 requirements:
 - 'R (>= 4.1.0)'
-description: 'Estimation of indicators of forest stands'
+description: 'Estimation of indicator metrics for forest stands'
 date: '2025-12-16'
 date_lastmod: '2025-12-16'
